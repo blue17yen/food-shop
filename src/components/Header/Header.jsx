@@ -6,6 +6,7 @@ import Container from '../Container/Container';
 import UserIco from '../../assets/svg/ic-actions-user.svg';
 import BasketIco from '../../assets/svg/ic-ecommerce-basket.svg';
 import SearchIco from "../../assets/svg/ic-actions-search.svg";
+import Icon from '../blocks/Icon/Icon';
 
 
 const HeaderWrap = styled.header`
@@ -27,11 +28,9 @@ const Logo = styled.div`
 `;
 
 const UserNav = styled.div`
-    & img {
-        width: 24px;
-        height: 24px;
-        margin: 8px;
-    }
+    display: flex;
+    flex-direction: row;
+    align-items: center;
 `
 
 const Header = () => {
@@ -45,9 +44,9 @@ const Header = () => {
                         🍲
                     </Logo>
                     <UserNav>
-                        <img src={SearchIco} alt='SearchIco' />
-                        <img src={UserIco} alt='UserIco' />
-                        <img src={BasketIco} alt='BasketIco' />
+                        <Icon icon={SearchIco} iconName='SearchIco' size={24} margin={'0 8 0 8'} />
+                        <Icon icon={UserIco} iconName='UserIco' size={24} margin={'0 8 0'} />
+                        <Icon icon={BasketIco} iconName='BasketIco' size={24} margin={'0 8 0 8'} />
                     </UserNav>
                 </HeaderInner>
             </Container>

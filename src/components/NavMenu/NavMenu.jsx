@@ -4,6 +4,9 @@ import { colors } from '../../helpers/colors';
 import { device } from '../../helpers/device';
 import Container from './../Container/Container';
 
+import Item from './Inner/Item';
+
+
 const NavMenuWrap = styled.nav`
     background-color: ${colors.smoky_white};
 `;
@@ -22,39 +25,6 @@ const Inner = styled.div`
     @media ${device.mobileL} {
         min-height: 55px;
         padding: 16px 16px 16px 0;
-    }
-`;
-const Item = styled.div`
-    min-height: 23px;
-    padding: 0 20px 0 0;
-    position: relative;
-    &::after,
-    &::before {
-        content: "";
-        position: absolute;
-        top: 50%;
-        right: 0;
-        height: 3px;
-        width: 8px;
-        background-color: ${colors.green};
-        border-radius: 50px;
-        transform: rotate(45deg) translate(-50%, -48%);
-    }
-    &::before {
-        transform: rotate(-45deg) translate(53%, -50%);
-    }
-
-    @media ${device.mobileL} {
-        padding: 0 20px 0 0;
-        &::after,
-        &::before {
-            height: 3px;
-            width: 10px;
-            transform: rotate(45deg) translate(-36%, 0);
-        }
-        &::before {
-            transform: rotate(-45deg) translate(38%, -2%);
-        }
     }
 `;
 const ItemText = styled.h5`
