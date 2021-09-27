@@ -4,12 +4,8 @@ import styled  from 'styled-components';
 import Header from "./components/Header/Header";
 import Footer from './components/Footer/Footer';
 import NavMenu from './components/NavMenu/NavMenu';
-import { Input } from './components/blocks/Input/Input';
-import { InputSearch } from './components/blocks/Input/InputSearch';
-import { Banner } from './components/blocks/Card/Banner';
-import Container from './components/Container/Container';
-import { Card } from './components/blocks/Card/Card';
 import { Home } from './Pages/Home';
+import ProductCategory from './Pages/ProductCategory';
 
 
 const AppWrap = styled.div`
@@ -28,7 +24,7 @@ function App() {
           <Content>
               <Header />
               <NavMenu />
-              <Home />
+              <ProductCategory />
           </Content>
           <Footer />
       </AppWrap>
