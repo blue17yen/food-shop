@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { PropTypes } from "prop-types";
 
-import { marginHelper } from './../../../helpers/margin';
+import { cssMP_Helper } from './../../../helpers/margin';
 import Icon from './../Icon/Icon';
 import * as Style from './inputStyle'
 import searchSvg from '../../../assets/svg/ic-actions-search.svg'
@@ -11,7 +11,7 @@ const Wrapper = styled.div`
     position: relative;
     max-width: 320px; 
 
-    margin: ${(props) => marginHelper(props.margin)};
+    margin: ${(props) => cssMP_Helper(props.margin)};
 `;
 
 const InputRoot = styled.input`

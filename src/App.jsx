@@ -6,6 +6,9 @@ import Footer from './components/Footer/Footer';
 import NavMenu from './components/NavMenu/NavMenu';
 import { Input } from './components/blocks/Input/Input';
 import { InputSearch } from './components/blocks/Input/InputSearch';
+import { Banner } from './components/blocks/Card/Banner';
+import Container from './components/Container/Container';
+import { Card } from './components/blocks/Card/Card';
 
 
 const AppWrap = styled.div`
@@ -24,8 +27,11 @@ function App() {
           <Content>
               <Header />
               <NavMenu />
-              <Input label={"Label"} margin={"0 40 0"} />
-              <InputSearch margin={"40 40 0"} />
+              <Container>
+                  {/* <Banner /> */}
+                <Card />
+
+              </Container>
           </Content>
           <Footer />
       </AppWrap>

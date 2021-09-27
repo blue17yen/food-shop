@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { colors } from '../../../helpers/colors';
 import { PropTypes } from 'prop-types';
-import { marginHelper } from '../../../helpers/margin';
+import { cssMP_Helper } from '../../../helpers/margin';
 import * as Style from './inputStyle';
 
 const Wrapper = styled.div`
@@ -10,7 +10,7 @@ const Wrapper = styled.div`
     flex-direction: column;
     max-width: 320px;
 
-    margin: ${props => marginHelper(props.margin)};
+    margin: ${props => cssMP_Helper(props.margin)};
 `
 const Label = styled.label`
     font-family: 'Poppins-SemiBold';

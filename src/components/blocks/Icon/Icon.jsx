@@ -1,12 +1,12 @@
 import React from 'react';
 import PropTypes from "prop-types";
 import styled from 'styled-components';
-import { marginHelper } from './../../../helpers/margin';
+import { cssMP_Helper } from './../../../helpers/margin';
 
 const Image = styled.img`
     width: ${(props) => props.size}px;
     height: ${(props) => props.size}px;
-    margin: ${(props) => marginHelper(props.margin)};
+    margin: ${(props) => cssMP_Helper(props.margin)};
 `;
 
 const Icon = ({ icon, iconName, size = 20, margin = '0 0 0 0' }) => {

@@ -1,6 +1,5 @@
 import { css } from "styled-components";
 import { colors } from "../../../helpers/colors";
-import { marginHelper } from './../../../helpers/margin';
 
 /* styles common to all buttons */
 export const buttonRoot = css`
@@ -26,7 +25,7 @@ export const normal = css`
     color: ${colors.black};
 `;
 export const filled = css`
-    border-color: #6a983c;
+    border-color: #46760a;
     background: ${colors.green};
     color: #fff;
 `;
@@ -45,12 +44,3 @@ export const md = css`
 export const sm = css`
     padding: 12px;
 `;
-
-/* margin */
-
-export const margin = (val) => {
-    const margin = marginHelper(val);
-    return css`
-        margin: ${margin}
-    `;
-}

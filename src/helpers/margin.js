@@ -6,6 +6,6 @@
     валидным для css margin параметра
 */
 
-export function marginHelper(string) {
+export function cssMP_Helper(string) {
     return string.split(' ').map(value => Number(value) === 0 ? value : value + 'px').join(' ');
 }
