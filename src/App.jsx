@@ -9,6 +9,7 @@ import { InputSearch } from './components/blocks/Input/InputSearch';
 import { Banner } from './components/blocks/Card/Banner';
 import Container from './components/Container/Container';
 import { Card } from './components/blocks/Card/Card';
+import { Home } from './Pages/Home';
 
 
 const AppWrap = styled.div`
@@ -27,11 +28,7 @@ function App() {
           <Content>
               <Header />
               <NavMenu />
-              <Container>
-                  {/* <Banner /> */}
-                <Card />
-
-              </Container>
+              <Home />
           </Content>
           <Footer />
       </AppWrap>

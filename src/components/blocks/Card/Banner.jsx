@@ -1,24 +1,50 @@
 import React from "react";
+import { PropTypes } from 'prop-types';
 import styled from "styled-components";
 import { colors } from "../../../helpers/colors";
 import { Button } from "./../Button/Button";
 import { cssMP_Helper } from './../../../helpers/margin';
 import { device } from "../../../helpers/device";
+import { useValidateImageUrl } from './../../../helpers/useValidateImageUrl';
+import { setFont } from './../Text/index';
 
 const Wrapper = styled.div`
     width: 100%;
     max-width: 390px;
     min-height: 180px;
-    border-radius: 12px;
-    background: ${(props) => props.background};
-    padding: 48px 32px 32px;
     overflow-x: hidden;
+    border-radius: 12px;
+    background-color: #f4f8ec;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    ${(props) =>
+        props.background
+            ? `background-image: url(${props.background})`
+            : null};
 
     margin: ${(props) => cssMP_Helper(props.margin)};
 
     @media ${device.mobileL} {
         min-height: 280px;
     }
+`;
+
+const Bg = styled.div`
+    padding: 48px 32px 32px;
+    ${(props) => {
+        if (props.isBackground) {
+            return `    
+            background: rgba(21, 21, 21, 0.3);
+            box-shadow: 0 80px 100px 0 rgba(21, 21, 21, 0.6) inset;
+            transition: background 0.5s;
+            &:hover {
+                background: rgba(21, 21, 21, 0.6);
+            }`
+        }
+    }};
+
+
 `;
 
 const Inner = styled.div`
@@ -38,6 +64,7 @@ const TextBlock = styled.div`
     display: flex;
     flex-direction: column;
     text-align: start;
+
     margin: 0 0 54px 0;
 
     @media ${device.mobileL} {
@@ -45,40 +72,58 @@ const TextBlock = styled.div`
     }
 `;
 
-const SubTitle = styled.div`
-    font-family: "Poppins-SemiBold";
-    font-weight: 600;
-    font-size: 12px;
-    line-height: 18px;
+const SubTitle = styled.h6`
+    min-height: 18px;
+    ${setFont('h6')}
     color: ${colors.green};
 `;
 
-const Title = styled.div`
-    font-family: "Poppins-SemiBold";
-    font-weight: 600;
-    font-size: 22px;
-    line-height: 33px;
-    color: ${colors.black};
+const Title = styled.h3`
+    ${setFont('h3')}
+    ${(props) =>
+        props.isBackground ? `color: #fff` : `color: ${colors.black}`}
 `;
 
 export const Banner = ({
     title = "Title",
     subTitle = "SubTitle",
     buttonText = "Button",
-    background = "#f4f8ec",
+    background = null,
     margin = '0 0 0 0'
 }) => {
+
+    const isImage = useValidateImageUrl(background)
+
     return (
         <Wrapper background={background} margin={margin}>
-            <Inner>
-                <TextBlock>
-                    <SubTitle>{subTitle}</SubTitle>
-                    <Title>{title}</Title>
-                </TextBlock>
-                <Button variant='filled' size='md' endArrow>
-                    {buttonText}
-                </Button>
-            </Inner>
+            <Bg isBackground={isImage}>
+                <Inner>
+                    <TextBlock>
+                        <SubTitle>{subTitle}</SubTitle>
+                        <Title isBackground={isImage}>{title}</Title>
+                    </TextBlock>
+                    <Button variant='filled' size='md' endArrow>
+                        {buttonText}
+                    </Button>
+                </Inner>
+            </Bg>
         </Wrapper>
     );
+};
+
+Banner.propTypes = {
+    title: PropTypes.string,
+    subTitle: PropTypes.oneOfType([
+        PropTypes.string,
+        PropTypes.oneOf([null]).isRequired,
+    ]),
+    buttonText: PropTypes.string,
+    background: PropTypes.oneOfType([
+        PropTypes.string,
+        PropTypes.oneOf([null]).isRequired,
+    ]),
+    margin: PropTypes.oneOfType([
+        PropTypes.string,
+        PropTypes.oneOf([null]).isRequired,
+    ]),
 };

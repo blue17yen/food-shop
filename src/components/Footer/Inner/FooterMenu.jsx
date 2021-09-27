@@ -1,11 +1,13 @@
 import React from 'react';
 import styled from 'styled-components';
 import { colors } from '../../../helpers/colors';
+import { device } from '../../../helpers/device';
 
 const Wrapper = styled.div`
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: flex-start;
+    column-gap: 40px;
     flex-wrap: wrap;
     margin: 0 0 40px;
 `;
