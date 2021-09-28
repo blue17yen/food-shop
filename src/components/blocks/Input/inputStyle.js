@@ -23,6 +23,6 @@ export const inputRoot = css`
         font-weight: 400;
         font-size: 14px;
         line-height: 19px;
-        color: #a9a9a9;
+        color: ${colors.light_grey};
     }
 `;

@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { device } from './../helpers/device';
 import Container from '../components/Container/Container';
 import { Card } from '../components/blocks/Card/Card';
-import { setFont } from './../components/blocks/Text/index';
+import { setFont } from '../components/blocks/Text/setFont';
 import { colors } from '../helpers/colors';
 
 const Wrapper = styled.main`
@@ -13,13 +13,12 @@ const Wrapper = styled.main`
 const Inner = styled.div`
     display: flex;
     flex-direction: column;
-    text-align: center;
 `;
 
 const TitlePage = styled.h1`
     ${setFont("h1")};
+    text-align: center;
     color: ${colors.green};
-    text-transform: uppercase;
     margin: 0 0 40px 0;
 `;
 

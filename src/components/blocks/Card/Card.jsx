@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { setFont } from "../Text/";
+import { setFont } from "../Text/setFont";
 import { Button } from './../Button/Button';
 
 import defaultImage from '../../../assets/images/def-card-img.png'
