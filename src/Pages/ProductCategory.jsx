@@ -21,11 +21,6 @@ const TitlePage = styled.h1`
     color: ${colors.green};
     text-transform: uppercase;
     margin: 0 0 40px 0;
-
-    /* @media ${device.tablet} {
-        ${setFont("h1")};
-        color: ${colors.green};
-    } */
 `;
 
 const CardWrapper = styled.div`

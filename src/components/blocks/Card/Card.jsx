@@ -29,6 +29,7 @@ const Image = styled.img`
 const Info = styled.div`
     display: flex;
     flex-direction: column;
+    text-align: start;
     margin: 0 0 16px;
 `;
 
