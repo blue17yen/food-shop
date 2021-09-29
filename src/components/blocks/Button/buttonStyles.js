@@ -1,5 +1,6 @@
 import { css } from "styled-components";
 import { colors } from "../../../helpers/colors";
+import { setFont } from './../Text/setFont';
 
 /* styles common to all buttons */
 export const buttonRoot = css`
@@ -10,10 +11,8 @@ export const buttonRoot = css`
     display: flex;
     flex-direction: row;
     align-items: center;
-    font-family: "Poppins-Bold";
-    font-weight: 700;
-    font-size: 15px;
-    line-height: 22.5px;
+    justify-content: center;
+    ${setFont('button')};
 
     cursor: pointer;
 `;

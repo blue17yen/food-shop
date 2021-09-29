@@ -1,23 +1,39 @@
 import React from 'react';
 import styled from 'styled-components';
 import Container from '../components/Container/Container';
-import {BasketItem} from '../components/blocks/Card/BasketItem';
+import {CardItem} from '../components/blocks/Card/CardItem';
 import { colors } from '../helpers/colors';
 import { setFont } from '../components/blocks/Text/setFont';
 import { Button } from './../components/blocks/Button/Button';
+import { device } from './../helpers/device';
+import { Input } from './../components/blocks/Input/Input';
 
 const Wrapper = styled.main`
-    padding: 40px 0 40px;
-`
+    padding: 20px 0 40px;
+    position: relative;
+`;
 const Inner = styled.div`
+    max-width: 468px;
+    margin: 0 auto;
+    border: 1px solid #D1D1D1;
+    border-radius: 12px;
+    padding: 12px 16px;
     display: flex;
     flex-direction: column;
-`
-const PageHead = styled.h1`
-    ${setFont("h1")};
-    text-align: center;
-    color: ${colors.red};
-    margin: 0 0 40px 0;
+`;
+const Head = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    text-align: start;
+    margin: 0 0 40px;
+`;
+const Title = styled.h3`
+    ${setFont("h3")};
+    margin: 0 0 4px;
+`;
+const SubTitle = styled.p`
+    ${setFont("caption")};
 `;
 const Cards = styled.div`
     display: flex;
@@ -25,84 +41,66 @@ const Cards = styled.div`
     gap: 30px;
     margin: 0 0 40px;
 `;
-
-const Bottom = styled.div`
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-`
-const ListWrapper = styled.div`
-    width: 100%;
-    padding: 20px 10px;
-    background-color: rgba(0, 0, 0, 0.1);
-    border-radius: 12px;
-    display: flex;
-    flex-direction: column;
-    margin: 0 0 20px;
-`;
-const ListHead = styled.h5`
-    ${setFont('h5')};
-    color: ${colors.light_grey};
-    margin: 0 0 20px;
-`;
-const ListAllItems = styled.ul`
-    display: flex;
-    flex-direction: column;
-    align-items: stretch;
-    gap: 8px;
-`;
-const ListItem = styled.li`
-    display: grid;
-    grid-template-columns: 1.5fr 0.5fr;
-    grid-template-rows: 1fr 1fr;
-    gap: 8px 0px;
-    grid-template-areas:
-        "Name Count"
-        "Cost Cost";
-
-    ${setFont("caption")};
-    color: ${colors.light_grey};
-`;
-const ItemProduct = styled.div`
-    max-width: 100%;
-    grid-area: Name;
-    justify-self: start;
-    align-self: center;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-`;
-const ItemCount = styled.div`
-    grid-area: Count;
-    justify-self: end;
-    align-self: center;
-`;
-const ItemCost = styled.div`
-    grid-area: Cost;
-    justify-self: end;
-    align-self: center;
-    ${setFont("body")};
-    color: ${colors.light_grey};
-    border-top: 1px solid ${colors.light_grey};
-`;
 const Continue = styled.h4`
     ${setFont("h5", true)};
-    color: ${colors.green};
-    text-align: end;
+    color: ${colors.red};
+    text-align: center;
+    margin: 0 auto 40px;
+    cursor: pointer;
 `;
-const Total = styled.div`
-    padding: 20px 10px;
+
+const Summary = styled.div`
+    width: 100%;
     display: flex;
     flex-direction: column;
-    align-items: flex-end;
-
-    ${setFont("h4")};
+    gap: 12px;
+    margin: 0 0 32px;
 `;
-const TotalCostPrev = styled.h4`
+const SummaryItem = styled.div`
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+    ${setFont("h6")};
+`;
+const SummaryName = styled.div`
+    justify-self: flex-start;
+`;
+const SummaryCalue = styled.div`
+    justify-self: flex-end;
+`;
+
+const PromoCode = styled.div`
+    margin: 0 0 40px;
+`;
+const TotalOrder = styled.div`
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 0;
+    grid-template-areas:"title total"
+                        "delivery total"
+                        "_ button";
+
+    & button {
+        grid-area: button;
+    }
+`;
+const TotalOrderTitle = styled.h6`
+    grid-area: title;
+    ${setFont('h6')};
 
 `;
-const TotalCostEnd = styled.h4`
-
+const DeliveryDate = styled.p`
+    grid-area: delivery;
+    ${setFont("caption")};
+    color: ${colors.green};
+`;
+const Total = styled.h2`
+    grid-area: total;
+    justify-self: end;
+    ${setFont("h2")};
+    color: ${colors.green};
 `;
 
 export const Basket = () => {
@@ -110,55 +108,52 @@ export const Basket = () => {
         <Wrapper>
             <Container>
                 <Inner>
-                    <PageHead>Корзина товаров</PageHead>
+                    <Head>
+                        <Title>Order Summary</Title>
+                        <SubTitle>
+                            Price can change depending on shipping method and
+                            taxes of your state.
+                        </SubTitle>
+                    </Head>
                     <Cards>
-                        <BasketItem />
-                        <BasketItem />
-                        <BasketItem />
-                        <BasketItem />
+                        <CardItem />
+                        <CardItem />
+                        <CardItem />
+                        <CardItem />
                     </Cards>
-                    <Bottom>
-                        <ListWrapper>
-                            <ListHead>Short review</ListHead>
-                            <ListAllItems>
-                                <ListItem>
-                                    <ItemProduct>
-                                        Lorem ipsum dolor sit, amet consectetur
-                                        adipisicing elit.
-                                    </ItemProduct>
-                                    <ItemCount>X12 </ItemCount>
-                                    <ItemCost>123.3 USD</ItemCost>
-                                </ListItem>
-                                <ListItem>
-                                    <ItemProduct>
-                                        Lorem ipsum dolor sit.
-                                    </ItemProduct>
-                                    <ItemCount>X12 </ItemCount>
-                                    <ItemCost>123.3 USD</ItemCost>
-                                </ListItem>
-                                <ListItem>
-                                    <ItemProduct>
-                                        Lorem ipsum dolor sit amet.
-                                    </ItemProduct>
-                                    <ItemCount>X12 </ItemCount>
-                                    <ItemCost>123.3 USD</ItemCost>
-                                </ListItem>
-                                <ListItem>
-                                    <ItemProduct>Name product</ItemProduct>
-                                    <ItemCount>X12 </ItemCount>
-                                    <ItemCost>123.3 USD</ItemCost>
-                                </ListItem>
-                            </ListAllItems>
-                        </ListWrapper>
-                            <Continue>Continue shopping</Continue>
-                        <Total>
-                            <TotalCostPrev>312321 USD</TotalCostPrev>
-                            <TotalCostEnd>312321 USD</TotalCostEnd>
-                            <Button variant='filled' size='lg' endArrow>
-                                To pay
-                            </Button>
-                        </Total>
-                    </Bottom>
+                    <Continue>Continue shopping</Continue>
+                    <Summary>
+                        <SummaryItem>
+                            <SummaryName>Subtotal</SummaryName>
+                            <SummaryCalue>73.98 USD</SummaryCalue>
+                        </SummaryItem>
+                        <SummaryItem>
+                            <SummaryName>Tax</SummaryName>
+                            <SummaryCalue>17% 16.53 USD</SummaryCalue>
+                        </SummaryItem>
+                        <SummaryItem>
+                            <SummaryName>Shipping</SummaryName>
+                            <SummaryCalue>0 USD</SummaryCalue>
+                        </SummaryItem>
+                    </Summary>
+                    <PromoCode>
+                        <Input />
+                    </PromoCode>
+                    <TotalOrder>
+                        <TotalOrderTitle>Total Order</TotalOrderTitle>
+                        <DeliveryDate>
+                            Guaranteed delivery day: June 12, 2020
+                        </DeliveryDate>
+                        <Total>89.84 USD</Total>
+                        <Button
+                            variant='filled'
+                            size='md'
+                            margin={"20 0 0 0"}
+                            endArrow
+                        >
+                            To pay
+                        </Button>
+                    </TotalOrder>
                 </Inner>
             </Container>
         </Wrapper>

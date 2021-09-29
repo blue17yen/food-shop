@@ -6,17 +6,24 @@ import ArrowIco from "./Inner/ArrowIco";
 import { cssMP_Helper } from "./../../../helpers/margin";
 
 
-const ButtonRoot = styled.button`
-    ${Style.buttonRoot}
-    ${(props) => Style[props.size] ?? Style.md}
-    ${(props) => Style[props.variant] ?? Style.normal}
-    ${(props) => props.margin ? 'margin:' + cssMP_Helper(props.margin) : null}
-    ${(props) => props.padding ? 'padding:' + cssMP_Helper(props.padding) : null}
+const ButtonRoot = styled.button.attrs(props => ({
+    className: '__button',
+}))`
+    ${Style.buttonRoot};
+    ${(props) => Style[props.size] ?? Style.md};
+    ${(props) => Style[props.variant] ?? Style.normal};
+    ${(props) => props.margin && 'margin:' + cssMP_Helper(props.margin)};
+    ${(props) => props.padding && 'padding:' + cssMP_Helper(props.padding)};
 `;
 
 export const Button = ({children, size = 'md', variant = 'normal', margin = null, padding = null, startArrow = false, endArrow = false}) => {
     return (
-        <ButtonRoot size={size} variant={variant} margin={margin} padding={padding}>
+        <ButtonRoot
+            size={size}
+            variant={variant}
+            margin={margin}
+            padding={padding}
+        >
             {startArrow && <ArrowIco direction='start' variant={variant} />}
             {children}
             {endArrow && <ArrowIco direction='end' variant={variant} />}
