@@ -4,7 +4,6 @@ import { colors } from "../../../helpers/colors";
 
 export const inputRoot = css`
     width: 100%;
-    /* min-width: 240px; */
     max-width: 320px;
     min-height: 42px;
 

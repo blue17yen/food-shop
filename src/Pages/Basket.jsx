@@ -7,6 +7,7 @@ import { setFont } from '../components/blocks/Text/setFont';
 import { Button } from './../components/blocks/Button/Button';
 import { device } from './../helpers/device';
 import { Input } from './../components/blocks/Input/Input';
+import { InputWithButton } from '../components/blocks/Input/InputWithButton';
 
 const Wrapper = styled.main`
     padding: 20px 0 40px;
@@ -137,7 +138,7 @@ export const Basket = () => {
                         </SummaryItem>
                     </Summary>
                     <PromoCode>
-                        <Input />
+                        <InputWithButton buttonText={'Apply now'} />
                     </PromoCode>
                     <TotalOrder>
                         <TotalOrderTitle>Total Order</TotalOrderTitle>
