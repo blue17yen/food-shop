@@ -6,9 +6,10 @@ const defaultColor = css`
     color: ${colors.black};
 `;
 
-export function setFont(font) {
+export function setFont(font, underline = false) {
     return css`
         ${FONT[font]};
         ${defaultColor};
+        ${underline && `text-decoration: underline`};
     `;
 }

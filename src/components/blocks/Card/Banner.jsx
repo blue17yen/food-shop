@@ -6,7 +6,7 @@ import { Button } from "./../Button/Button";
 import { cssMP_Helper } from './../../../helpers/margin';
 import { device } from "../../../helpers/device";
 import { useValidateImageUrl } from './../../../helpers/useValidateImageUrl';
-import { setFont } from './../Text/index';
+import { setFont } from '../Text/setFont';
 
 const Wrapper = styled.div`
     width: 100%;
