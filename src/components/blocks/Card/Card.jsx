@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { setFont } from "../Text/";
+import { setFont } from "../Text/setFont";
 import { Button } from './../Button/Button';
 
 import defaultImage from '../../../assets/images/def-card-img.png'
@@ -29,6 +29,7 @@ const Image = styled.img`
 const Info = styled.div`
     display: flex;
     flex-direction: column;
+    text-align: start;
     margin: 0 0 16px;
 `;
 

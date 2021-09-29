@@ -4,7 +4,6 @@ import { colors } from "../../../helpers/colors";
 
 export const inputRoot = css`
     width: 100%;
-    /* min-width: 240px; */
     max-width: 320px;
     min-height: 42px;
 
@@ -23,6 +22,6 @@ export const inputRoot = css`
         font-weight: 400;
         font-size: 14px;
         line-height: 19px;
-        color: #a9a9a9;
+        color: ${colors.light_grey};
     }
 `;

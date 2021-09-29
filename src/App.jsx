@@ -5,7 +5,8 @@ import Header from "./components/Header/Header";
 import Footer from './components/Footer/Footer';
 import NavMenu from './components/NavMenu/NavMenu';
 import { Home } from './Pages/Home';
-import ProductCategory from './Pages/ProductCategory';
+import { ProductCategory } from './Pages/ProductCategory';
+import { Basket } from './Pages/Basket';
 
 
 const AppWrap = styled.div`
@@ -24,7 +25,7 @@ function App() {
           <Content>
               <Header />
               <NavMenu />
-              <ProductCategory />
+              <Basket />
           </Content>
           <Footer />
       </AppWrap>
