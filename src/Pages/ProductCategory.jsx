@@ -5,6 +5,8 @@ import Container from '../components/Container/Container';
 import { Card } from '../components/blocks/Card/Card';
 import { setFont } from '../components/blocks/Text/setFont';
 import { colors } from '../helpers/colors';
+// import { useLocation } from 'react-router';
+import { useLocation } from 'react-router-dom';
 
 const Wrapper = styled.main`
     padding: 30px 0 40px;
@@ -20,6 +22,10 @@ const TitlePage = styled.h1`
     text-align: center;
     color: ${colors.green};
     margin: 0 0 40px 0;
+    text-transform: lowercase;
+    &::first-letter {
+        text-transform: uppercase;
+    }
 `;
 
 const CardWrapper = styled.div`
@@ -41,13 +47,15 @@ const CardWrapper = styled.div`
     }
 `;
 
-const ProductCategory = () => {
+export const ProductCategory = () => {
+    const { pathname } = useLocation();
+    console.log(pathname.split('/')[2]);
+
     return (
         <Wrapper>
             <Container>
                 <Inner>
-                    {/* <TitlePage>PROPUCT CATEGORY</TitlePage> */}
-                    <TitlePage>Fruits</TitlePage>
+                    <TitlePage>{pathname.split("/")[2]}</TitlePage>
                     <CardWrapper>
                         <Card />
                         <Card />
@@ -65,5 +73,3 @@ const ProductCategory = () => {
         </Wrapper>
     );
 }
-
-export default ProductCategory;

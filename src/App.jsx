@@ -1,5 +1,7 @@
 import React from 'react';
+import { Switch, Route } from "react-router-dom";
 import styled  from 'styled-components';
+
 
 import Header from "./components/Header/Header";
 import Footer from './components/Footer/Footer';
@@ -25,7 +27,17 @@ function App() {
           <Content>
               <Header />
               <NavMenu />
-              <Basket />
+              <Switch>
+                  <Route path='/home' exact>
+                      <Home />
+                  </Route>
+                  <Route path='/basket'>
+                      <Basket />
+                  </Route>
+                  <Route path='/products/:category'>
+                      <ProductCategory />
+                  </Route>
+              </Switch>
           </Content>
           <Footer />
       </AppWrap>

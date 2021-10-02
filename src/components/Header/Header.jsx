@@ -1,8 +1,8 @@
 import React from 'react';
+import { NavLink } from "react-router-dom";
 import styled from "styled-components";
 
 import Container from '../Container/Container';
-
 import UserIco from '../../assets/svg/ic-actions-user.svg';
 import BasketIco from '../../assets/svg/ic-ecommerce-basket.svg';
 import SearchIco from "../../assets/svg/ic-actions-search.svg";
@@ -39,14 +39,32 @@ const Header = () => {
             <Container>
                 <HeaderInner>
                     <Logo>
-                        Food
-                        shop
-                        🍲
+                        <NavLink to='/home' >
+                            Food shop 🍲
+                        </NavLink>
                     </Logo>
                     <UserNav>
-                        <Icon icon={SearchIco} iconName='SearchIco' size={24} margin={'0 8 0 8'} />
-                        <Icon icon={UserIco} iconName='UserIco' size={24} margin={'0 8 0'} />
-                        <Icon icon={BasketIco} iconName='BasketIco' size={24} margin={'0 8 0 8'} />
+                        <Icon
+                            icon={SearchIco}
+                            iconName='SearchIco'
+                            size={24}
+                            margin={"0 8 0 8"}
+                        />
+                        <Icon
+                            icon={UserIco}
+                            iconName='UserIco'
+                            size={24}
+                            margin={"0 8 0"}
+                        />
+
+                        <NavLink to='/basket'>
+                            <Icon
+                                icon={BasketIco}
+                                iconName='BasketIco'
+                                size={24}
+                                margin={"0 8 0 8"}
+                            />
+                        </NavLink>
                     </UserNav>
                 </HeaderInner>
             </Container>
