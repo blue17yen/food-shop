@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { device } from '../helpers/device';
-import Container from '../components/Container/Container';
+import { Container } from '../components/Container/Container';
 import { Banner } from '../components/blocks/Card/Banner';
 
 import BgBannerEgg from '../assets/images/bg-banner-egg.png'

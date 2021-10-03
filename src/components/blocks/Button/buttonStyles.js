@@ -15,6 +15,8 @@ export const buttonRoot = css`
     ${setFont('button')};
 
     cursor: pointer;
+
+
 `;
 
 /* theme variants */
@@ -22,11 +24,19 @@ export const normal = css`
     border-color: #92c064;
     background: transparent;
     color: ${colors.black};
+
+
 `;
 export const filled = css`
     border-color: #46760a;
     background: ${colors.green};
     color: #fff;
+
+    &:disabled {
+        background: ${colors.light_grey};
+        border-color: ${colors.light_grey};
+        color: ${colors.smoky_white};
+    }
 `;
 export const bright = css`
     background: #f5f5f5;

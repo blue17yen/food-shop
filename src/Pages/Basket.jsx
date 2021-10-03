@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import Container from '../components/Container/Container';
+import { Container } from '../components/Container/Container';
 import {CardItem} from '../components/blocks/Card/CardItem';
 import { colors } from '../helpers/colors';
 import { setFont } from '../components/blocks/Text/setFont';

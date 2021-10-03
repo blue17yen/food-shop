@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { colors } from '../../helpers/colors';
 import { device } from '../../helpers/device';
-import Container from './../Container/Container';
+import { Container } from './../Container/Container';
 
 import Item from './Inner/Item';
 

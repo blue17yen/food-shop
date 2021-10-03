@@ -17,7 +17,7 @@ const ContainerWrap = styled.div`
     }
 `;
 
-const Container = ({children}) => {
+export const Container = ({children}) => {
     return (
         <ContainerWrap>
             {children}
@@ -25,4 +25,3 @@ const Container = ({children}) => {
     );
 }
 
-export default Container;

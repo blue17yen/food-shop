@@ -2,7 +2,7 @@ import React from 'react';
 import { NavLink } from "react-router-dom";
 import styled from "styled-components";
 
-import Container from '../Container/Container';
+import { Container } from '../Container/Container';
 import UserIco from '../../assets/svg/ic-actions-user.svg';
 import BasketIco from '../../assets/svg/ic-ecommerce-basket.svg';
 import SearchIco from "../../assets/svg/ic-actions-search.svg";

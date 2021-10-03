@@ -4,6 +4,7 @@ import { setFont } from "../Text/setFont";
 import { Button } from './../Button/Button';
 
 import defaultImage from '../../../assets/images/def-card-img.png'
+import { colors } from './../../../helpers/colors';
 
 const Wrapper = styled.div`
     width: 100%;
@@ -16,15 +17,18 @@ const Wrapper = styled.div`
 `;
 
 const Inner = styled.div`
+    height: 100%;
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
 `
 
 const Image = styled.img`
     width: 237px;
     height: 180px;
     margin: 0 0 16px;
-`
+    object-fit: contain;
+`;
 
 const Info = styled.div`
     display: flex;
@@ -37,9 +41,20 @@ const Title = styled.h5`
     ${setFont('h5')};
 `;
 
-const SubTitle = styled.p`
+const Brand = styled.p`
     ${setFont("caption")};
     color: #575757;
+`;
+
+const BreadCrumbs = styled.div`
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 5px;
+`
+const BreadCrumb = styled.p`
+    ${setFont("caption", true)};
+    color: ${colors.green};
 `;
 
 const CostBlock = styled.div`
@@ -57,8 +72,9 @@ const Price = styled.h4`
 export const Card = ({
     imagePath = defaultImage,
     title = "Product title",
-    subTitle = "Space for a small product description",
-    price = "36.99 USD",
+    brand = null,
+    breadcrumbs = [],
+    price = null,
     buttonText = "Buy Now",
 }) => {
     return (
@@ -66,12 +82,18 @@ export const Card = ({
             <Inner>
                 <Image src={imagePath} />
                 <Info>
+                    <Brand>{brand}</Brand>
                     <Title>{title}</Title>
-                    <SubTitle>{subTitle}</SubTitle>
+                    <BreadCrumbs>{breadcrumbs.slice(0, 3).map(bc => <BreadCrumb key={bc}>{bc}</BreadCrumb>)}</BreadCrumbs>
                 </Info>
                 <CostBlock>
-                    <Price>{price}</Price>
-                    <Button variant='filled' size='sm' padding="6.5 12">
+                    <Price>{!price ? `not available` : `${price.toFixed(2)} USD`} </Price>
+                    <Button
+                        variant='filled'
+                        size='sm'
+                        padding='6.5 12'
+                        disabled={!Boolean(price)}
+                    >
                         {buttonText}
                     </Button>
                 </CostBlock>

@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import Container from '../Container/Container';
+import { Container } from '../Container/Container';
 import FooterMenu from './Inner/FooterMenu';
 import ProductTags from './Inner/ProductTags';
 
