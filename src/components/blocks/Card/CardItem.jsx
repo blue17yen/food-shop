@@ -3,7 +3,6 @@ import styled from 'styled-components';
 import { device } from "../../../helpers/device";
 import { colors } from "../../../helpers/colors";
 import { setFont } from '../Text/setFont';
-import { Button } from '../Button/Button';
 import Icon from '../Icon/Icon';
 
 import defItemImage from '../../../assets/images/def-card-img.png';

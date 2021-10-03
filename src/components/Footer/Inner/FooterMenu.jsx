@@ -1,7 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
 import { colors } from '../../../helpers/colors';
-import { device } from '../../../helpers/device';
 
 const Wrapper = styled.div`
     display: flex;

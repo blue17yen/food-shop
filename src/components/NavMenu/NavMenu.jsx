@@ -1,4 +1,5 @@
 import React from 'react';
+import { NavLink } from 'react-router-dom';
 import styled from 'styled-components';
 import { colors } from '../../helpers/colors';
 import { device } from '../../helpers/device';
@@ -47,10 +48,14 @@ const NavMenu = () => {
             <Container>
                 <Inner>
                     <Item>
-                        <ItemText>Bakery</ItemText>
+                        <NavLink to='/products/pepsi'>
+                            <ItemText>Bakery</ItemText>
+                        </NavLink>
                     </Item>
                     <Item>
-                        <ItemText>Fruit and vegetables</ItemText>
+                        <NavLink to='/products/apple'>
+                            <ItemText>Fruit and vegetables</ItemText>
+                        </NavLink>
                     </Item>
                     <Item>
                         <ItemText>Meat and fish</ItemText>
