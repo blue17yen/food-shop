@@ -17,34 +17,63 @@ import { useLocationName } from "../helpers/hooks/useLocationName";
 // Api
 import { searchProductCategory } from "../api/spoonacularAPI";
 import { LimitRequestsError } from './../api/LimitReqestsERROR';
+import { Loader } from "../components/blocks/Loader/Loader";
 
 export const ProductCategory = () => {
-    const [pageError, setPageError] = useState(null)
-    const [products, setProducts] = useState([]);
-    const [pageSelected, setPageSelected] = useState(1);
     const categoryName = useLocationName();
 
+    const [pageError, setPageError] = useState(null);
+    const [isLoading, setIsLoading] = useState(false);
+    const [productsOnPage, setProductsPage] = useState(10);
+    const [totalProductsCount, setTotalProductsCount] = useState(
+        10
+    );
+    const [numberCurrentPage, setNumberCurrentPage] = useState(0);
+    const [products, setProducts] = useState([]);
+
     const handlePagination = useCallback((pageNum) => {
-        setPageSelected(pageNum);
+        setNumberCurrentPage(pageNum);
     }, [])
 
     async function searchProd(name, count, page) {
+        setIsLoading(true);
         const data = await searchProductCategory(name, count, page);
         if (data instanceof LimitRequestsError) {
-            setPageError(data.toString());
+            setPageError(data.toString().split(': ')[1]);
         } else if (!data.products?.length) {
             setPageError("No product category was found for your request.");
         } else {
+            setTotalProductsCount(data.totalProducts);
             setProducts(data.products ?? []);
         }
+        setIsLoading(false);
     }
 
     useEffect(() => {
+        setNumberCurrentPage(0);
+        setProducts([])
+    }, [categoryName]);
+
+    useEffect(() => {
         if (categoryName) {
+            searchProd(categoryName, productsOnPage, numberCurrentPage);
             window.scrollTo(0, 0);
-            searchProd(categoryName, 5, pageSelected);
         }
-    }, [categoryName, pageSelected]);
+    }, [categoryName, numberCurrentPage]);
+
+    
+
+    if (isLoading) {
+        return (
+            <Wrapper>
+                <Container>
+                    <Inner>
+                        <Loader /> 
+                    </Inner>
+                </Container>
+            </Wrapper>
+        )
+    }
 
     return (
         <Wrapper>
@@ -66,16 +95,18 @@ export const ProductCategory = () => {
                                 ))}
                             </CardWrapper>
                             <Pagination
-                                totalCount={25}
-                                countOnPage={5}
-                                selected={pageSelected}
+                                totalCount={totalProductsCount}
+                                countOnPage={productsOnPage}
+                                currentPage={numberCurrentPage}
                                 callback={handlePagination}
                             />
                         </>
                     ) : (
                         <>
                             <ErrorInfo>No such item</ErrorInfo>
-                            {pageError?.length && (<ErrorInfoSm>{pageError}</ErrorInfoSm>)}
+                            {pageError?.length && (
+                                <ErrorInfoSm>{pageError}</ErrorInfoSm>
+                            )}
                         </>
                     )}
                 </Inner>

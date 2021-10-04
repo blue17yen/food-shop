@@ -37,6 +37,9 @@ function App() {
                   <Route path='/products/:category'>
                       <ProductCategory />
                   </Route>
+                  <Route path='/'>
+                      <Home />
+                  </Route>
               </Switch>
           </Content>
           <Footer />

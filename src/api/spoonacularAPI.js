@@ -42,14 +42,14 @@ export async function getProduct(nameProduct) {
     return ERRORWrapper(request);
 };
 
-export async function searchProductCategory(nameCategory, count = 10, page = 1) {
+export async function searchProductCategory(nameCategory, count = 10, page = 0) {
     const request = async () => {
         const category = `=${nameCategory}`;
         const categoryCount = `&number=${count}`;
         
         // Skip so many products 
         // to display the desired number by pagination
-        const skipCount = page === 1 ? `` : `&offset=${(page - 1) * 10}`;
+        const skipCount = page === 0 ? `` : `&offset=${page * 10}`;
 
         const addProductInformation = `&addProductInformation=true`;
         const url = addAPIKEY(
