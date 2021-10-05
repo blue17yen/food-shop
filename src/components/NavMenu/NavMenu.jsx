@@ -1,14 +1,43 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
 import styled from 'styled-components';
+import { NavLink } from 'react-router-dom';
+
+// helpers
 import { colors } from '../../helpers/colors';
 import { device } from '../../helpers/device';
 import { Container } from './../Container/Container';
 
-import Item from './Inner/Item';
+// components
+import { Item } from './Inner/Item';
 
 
-const NavMenuWrap = styled.nav`
+
+
+export const NavMenu = () => {
+    return (
+        <Wrapper>
+            <Container>
+                <Inner>
+                    <Item>
+                        <ItemText>Bakery</ItemText>
+                    </Item>
+                    <Item>
+                        <ItemText>Fruit and vegetables</ItemText>
+                    </Item>
+                    <Item>
+                        <ItemText>Meat and fish</ItemText>
+                    </Item>
+                    <Item>
+                        <ItemText>Drinks</ItemText>
+                    </Item>
+                </Inner>
+            </Container>
+        </Wrapper>
+    );
+}
+
+
+const Wrapper = styled.nav`
     background-color: ${colors.smoky_white};
 `;
 const Inner = styled.div`
@@ -41,32 +70,3 @@ const ItemText = styled.h5`
         line-height: 22.5px;
     }
 `;
-
-const NavMenu = () => {
-    return (
-        <NavMenuWrap>
-            <Container>
-                <Inner>
-                    <Item>
-                        <NavLink to='/products/pepsi'>
-                            <ItemText>Bakery</ItemText>
-                        </NavLink>
-                    </Item>
-                    <Item>
-                        <NavLink to='/products/apple'>
-                            <ItemText>Fruit and vegetables</ItemText>
-                        </NavLink>
-                    </Item>
-                    <Item>
-                        <ItemText>Meat and fish</ItemText>
-                    </Item>
-                    <Item>
-                        <ItemText>Drinks</ItemText>
-                    </Item>
-                </Inner>
-            </Container>
-        </NavMenuWrap>
-    );
-}
-
-export default NavMenu;

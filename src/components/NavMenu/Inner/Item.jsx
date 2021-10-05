@@ -1,26 +1,55 @@
-import React from 'react';
+import React, { useState, useContext } from "react";
 import styled from 'styled-components';
+
+// context
+import { ToolsContext } from "../../Tools/Tools";
+
+// components
 import Icon from './../../blocks/Icon/Icon';
 
+// image
 import downArrowSVG from "../../../assets/svg/arrows/down-arrow.svg";
+import upArrowSVG from "../../../assets/svg/arrows/up-arrow.svg";
+
+
+export const Item = ({ children }) => {
+    const [reference, setReference] = useState(null)
+    const popperContext = useContext(ToolsContext).popperInterface;
+
+    const handleOpenPopper = () => {
+        if (reference) {
+            popperContext.openPopper(reference);
+        }
+    }
+
+    return (
+        <>
+            <Wrapper ref={setReference} onClick={handleOpenPopper}>
+                {children}
+                {popperContext.isOpen &&
+                popperContext.reference === reference ? (
+                    <Icon
+                        icon={upArrowSVG}
+                        iconName={"upArrowSVG"}
+                        size={18}
+                        margin={"0 0 0 5"}
+                    />
+                ) : (
+                    <Icon
+                        icon={downArrowSVG}
+                        iconName={"downArrowSVG"}
+                        size={18}
+                        margin={"0 0 0 5"}
+                    />
+                )}
+            </Wrapper>
+        </>
+    );
+};
 
 const Wrapper = styled.div`
     min-height: 23px;
     display: flex;
     flex-direction: row;
     align-items: center;
-    img {
-        margin: 0 0 0 5px;
-    }
 `;
-
-const Item = ({ children }) => {
-    return (
-        <Wrapper>
-            {children}
-            <Icon icon={downArrowSVG} iconName={"downArrowSVG"} size={18} />
-        </Wrapper>
-    );
-};
-
-export default Item;

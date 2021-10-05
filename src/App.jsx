@@ -3,9 +3,10 @@ import { Switch, Route } from "react-router-dom";
 import styled  from 'styled-components';
 
 
+import { Tools } from './components/Tools/Tools';
 import Header from "./components/Header/Header";
 import Footer from './components/Footer/Footer';
-import NavMenu from './components/NavMenu/NavMenu';
+import { NavMenu } from './components/NavMenu/NavMenu';
 import { Home } from './Pages/Home';
 import { ProductCategory } from './Pages/ProductCategory';
 import { Basket } from './Pages/Basket';
@@ -27,25 +28,27 @@ const Content = styled.div`
 function App() {
   return (
       <AppWrap>
-          <Content>
-              <Header />
-              <NavMenu />
-              <Switch>
-                  <Route path='/home' exact>
-                      <Home />
-                  </Route>
-                  <Route path='/basket'>
-                      <Basket />
-                  </Route>
-                  <Route path='/products/:category'>
-                      <ProductCategory />
-                  </Route>
-                  <Route path='/'>
-                      <Home />
-                  </Route>
-              </Switch>
-          </Content>
-          <Footer />
+          <Tools>
+              <Content>
+                  <Header />
+                  <NavMenu />
+                  <Switch>
+                      <Route path='/home' exact>
+                          <Home />
+                      </Route>
+                      <Route path='/basket'>
+                          <Basket />
+                      </Route>
+                      <Route path='/products/:category'>
+                          <ProductCategory />
+                      </Route>
+                      <Route path='/'>
+                          <Home />
+                      </Route>
+                  </Switch>
+              </Content>
+              <Footer />
+          </Tools>
       </AppWrap>
   );
 }
