@@ -18,7 +18,10 @@ const AppWrap = styled.div`
 `;
 
 const Content = styled.div`
-    flex: 1 0 auto;
+    flex: 1 1 auto;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
 `
 
 function App() {

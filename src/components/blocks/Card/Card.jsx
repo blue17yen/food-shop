@@ -5,6 +5,7 @@ import { Button } from './../Button/Button';
 
 import defaultImage from '../../../assets/images/def-card-img.png'
 import { colors } from './../../../helpers/colors';
+import { NavLink } from 'react-router-dom';
 
 const Wrapper = styled.div`
     width: 100%;
@@ -84,10 +85,18 @@ export const Card = ({
                 <Info>
                     <Brand>{brand}</Brand>
                     <Title>{title}</Title>
-                    <BreadCrumbs>{breadcrumbs.slice(0, 3).map(bc => <BreadCrumb key={bc}>{bc}</BreadCrumb>)}</BreadCrumbs>
+                    <BreadCrumbs>
+                        {breadcrumbs.slice(0, 3).map((bc) => (
+                            <NavLink  to={bc} key={bc}>
+                                <BreadCrumb>{bc}</BreadCrumb>
+                            </NavLink>
+                        ))}
+                    </BreadCrumbs>
                 </Info>
                 <CostBlock>
-                    <Price>{!price ? `not available` : `${price.toFixed(2)} USD`} </Price>
+                    <Price>
+                        {!price ? `not available` : `${price.toFixed(2)} USD`}{" "}
+                    </Price>
                     <Button
                         variant='filled'
                         size='sm'

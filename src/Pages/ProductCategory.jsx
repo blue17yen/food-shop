@@ -18,12 +18,13 @@ import { useLocationName } from "../helpers/hooks/useLocationName";
 import { searchProductCategory } from "../api/spoonacularAPI";
 import { LimitRequestsError } from './../api/LimitReqestsERROR';
 import { Loader } from "../components/blocks/Loader/Loader";
+import { DATA, DATA_APPLE } from "./../api/testData";
 
 export const ProductCategory = () => {
     const categoryName = useLocationName();
 
     const [pageError, setPageError] = useState(null);
-    const [isLoading, setIsLoading] = useState(false);
+    const [isLoading, setIsLoading] = useState(true);
     const [productsOnPage, setProductsPage] = useState(10);
     const [totalProductsCount, setTotalProductsCount] = useState(
         10
@@ -37,13 +38,14 @@ export const ProductCategory = () => {
 
     async function searchProd(name, count, page) {
         setIsLoading(true);
-        const data = await searchProductCategory(name, count, page);
+        // const data = await searchProductCategory(name, count, page);
+        const data = DATA_APPLE;
         if (data instanceof LimitRequestsError) {
             setPageError(data.toString().split(': ')[1]);
         } else if (!data.products?.length) {
             setPageError("No product category was found for your request.");
         } else {
-            setTotalProductsCount(data.totalProducts);
+            setTotalProductsCount(data.totalProducts > 910 ?  910 : data.totalProducts);
             setProducts(data.products ?? []);
         }
         setIsLoading(false);
@@ -59,18 +61,16 @@ export const ProductCategory = () => {
             searchProd(categoryName, productsOnPage, numberCurrentPage);
             window.scrollTo(0, 0);
         }
-    }, [categoryName, numberCurrentPage]);
+    }, [categoryName, productsOnPage, numberCurrentPage]);
 
     
 
     if (isLoading) {
         return (
             <Wrapper>
-                <Container>
-                    <Inner>
-                        <Loader /> 
-                    </Inner>
-                </Container>
+                <LoadingInner>
+                    <Loader /> 
+                </LoadingInner>
             </Wrapper>
         )
     }
@@ -79,9 +79,9 @@ export const ProductCategory = () => {
         <Wrapper>
             <Container>
                 <Inner>
+                    <TitlePage>{categoryName} products category</TitlePage>
                     {products.length ? (
                         <>
-                            <TitlePage>{categoryName}</TitlePage>
                             <CardWrapper>
                                 {products.map((prod) => (
                                     <Card
@@ -117,11 +117,20 @@ export const ProductCategory = () => {
 
 // Style
 const Wrapper = styled.main`
+    flex: 1;
+    display: flex;
+    margin: 0 auto;
     padding: 30px 0 40px;
 `;
 const Inner = styled.div`
     display: flex;
     flex-direction: column;
+`;
+const LoadingInner = styled.div`
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 `;
 const TitlePage = styled.h1`
     ${setFont("h1")};

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import styled from 'styled-components';
 import { setFont } from '../Text/setFont';
 import { colors } from '../../../helpers/colors';
@@ -22,7 +22,7 @@ export const Pagination = ({
     function handlePage(page) {
 
         if (page !== currentPage) {
-            console.log("page: ", page);
+            console.log("page: ", page + 1);
             callback(page)
         }
     }
@@ -35,18 +35,19 @@ export const Pagination = ({
    
     function makePaginationNumbers() {
         const totalPages = Math.ceil(totalCount / countOnPage);
-        const totalNumbers = pageNeighbours * 2 + 1;
+        const totalNumbers = (pageNeighbours * 2) + 3;
+        const totalBlocks = totalNumbers + 2;
 
-        if (totalPages > totalNumbers) {
-            const startPage = Math.max(1, currentPage - pageNeighbours);
+        if (totalPages > totalBlocks) {
+            const startPage = Math.max(2, currentPage - pageNeighbours + 1);
             const endPage = Math.min(
-                totalPages,
-                currentPage + pageNeighbours
+                totalPages - 1,
+                currentPage + pageNeighbours + 1
             );
             let pages = range(startPage, endPage);
 
-            const hasLeftSpill = startPage > 1;
-            const hasRightSpill = totalPages - endPage > 1;
+            const hasLeftSpill = startPage > 2;
+            const hasRightSpill = (totalPages - endPage) > 1;
             const spillOffset = totalNumbers - (pages.length + 1);
 
             if (hasLeftSpill && !hasRightSpill) {
@@ -56,16 +57,13 @@ export const Pagination = ({
                 );
                 pages = [LEFT_ARROW, ...extraPages, ...pages];
             } else if (!hasLeftSpill && hasRightSpill) {
-                const extraPages = range(
-                    endPage + 1,
-                    endPage + spillOffset
-                );
+                const extraPages = range(endPage + 1, endPage + spillOffset);
                 pages = [...pages, ...extraPages, RIGHT_ARROW];
             } else {
-                pages = [LEFT_ARROW, ...pages, RIGHT_ARROW]
+                pages = [LEFT_ARROW, ...pages, RIGHT_ARROW];
             }
 
-            return pages;
+            return [1, ...pages, totalPages];
         }
         return range(1, totalPages);
     }
