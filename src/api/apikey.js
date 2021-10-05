@@ -30,9 +30,8 @@ export const setKey = () => {
     const next = KEY();
     if (next === apiKeysMaxIndex) {
         throw new LimitRequestsError(
-            "Daily points limit of 150 has been reached on all apikeys"
+            "Daily points limit of 150 has been reached"
         );
     }
     APIKEY = getApiKey(next);
 };
-
