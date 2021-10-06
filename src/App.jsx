@@ -1,5 +1,5 @@
 import React from 'react';
-import { Switch, Route } from "react-router-dom";
+import { Switch, Route, Redirect } from "react-router-dom";
 import styled  from 'styled-components';
 
 
@@ -10,6 +10,7 @@ import { NavMenu } from './components/NavMenu/NavMenu';
 import { Home } from './Pages/Home';
 import { ProductCategory } from './Pages/ProductCategory';
 import { Basket } from './Pages/Basket';
+import { Product } from './Pages/Product';
 
 
 const AppWrap = styled.div`
@@ -42,8 +43,11 @@ function App() {
                       <Route path='/products/:category'>
                           <ProductCategory />
                       </Route>
+                      <Route path='/product/:id'>
+                          <Product />
+                      </Route>
                       <Route path='/'>
-                          <Home />
+                          <Redirect to='/home' />
                       </Route>
                   </Switch>
               </Content>

@@ -8,7 +8,7 @@ import { Button } from './../components/blocks/Button/Button';
 import { InputWithButton } from '../components/blocks/Input/InputWithButton';
 
 const Wrapper = styled.main`
-    padding: 20px 0 40px;
+    padding: 30px 0 40px;
     position: relative;
 `;
 const Inner = styled.div`

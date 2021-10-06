@@ -38,8 +38,9 @@ export const ProductCategory = () => {
 
     async function searchProd(name, count, page) {
         setIsLoading(true);
-        // const data = await searchProductCategory(name, count, page);
-        const data = DATA_APPLE;
+        const data = await searchProductCategory(name, count, page);
+        // test data
+        // const data = DATA_APPLE;
         if (data instanceof LimitRequestsError) {
             setPageError(data.toString().split(': ')[1]);
         } else if (!data.products?.length) {
@@ -86,11 +87,7 @@ export const ProductCategory = () => {
                                 {products.map((prod) => (
                                     <Card
                                         key={prod.id}
-                                        imagePath={prod.images[2]}
-                                        title={prod.title}
-                                        brand={prod.brand}
-                                        breadcrumbs={prod.breadcrumbs}
-                                        price={prod.price}
+                                        product={prod}
                                     />
                                 ))}
                             </CardWrapper>
