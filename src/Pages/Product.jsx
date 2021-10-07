@@ -1,125 +1,184 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { NavLink, useLocation } from "react-router-dom";
 import styled from "styled-components";
-import { decode } from "html-entities";
 import { colors } from "../helpers/colors";
 import { setFont } from "./../components/blocks/Text/setFont";
+import { decoder } from './../helpers/decoderHTML';
 
 import { Container } from "../components/Container/Container";
 import { Button } from "./../components/blocks/Button/Button";
+import { getProduct } from "../api/spoonacularAPI";
+import { useLocationPathName } from './../helpers/hooks/useLocationPathName';
+import { LimitRequestsError } from './../api/LimitReqestsERROR';
+import { Loader } from "../components/blocks/Loader/Loader";
+import { DATA_APPLE } from "../api/testData";
 
-export const Product = (props) => {
-    const {
-    id,
-    images,
-    title,
-    price,
-    generatedText,
-    description,
-    ingredientCount,
-    ingredientList,
-    breadcrumbs,
-    brand,
-} = useLocation().state;
-    console.log(images);
+export const Product = () => {
+    const [pageError, setPageError] = useState(null);
+    const [isLoading, setIsLoading] = useState(true);
+    const [product, setProduct] = useState(null)
+    const location = useLocation();
+    const productId = useLocationPathName();
+
+    useEffect(() => {
+        const locationState = location.state;
+        if (productId?.length) {
+            if (locationState) {
+                setProduct(locationState);
+                setIsLoading(false);
+            } else {
+                getData(productId);
+            }
+        }
+    }, [productId]);
+
+    async function getData(productId) {
+        setIsLoading(true);
+        const fetchData = await getProduct(productId);
+        if (fetchData instanceof LimitRequestsError) {
+            setPageError(fetchData.toString().split(": ")[1]);
+        } else if (!Object.keys(fetchData).length) {
+            setPageError("No product category was found for your request.");
+        } else {
+            setProduct(fetchData);
+        }
+        setIsLoading(false);
+    }
     
-    const decoder = (des) => {
-        const decoded = decode(des, { level: "xml" });
-        const removeElements = decoded.replace(
-            /(&\w+;)|(\s?(<\/?\w+>|<\w+\s+\/>))/gm,
-            ""
+    if (isLoading) {
+        return (
+            <Wrapper>
+                <LoadingInner>
+                    <Loader />
+                </LoadingInner>
+            </Wrapper>
         );
-        console.table([{ des, removeElements }]);
-        return removeElements;
-    };
-
+    }
+    
     return (
         <Wrapper>
             <Container>
                 <Inner>
-                    <Image src={images[2]} />
-                    <ProductInfo>
-                        <Title>{title}</Title>
-                        <Table>
-                            <TableBlock>
-                                <TableItem>
-                                    ProductID:
-                                    <TableItemValue>{id}</TableItemValue>
-                                </TableItem>
-                                <TableItem>
-                                    Category:
-                                    <TableItemValue>
-                                        <Breadcrumbs>
-                                            {breadcrumbs.map((bc) => (
-                                                <NavLink
-                                                    to={"/products/" + bc}
-                                                    key={bc}
-                                                >
-                                                    <Breadcrumb>
-                                                        {bc}
-                                                    </Breadcrumb>
-                                                </NavLink>
-                                            ))}
-                                        </Breadcrumbs>
-                                    </TableItemValue>
-                                </TableItem>
-                                <TableItem>
-                                    Stock:
-                                    <TableItemValue>In Stock</TableItemValue>
-                                </TableItem>
-                                <TableItem>
-                                    Brand:
-                                    <TableItemValue>{brand}</TableItemValue>
-                                </TableItem>
-                            </TableBlock>
-                            <TableBlock>
-                                <TableItem>
-                                    Freshness:
-                                    <TableItemValue>1 days old</TableItemValue>
-                                </TableItem>
-                                <TableItem>
-                                    Buy by:
-                                    <TableItemValue>
-                                        pcs, kgs, box, pack
-                                    </TableItemValue>
-                                </TableItem>
-                                <TableItem>
-                                    Delivery:
-                                    <TableItemValue>in 2 days</TableItemValue>
-                                </TableItem>
-                                <TableItem>
-                                    Delivery area:
-                                    <TableItemValue>Earth</TableItemValue>
-                                </TableItem>
-                            </TableBlock>
-                        </Table>
-                        <Sale>
-                            <Price>{price} USD</Price>
-                            <Counter>1</Counter>
-                            <Button variant='filled' size='md' startArrow>
-                                Add to cart
-                            </Button>
-                        </Sale>
+                    {!pageError ? (
+                        <>
+                            <Image src={product.images[2]} />
+                            <ProductInfo>
+                                <Title>{product.title}</Title>
+                                <Table>
+                                    <TableBlock>
+                                        <TableItem>
+                                            ProductID:
+                                            <TableItemValue>
+                                                {product.id}
+                                            </TableItemValue>
+                                        </TableItem>
+                                        <TableItem>
+                                            Category:
+                                            <TableItemValue>
+                                                <Breadcrumbs>
+                                                    {product.breadcrumbs.map(
+                                                        (bc) => (
+                                                            <NavLink
+                                                                to={
+                                                                    "/products/" +
+                                                                    bc
+                                                                }
+                                                                key={bc}
+                                                            >
+                                                                <Breadcrumb>
+                                                                    {bc}
+                                                                </Breadcrumb>
+                                                            </NavLink>
+                                                        )
+                                                    )}
+                                                </Breadcrumbs>
+                                            </TableItemValue>
+                                        </TableItem>
+                                        <TableItem>
+                                            Stock:
+                                            <TableItemValue>
+                                                In Stock
+                                            </TableItemValue>
+                                        </TableItem>
+                                        <TableItem>
+                                            Brand:
+                                            <TableItemValue>
+                                                {product.brand}
+                                            </TableItemValue>
+                                        </TableItem>
+                                    </TableBlock>
+                                    <TableBlock>
+                                        <TableItem>
+                                            Freshness:
+                                            <TableItemValue>
+                                                1 days old
+                                            </TableItemValue>
+                                        </TableItem>
+                                        <TableItem>
+                                            Buy by:
+                                            <TableItemValue>
+                                                pcs, kgs, box, pack
+                                            </TableItemValue>
+                                        </TableItem>
+                                        <TableItem>
+                                            Delivery:
+                                            <TableItemValue>
+                                                in 2 days
+                                            </TableItemValue>
+                                        </TableItem>
+                                        <TableItem>
+                                            Delivery area:
+                                            <TableItemValue>
+                                                Earth
+                                            </TableItemValue>
+                                        </TableItem>
+                                    </TableBlock>
+                                </Table>
+                                <Sale>
+                                    <Price>{product.price} USD</Price>
+                                    <Counter>1</Counter>
+                                    <Button
+                                        variant='filled'
+                                        size='md'
+                                        startArrow
+                                    >
+                                        Add to cart
+                                    </Button>
+                                </Sale>
 
-                        <Info>
-                            <Description>
-                                <DescriptionTitle>Description</DescriptionTitle>
-                                <DescriptionText>
-                                    {generatedText
-                                        ? decoder(generatedText)
-                                        : decoder(description)}
-                                </DescriptionText>
-                            </Description>
-                            <Ingredients>
-                                <IngredientsTitle>
-                                    Ingredients ({ingredientCount})
-                                </IngredientsTitle>
-                                <IngredientsText>
-                                    {ingredientList}
-                                </IngredientsText>
-                            </Ingredients>
-                        </Info>
-                    </ProductInfo>
+                                <Info>
+                                    <Description>
+                                        <DescriptionTitle>
+                                            Description
+                                        </DescriptionTitle>
+                                        <DescriptionText>
+                                            {product.generatedText
+                                                ? decoder(product.generatedText)
+                                                : decoder(product.description)}
+                                        </DescriptionText>
+                                    </Description>
+                                    {product.ingredientCount && (
+                                        <Ingredients>
+                                            <IngredientsTitle>
+                                                Ingredients (
+                                                {product.ingredientCount})
+                                            </IngredientsTitle>
+                                            <IngredientsText>
+                                                {product.ingredientList}
+                                            </IngredientsText>
+                                        </Ingredients>
+                                    )}
+                                </Info>
+                            </ProductInfo>
+                        </>
+                    ) : (
+                        <>
+                            <ErrorInfo>No such item</ErrorInfo>
+                            {pageError?.length && (
+                                <ErrorInfoSm>{pageError}</ErrorInfoSm>
+                            )}
+                        </>
+                    )}
                 </Inner>
             </Container>
         </Wrapper>
@@ -128,6 +187,12 @@ export const Product = (props) => {
 
 const Wrapper = styled.main`
     padding: 30px 0 40px;
+`;
+const LoadingInner = styled.div`
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 `;
 const Inner = styled.div`
     display: flex;
@@ -151,6 +216,7 @@ const Title = styled.h1`
 const Breadcrumbs = styled.div`
     display: flex;
     flex-direction: row;
+    flex-wrap: wrap;
     gap: 5px;
 `;
 const Breadcrumb = styled.p`
@@ -206,3 +272,23 @@ const Ingredients = styled(Description)``;
 const IngredientsTitle = styled(DescriptionTitle)``;
 const IngredientsText = styled(DescriptionText)``;
 
+const ErrorInfo = styled.h1`
+    ${setFont("h1")};
+    color: ${colors.light_grey};
+    text-align: center;
+    margin: 0;
+    text-transform: lowercase;
+    &::first-letter {
+        text-transform: uppercase;
+    }
+`;
+const ErrorInfoSm = styled.h3`
+    ${setFont("h3")};
+    color: ${colors.light_grey};
+    text-align: center;
+    margin: 0;
+    text-transform: lowercase;
+    &::first-letter {
+        text-transform: uppercase;
+    }
+`;

@@ -12,7 +12,7 @@ import { Card } from '../components/blocks/Card/Card';
 import { Pagination } from "../components/blocks/pagination/Pagination";
 
 // Custom hooks
-import { useLocationName } from "../helpers/hooks/useLocationName";
+import { useLocationPathName } from "../helpers/hooks/useLocationPathName";
 
 // Api
 import { searchProductCategory } from "../api/spoonacularAPI";
@@ -21,10 +21,10 @@ import { Loader } from "../components/blocks/Loader/Loader";
 import { DATA, DATA_APPLE } from "./../api/testData";
 
 export const ProductCategory = () => {
-    const categoryName = useLocationName();
+    const categoryName = useLocationPathName();
 
     const [pageError, setPageError] = useState(null);
-    const [isLoading, setIsLoading] = useState(true);
+    const [isLoading, setIsLoading] = useState(false);
     const [productsOnPage, setProductsPage] = useState(10);
     const [totalProductsCount, setTotalProductsCount] = useState(
         10
@@ -62,6 +62,7 @@ export const ProductCategory = () => {
             searchProd(categoryName, productsOnPage, numberCurrentPage);
             window.scrollTo(0, 0);
         }
+
     }, [categoryName, productsOnPage, numberCurrentPage]);
 
     

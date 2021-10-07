@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useLocation } from "react-router-dom";
 
-export function useLocationName() {
+export function useLocationPathName() {
     const {  pathname } = useLocation();
     const [categoryName, setCategoryName] = useState();
     

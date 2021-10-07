@@ -29,9 +29,9 @@ async function ERRORWrapper(callback) {
     }
 }
 
-export async function getProduct(nameProduct) {
+export async function getProduct(productId) {
     const request = async () => {
-        const product = `/${nameProduct}`;
+        const product = `/${productId}`;
         const url = addAPIKEY(BASEURL + product);
 
         const response = await axios.get(url);
@@ -39,7 +39,7 @@ export async function getProduct(nameProduct) {
         console.log(data);
         return data;
     };
-    return ERRORWrapper(request);
+    return await ERRORWrapper(request);
 };
 
 export async function searchProductCategory(nameCategory, count = 10, page = 0) {
