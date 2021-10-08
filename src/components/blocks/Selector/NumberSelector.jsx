@@ -22,7 +22,8 @@ export const Numberselector = ({ margin = "0 0 0 0", value = 100}) => {
             <Button
                 size='sm'
                 variant='bright'
-                endIcon={popperContext.isOpen ? <Arrowup /> : <Arrowdown />}
+                endIcon={popperContext.isOpen &&
+                popperContext.reference === reference ? <Arrowup /> : <Arrowdown />}
             >
                 Nmb
             </Button>

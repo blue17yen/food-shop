@@ -8,6 +8,7 @@ import { setFont } from "../Text/setFont";
 import { Button } from './../Button/Button';
 
 import defaultImage from '../../../assets/images/def-card-img.png'
+import { Disableprise } from '../NoProducts/DisablePrise';
 
 
 export const Card = ({product}) => {
@@ -47,7 +48,7 @@ export const Card = ({product}) => {
                 </Info>
                 <CostBlock>
                     <Price>
-                        {!price ? `not available` : `${price.toFixed(2)} USD`}{" "}
+                        <Disableprise price={price} />
                     </Price>
                     <Button
                         variant='filled'
@@ -86,6 +87,7 @@ const Image = styled.img`
     height: 180px;
     margin: 0 0 16px;
     object-fit: contain;
+    cursor: pointer;
 `;
 
 const Info = styled.div`
@@ -97,6 +99,11 @@ const Info = styled.div`
 
 const Title = styled.h5`
     ${setFont("h5")};
+    cursor: pointer;
+
+    &:hover {
+        text-decoration: underline;
+    }
 `;
 
 const Brand = styled.p`

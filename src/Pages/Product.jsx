@@ -15,6 +15,7 @@ import { DATA_APPLE } from "../api/testData";
 import { device } from './../helpers/device';
 import { Numberselector } from '../components/blocks/Selector/NumberSelector';
 import { Plus } from "../components/blocks/SVG_Components/Plus";
+import { Disableprise } from "../components/blocks/NoProducts/DisablePrise";
 
 export const Product = () => {
     const [pageError, setPageError] = useState(null);
@@ -138,12 +139,15 @@ export const Product = () => {
                                     </TableBlock>
                                 </Table>
                                 <Sale>
-                                    <Price>{product.price} USD</Price>
+                                    <Price>
+                                        <Disableprise price={product.price} />
+                                    </Price>
                                     <Numberselector />
                                     <Button
                                         variant='filled'
                                         size='md'
                                         startIcon={<Plus />}
+                                        disabled={!Boolean(product.price)}
                                     >
                                         Add to cart
                                     </Button>
