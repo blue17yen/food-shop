@@ -7,6 +7,7 @@ import { cssMP_Helper } from './../../../helpers/margin';
 import { device } from "../../../helpers/device";
 import { useValidateImageUrl } from './../../../helpers/useValidateImageUrl';
 import { setFont } from '../Text/setFont';
+import { Arrowright } from "../SVG_Components/Arrow";
 
 const Wrapper = styled.div`
     width: 100%;
@@ -102,7 +103,7 @@ export const Banner = ({
                         <SubTitle>{subTitle}</SubTitle>
                         <Title isBackground={isImage}>{title}</Title>
                     </TextBlock>
-                    <Button variant='filled' size='md' endArrow>
+                    <Button variant='filled' size='md' endIcon={<Arrowright />} >
                         {buttonText}
                     </Button>
                 </Inner>

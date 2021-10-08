@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { setFont } from '../Text/setFont';
 import { colors } from '../../../helpers/colors';
 import { range } from "../../../helpers/range";
-import Icon from './../Icon/Icon';
+import {Icon} from './../Icon/Icon';
 
 import leftArrow from '../../../assets/svg/arrows/left-arrow.svg'
 import rightArrow from '../../../assets/svg/arrows/right-arrow.svg'

@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { PropTypes } from "prop-types";
 import { cssMP_Helper } from './../../../helpers/margin';
-import Icon from './../Icon/Icon';
+import {Icon} from './../Icon/Icon';
 import * as Style from './inputStyle'
 import searchSvg from '../../../assets/svg/ic-actions-search.svg'
 

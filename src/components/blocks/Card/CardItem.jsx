@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { device } from "../../../helpers/device";
 import { colors } from "../../../helpers/colors";
 import { setFont } from '../Text/setFont';
-import Icon from '../Icon/Icon';
+import { Icon } from '../Icon/Icon';
 
 import defItemImage from '../../../assets/images/def-card-img.png';
 import closeIco from '../../../assets/svg/ic-actions-close.svg'

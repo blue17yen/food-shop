@@ -9,7 +9,7 @@ const Image = styled.img`
     margin: ${(props) => cssMP_Helper(props.margin)};
 `;
 
-const Icon = ({ icon, iconName, size = 20, margin = '0 0 0 0' }) => {
+export const Icon = ({ icon, iconName, size = 20, margin = '0 0 0 0' }) => {
     return <Image src={icon} alt={iconName} size={size} margin={margin} />;
 };
 
@@ -18,5 +18,3 @@ Icon.propTypes = {
     margin: PropTypes.string,
     iconName: PropTypes.string,
 };
-
-export default Icon;

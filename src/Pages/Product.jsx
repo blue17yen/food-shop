@@ -13,6 +13,8 @@ import { LimitRequestsError } from './../api/LimitReqestsERROR';
 import { Loader } from "../components/blocks/Loader/Loader";
 import { DATA_APPLE } from "../api/testData";
 import { device } from './../helpers/device';
+import { Numberselector } from '../components/blocks/Selector/NumberSelector';
+import { Plus } from "../components/blocks/SVG_Components/Plus";
 
 export const Product = () => {
     const [pageError, setPageError] = useState(null);
@@ -137,11 +139,11 @@ export const Product = () => {
                                 </Table>
                                 <Sale>
                                     <Price>{product.price} USD</Price>
-                                    <Counter>1</Counter>
+                                    <Numberselector />
                                     <Button
                                         variant='filled'
                                         size='md'
-                                        startArrow
+                                        startIcon={<Plus />}
                                     >
                                         Add to cart
                                     </Button>

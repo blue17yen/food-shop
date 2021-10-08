@@ -5,7 +5,7 @@ import styled from 'styled-components';
 import { ToolsContext } from "../../Tools/Tools";
 
 // components
-import Icon from './../../blocks/Icon/Icon';
+import {Icon} from './../../blocks/Icon/Icon';
 
 // image
 import downArrowSVG from "../../../assets/svg/arrows/down-arrow.svg";
