@@ -6,8 +6,9 @@ const BASEURL = "https://api.spoonacular.com/food/products";
 const SEACH = BASEURL + "/search?query";
 
 function addAPIKEY(url) {
-    const regex = new RegExp("/?", "g");
-    if (regex.test(url)) {
+    const regex = /\?/g;
+    console.log(url.match(regex));
+    if (url.match(regex)) {
         return url + `&${APIKEY}`;
     }
     return url + `?${APIKEY}`;
