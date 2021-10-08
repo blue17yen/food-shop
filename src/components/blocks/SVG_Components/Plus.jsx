@@ -12,16 +12,16 @@ export const Plus = ({ color = "#151515", size = "16" }) => {
             <path
                 d='M14.1608 8H3.49414'
                 stroke={color}
-                stroke-width='2.5'
-                stroke-linecap='round'
-                stroke-linejoin='bevel'
+                strokeWidth='2.5'
+                strokeLinecap='round'
+                strokeLinejoin='bevel'
             />
             <path
                 d='M8.82812 13.3334V2.66676'
                 stroke={color}
-                stroke-width='2.5'
-                stroke-linecap='round'
-                stroke-linejoin='bevel'
+                strokeWidth='2.5'
+                strokeLinecap='round'
+                strokeLinejoin='bevel'
             />
         </svg>
     );

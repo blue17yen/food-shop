@@ -4,7 +4,7 @@ import styled  from 'styled-components';
 
 
 import { Tools } from './components/Tools/Tools';
-import Header from "./components/Header/Header";
+import { Header } from "./components/Header/Header";
 import Footer from './components/Footer/Footer';
 import { NavMenu } from './components/NavMenu/NavMenu';
 import { Home } from './Pages/Home';

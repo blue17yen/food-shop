@@ -29,7 +29,6 @@ export const Button = ({
     startIcon = null,
     endIcon = null,
 }) => {
-    console.table([{ startIcon , endIcon}]);
     return (
         <ButtonRoot
             size={size}

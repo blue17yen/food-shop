@@ -8,13 +8,20 @@ import searchSvg from '../../../assets/svg/ic-actions-search.svg'
 
 const Wrapper = styled.div`
     position: relative;
-    max-width: 320px; 
+    flex: 1;
 
     margin: ${(props) => cssMP_Helper(props.margin)};
 `;
 
+const Search = styled.div`
+    position: absolute;
+    top: 13px;
+    right: 16px;
+`;
+
 const InputRoot = styled.input`
     ${Style.inputRoot};
+    max-width: none;
     padding-right: 44px;
     &::-ms-clear, &::-webkit-clear {
         width: 0;
@@ -22,12 +29,6 @@ const InputRoot = styled.input`
         display: none;
     }
 `;
-
-const Search = styled.div`
-    position: absolute;
-    top: 13px;
-    right: 16px;
-`
 
 const SearchIcon = () => {
     return (
@@ -37,11 +38,16 @@ const SearchIcon = () => {
     );
 }
 
-
-export const InputSearch = ({ margin = "0 0 0 0", value }) => {
+export const InputSearch = ({ margin = "0 0 0 0", value = '', onChange, refImp }) => {
     return (
         <Wrapper margin={margin}>
-            <InputRoot type='search' placeholder='Search Products, categories ...' />
+            <InputRoot
+                value={value}
+                onChange={onChange}
+                type='search'
+                placeholder='Search Products, categories ...'
+                ref={refImp}
+            />
             <SearchIcon />
         </Wrapper>
     );
@@ -50,4 +56,5 @@ export const InputSearch = ({ margin = "0 0 0 0", value }) => {
 InputSearch.propType = {
     value: PropTypes.string,
     margin: PropTypes.string,
+    onChange: PropTypes.func,
 };
