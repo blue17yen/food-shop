@@ -12,6 +12,7 @@ import { useLocationPathName } from './../helpers/hooks/useLocationPathName';
 import { LimitRequestsError } from './../api/LimitReqestsERROR';
 import { Loader } from "../components/blocks/Loader/Loader";
 import { DATA_APPLE } from "../api/testData";
+import { device } from './../helpers/device';
 
 export const Product = () => {
     const [pageError, setPageError] = useState(null);
@@ -197,18 +198,33 @@ const LoadingInner = styled.div`
 const Inner = styled.div`
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 30px;
+
+    @media ${device.tablet} {
+        flex-direction: row;
+    } ;
 `;
 const Image = styled.img`
     width: 100%;
     max-width: 569px;
     height: 320px;
+    margin: 0 auto;
     object-fit: contain;
 `;
 const ProductInfo = styled.div`
     display: flex;
     flex-direction: column;
-    gap: 50px;
+    gap: 30px;
+    @media ${device.mobileL} {
+        width: 100%;
+        max-width: 480px;
+        margin: 0 auto;
+    };
+    @media ${device.tablet} {
+        width: 100%;
+        max-width: unset;
+        margin: 0;
+    };
 `;
 const Title = styled.h1`
     ${setFont("h2")};
@@ -246,6 +262,8 @@ const Sale = styled.div`
     flex-wrap: wrap;
     justify-content: space-between;
     align-items: center;
+
+
 `;
 const Price = styled.h2`
     ${setFont("h3")};
