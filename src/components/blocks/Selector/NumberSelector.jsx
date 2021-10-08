@@ -9,7 +9,7 @@ import { Arrowup, Arrowdown } from "../SVG_Components/Arrow";
 import { ToolsContext } from './../../Tools/Tools';
 
 
-export const Numberselector = ({ margin = "0 0 0 0", value = 100}) => {
+export const Numberselector = ({ margin = "0 0 0 0", value = 1, textButton = 'Nmb'}) => {
     const [reference, setReference] = useState(null);
     const popperContext = useContext(ToolsContext).popperInterface;
     const handleClick = () => {
@@ -22,10 +22,16 @@ export const Numberselector = ({ margin = "0 0 0 0", value = 100}) => {
             <Button
                 size='sm'
                 variant='bright'
-                endIcon={popperContext.isOpen &&
-                popperContext.reference === reference ? <Arrowup /> : <Arrowdown />}
+                endIcon={
+                    popperContext.isOpen &&
+                    popperContext.reference === reference ? (
+                        <Arrowup />
+                    ) : (
+                        <Arrowdown />
+                    )
+                }
             >
-                Nmb
+                {textButton}
             </Button>
         </Wrapper>
     );
@@ -39,6 +45,9 @@ Numberselector.propType = {
 const Wrapper = styled.div`
     min-width: 120px;
     max-width: 140px;
+    min-height: 38px;
+    max-height: 50px;
+    background: transparent;
     border: 1px solid #d1d1d1;
     border-radius: 12px;
     display: flex;
@@ -49,6 +58,9 @@ const Wrapper = styled.div`
 
     & button {
         max-width: 78px;
+        max-height: 38px;
+        background: transparent;
+        border-color: transparent;
     }
 `;
 const Count = styled.div`

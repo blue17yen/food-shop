@@ -142,7 +142,7 @@ export const Product = () => {
                                     <Price>
                                         <Disableprise price={product.price} />
                                     </Price>
-                                    <Numberselector />
+                                    <Numberselector textButton={'Pcs'} />
                                     <Button
                                         variant='filled'
                                         size='md'
@@ -268,14 +268,13 @@ const Sale = styled.div`
     flex-wrap: wrap;
     justify-content: space-between;
     align-items: center;
-
+    gap: 10px 30px;
 
 `;
 const Price = styled.h2`
     ${setFont("h3")};
     color: ${colors.green};
 `;
-const Counter = styled.div``;
 const Info = styled.div`
     display: flex;
     flex-direction: column;

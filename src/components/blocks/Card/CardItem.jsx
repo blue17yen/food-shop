@@ -7,6 +7,7 @@ import { Icon } from '../Icon/Icon';
 
 import defItemImage from '../../../assets/images/def-card-img.png';
 import closeIco from '../../../assets/svg/ic-actions-close.svg'
+import { Numberselector } from '../Selector/NumberSelector';
 
 
 const Wrapper = styled.div`
@@ -147,12 +148,6 @@ const CountValue = styled.div`
 
 export const CardItem = () => {
     const price = 36.99;
-    const [state, setstate] = useState(1);
-    const [priceS, setPriceS] = useState(price)
-
-    useEffect(() => {
-        setPriceS(Math.ceil(price * state * 100) / 100);
-    }, [state]);
 
     return (
         <Wrapper>
@@ -173,21 +168,8 @@ export const CardItem = () => {
                 <RightBlock>
                     <Title>Product title</Title>
                     <Total>
-                        <Price>{priceS} USD</Price>
-                        <Count>
-                            <CountButton
-                                disabled={state === 1}
-                                onClick={() => setstate((prev) => prev === 1 ? prev : prev - 1)}
-                            >
-                                -
-                            </CountButton>
-                            <CountValue>{state}</CountValue>
-                            <CountButton
-                                onClick={() => setstate((prev) => prev + 1)}
-                            >
-                                +
-                            </CountButton>
-                        </Count>
+                        <Price>{price} USD</Price>
+                        <Numberselector />
                     </Total>
                 </RightBlock>
             </Inner>
