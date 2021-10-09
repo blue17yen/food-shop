@@ -4,6 +4,7 @@ import styled from 'styled-components';
 
 import { colors } from './../../../helpers/colors';
 import { setFont } from "../Text/setFont";
+import { decoder } from './../../../helpers/decoderHTML';
 
 import { Button } from './../Button/Button';
 
@@ -34,10 +35,10 @@ export const Card = ({product}) => {
     return (
         <Wrapper>
             <Inner>
-                <Image src={image}  onClick={handleOpenProduct}/>
+                <Image src={image} onClick={handleOpenProduct} />
                 <Info>
                     <Brand>{brand}</Brand>
-                    <Title onClick={handleOpenProduct}>{title}</Title>
+                    <Title onClick={handleOpenProduct}>{decoder(title)}</Title>
                     <BreadCrumbs>
                         {breadcrumbs.slice(0, 3).map((bc) => (
                             <NavLink to={bc} key={bc}>

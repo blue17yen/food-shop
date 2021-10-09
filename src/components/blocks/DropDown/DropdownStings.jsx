@@ -1,10 +1,10 @@
 import React from "react";
 import { NavLink, useHistory } from "react-router-dom";
 import styled from "styled-components";
-import { setFont } from "./../Text/setFont";
-import { colors } from "./../../../helpers/colors";
+import { setFont } from "../Text/setFont";
+import { colors } from "../../../helpers/colors";
 
-export const Dropdown = ({ closeDropdown }) => {
+export const DropdownStings = ({ closeDropdown, itemsList = ['nothing'] }) => {
     const history = useHistory();
 
     const handleClick = (path) => {
@@ -15,10 +15,9 @@ export const Dropdown = ({ closeDropdown }) => {
     return (
         <Wrapper>
             <List>
-                <Item onClick={() => handleClick('apple')}>apple</Item>
-                <Item onClick={() => handleClick('orange')}>orange</Item>
-                <Item onClick={() => handleClick('banana')}>banana</Item>
-                <Item onClick={() => handleClick('pineapple')}>pineapple</Item>
+                {itemsList.map((el) => (
+                    <Item key={el} onClick={() => handleClick(el)}>{el}</Item>
+                ))}
             </List>
         </Wrapper>
     );
@@ -26,7 +25,7 @@ export const Dropdown = ({ closeDropdown }) => {
 
 const Wrapper = styled.div`
     background-color: rgba(255, 255, 255, 0.95);
-    max-width: 160px;
+    min-width: 140px;
     padding: 10px;
     box-shadow: 0 2px 6px 0 ${colors.light_grey};
     border-radius: 12px;

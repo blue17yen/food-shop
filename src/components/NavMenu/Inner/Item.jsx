@@ -12,13 +12,19 @@ import downArrowSVG from "../../../assets/svg/arrows/down-arrow.svg";
 import upArrowSVG from "../../../assets/svg/arrows/up-arrow.svg";
 
 
+const category = ["apple", "orange", "banana", "pineapple"];
+
 export const Item = ({ children }) => {
     const [reference, setReference] = useState(null)
     const popperContext = useContext(ToolsContext).popperInterface;
 
     const handleOpenPopper = () => {
         if (reference) {
-            popperContext.openPopper(reference);
+            popperContext.openPopper({
+                newReference: reference,
+                variant: "str",
+                content: category,
+            });
         }
     }
 

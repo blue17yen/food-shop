@@ -1,11 +1,12 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Container } from '../components/Container/Container';
-import { CardItem } from '../components/blocks/Card/CardItem';
+import { BasketItem } from '../components/blocks/Card/BasketItem';
 import { colors } from '../helpers/colors';
 import { setFont } from '../components/blocks/Text/setFont';
 import { Button } from './../components/blocks/Button/Button';
 import { InputWithButton } from '../components/blocks/Input/InputWithButton';
+import { device } from './../helpers/device';
 
 const months = [
     "January",
@@ -42,10 +43,10 @@ export const Basket = () => {
                         </SubTitle>
                     </Head>
                     <Cards>
-                        <CardItem />
-                        <CardItem />
-                        <CardItem />
-                        <CardItem />
+                        <BasketItem />
+                        <BasketItem />
+                        <BasketItem />
+                        <BasketItem />
                     </Cards>
                     <Continue>Continue shopping</Continue>
                     <Summary>
@@ -99,6 +100,10 @@ const Inner = styled.div`
     padding: 12px 16px;
     display: flex;
     flex-direction: column;
+
+    @media ${device.laptopS} {
+        max-width: 538px;
+    };
 `;
 const Head = styled.div`
     display: flex;

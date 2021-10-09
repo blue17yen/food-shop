@@ -1,7 +1,7 @@
 import React, { createContext } from "react";
 
 // components
-import { PopperDropDown } from "../blocks/DropDown/PopperDropDown";
+import { PopperWrapper } from "./PopperWrapper";
 
 // hooks
 import { usePopperInterface } from './../../helpers/hooks/usePopperInterface';
@@ -22,7 +22,7 @@ export const Tools = ({children}) => {
     return (
         <ToolsContext.Provider value={toolsContextValue}>
             {children}
-            <PopperDropDown />
+            <PopperWrapper />
         </ToolsContext.Provider>
     );
 }

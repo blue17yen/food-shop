@@ -1,24 +1,66 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import styled from 'styled-components';
 import { device } from "../../../helpers/device";
 import { colors } from "../../../helpers/colors";
 import { setFont } from '../Text/setFont';
-import { Icon } from '../Icon/Icon';
+import { decoder } from '../../../helpers/decoderHTML';
 
-import defItemImage from '../../../assets/images/def-card-img.png';
+import { Icon } from '../Icon/Icon';
 import closeIco from '../../../assets/svg/ic-actions-close.svg'
+import defItemImage from '../../../assets/images/def-card-img.png';
 import { Numberselector } from '../Selector/NumberSelector';
 
 
-const Wrapper = styled.div`
+export const BasketItem = () => {
+    const price = 36.99;
+    const [numSelected, setNumSelected] = useState(1);
 
-`
+    const handleNumSelector = useCallback((num) => {
+        setNumSelected(num);
+    }, [])
+
+    return (
+        <Wrapper>
+            <Inner>
+                <LeftBlock>
+                    <Image src={defItemImage} />
+                    <Functions>
+                        <FunctionsItem>
+                            <Icon
+                                icon={closeIco}
+                                size={12}
+                                iconName={"closeIco"}
+                            />
+                            Remove
+                        </FunctionsItem>
+                    </Functions>
+                </LeftBlock>
+                <RightBlock>
+                    <Title>
+                        {decoder(`                        Apple &amp; Eve On The Go, Cranberry Juice Cocktail, 8oz
+                        (Pack of 24)`)}
+                    </Title>
+                    <Total>
+                        <Price>{price} USD</Price>
+                        <Numberselector
+                            callback={handleNumSelector}
+                            selected={numSelected}
+                        />
+                    </Total>
+                </RightBlock>
+            </Inner>
+        </Wrapper>
+    );
+}
+
+
+const Wrapper = styled.div``;
 const Inner = styled.div`
     min-height: 134px;
     width: 100%;
     display: flex;
     flex-direction: row;
-    border-bottom: 1px solid #D1D1D1;
+    border-bottom: 1px solid #d1d1d1;
     padding: 0 0 20px 0;
     @media ${device.mobileL} {
         min-height: 154px;
@@ -28,7 +70,7 @@ const LeftBlock = styled.div`
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    row-gap: 12px; 
+    row-gap: 12px;
     margin: 0 16px 0 0;
 `;
 const Image = styled.img`
@@ -49,7 +91,7 @@ const FunctionsItem = styled.li`
     align-items: center;
     column-gap: 6px;
 
-    ${setFont('caption')};
+    ${setFont("caption")};
     color: ${colors.light_grey};
     cursor: pointer;
 `;
@@ -58,10 +100,15 @@ const RightBlock = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    gap: 10px
 `;
-const Title = styled.h5`
-    ${setFont('h5')};
-`
+const Title = styled.h4`
+    ${setFont("h5")};
+
+    @media ${device.tablet} {
+        ${setFont("h4")};
+    } ;
+`;
 const Total = styled.div`
     display: flex;
     flex-direction: column;
@@ -80,7 +127,6 @@ const Total = styled.div`
 const Price = styled.h4`
     ${setFont("h4")};
     color: ${colors.green};
-
 `;
 const Count = styled.div`
     min-height: 30px;
@@ -144,35 +190,3 @@ const CountValue = styled.div`
         right: -2px;
     }
 `;
-
-
-export const CardItem = () => {
-    const price = 36.99;
-
-    return (
-        <Wrapper>
-            <Inner>
-                <LeftBlock>
-                    <Image src={defItemImage} />
-                    <Functions>
-                        <FunctionsItem>
-                            <Icon
-                                icon={closeIco}
-                                size={12}
-                                iconName={"closeIco"}
-                            />
-                            Remove
-                        </FunctionsItem>
-                    </Functions>
-                </LeftBlock>
-                <RightBlock>
-                    <Title>Product title</Title>
-                    <Total>
-                        <Price>{price} USD</Price>
-                        <Numberselector />
-                    </Total>
-                </RightBlock>
-            </Inner>
-        </Wrapper>
-    );
-}

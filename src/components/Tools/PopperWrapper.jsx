@@ -1,17 +1,18 @@
 import React, { useState, useContext, useCallback } from "react";
 import styled from "styled-components";
 // components
-import { Dropdown } from "./DropDown";
+import { DropdownStings } from "../blocks/DropDown/DropdownStings";
+import { DropdownNumber } from "../blocks/DropDown/DropdownNumber";
 
 // context
-import { ToolsContext } from "../../Tools/Tools";
+import { ToolsContext } from "./Tools";
 
 // hooks
 import { usePopper } from "react-popper";
-import { usePopperOnClickOutside } from "../../../helpers/hooks/usePopperOnClickOutside";
+import { usePopperOnClickOutside } from "../../helpers/hooks/usePopperOnClickOutside";
 
 
-export const PopperDropDown = () => {
+export const PopperWrapper = () => {
     const popperContext = useContext(ToolsContext).popperInterface;
     const [popperElement, setPopperElement] = useState(null);
     const { styles, attributes } = usePopper(
@@ -48,7 +49,19 @@ export const PopperDropDown = () => {
                     style={styles.popper}
                     {...attributes.popper}
                 >
-                    <Dropdown closeDropdown={closeAfterSelect} />
+                    {popperContext.variant === "str" ? (
+                        <DropdownStings
+                            closeDropdown={closeAfterSelect}
+                            itemsList={popperContext.itemsList}
+                        />
+                    ) : (
+                        <DropdownNumber
+                            closeDropdown={closeAfterSelect}
+                            value={popperContext.value}
+                            itemsList={popperContext.itemList}
+                            callback={popperContext.callback}
+                        />
+                    )}
                 </Wrapper>
             )}
         </>
@@ -56,6 +69,6 @@ export const PopperDropDown = () => {
 };
 
 const Wrapper = styled.div`
-    min-width: 160px;
+    min-width: 50px;
     max-width: 200px;
 `;

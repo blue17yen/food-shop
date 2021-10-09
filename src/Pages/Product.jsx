@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { NavLink, useLocation } from "react-router-dom";
 import styled from "styled-components";
 import { colors } from "../helpers/colors";
@@ -23,6 +23,12 @@ export const Product = () => {
     const [product, setProduct] = useState(null)
     const location = useLocation();
     const productId = useLocationPathName();
+    const [numSelected, setNumSelected] = useState(1);
+
+    const handleNumSelector = useCallback((num) => {
+        setNumSelected(num);
+    }, []);
+
 
     useEffect(() => {
         const locationState = location.state;
@@ -67,7 +73,7 @@ export const Product = () => {
                         <>
                             <Image src={product.images[2]} />
                             <ProductInfo>
-                                <Title>{product.title}</Title>
+                                <Title>{decoder(product.title)}</Title>
                                 <Table>
                                     <TableBlock>
                                         <TableItem>
@@ -142,7 +148,7 @@ export const Product = () => {
                                     <Price>
                                         <Disableprise price={product.price} />
                                     </Price>
-                                    <Numberselector textButton={'Pcs'} />
+                                    <Numberselector callback={handleNumSelector} selected={numSelected} textButton={"Pcs"} />
                                     <Button
                                         variant='filled'
                                         size='md'
