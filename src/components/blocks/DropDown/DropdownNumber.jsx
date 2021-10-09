@@ -1,15 +1,12 @@
 import React from "react";
 import styled from "styled-components";
-import { setFont } from "./../Text/setFont";
-import { colors } from "./../../../helpers/colors";
-import { range } from "./../../../helpers/range";
 
+import { setFontStyle, colors, range } from "helpers/";
 
 
 export const DropdownNumber = ({ closeDropdown, itemsList = range(1, 20), value = 1, callback }) => {
 
     const handleClick = (num) => {
-        console.log(num);
         callback(num);
         closeDropdown();
     };
@@ -51,7 +48,7 @@ const Item = styled.li`
     max-width: 140px;
     padding: 10px 0;
 
-    ${setFont("button")};
+    ${setFontStyle("button")};
     display: grid;
     text-align: center;
     text-transform: uppercase;

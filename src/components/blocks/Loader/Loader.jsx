@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import loaderSVG from '../../../assets/svg/loader.svg'
+import loaderSVG from 'assets/svg/loader.svg'
 
 const Wrapper = styled.span`
     display: flex;

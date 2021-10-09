@@ -1,6 +1,34 @@
 import React from 'react';
 import styled from 'styled-components';
-import { colors } from '../../../helpers/colors';
+
+import { colors } from 'helpers/';
+
+
+export const FooterMenu = () => {
+    return (
+        <Wrapper>
+            <Column>
+                <Head>Get in touch</Head>
+                <List>
+                    <Item>About Us</Item>
+                    <Item>Careers</Item>
+                    <Item>Press Releases</Item>
+                    <Item>Blog</Item>
+                </List>
+            </Column>
+            <Column>
+                <Head>Get in touch</Head>
+                <List>
+                    <Item>About Us</Item>
+                    <Item>Careers</Item>
+                    <Item>Press Releases</Item>
+                    <Item>Blog</Item>
+                </List>
+            </Column>
+        </Wrapper>
+    );
+}
+
 
 const Wrapper = styled.div`
     display: flex;
@@ -39,29 +67,3 @@ const Item = styled.li`
     margin: 0 0 8px;
 `;
 
-const FooterMenu = () => {
-    return (
-        <Wrapper>
-            <Column>
-                <Head>Get in touch</Head>
-                <List>
-                    <Item>About Us</Item>
-                    <Item>Careers</Item>
-                    <Item>Press Releases</Item>
-                    <Item>Blog</Item>
-                </List>
-            </Column>
-            <Column>
-                <Head>Get in touch</Head>
-                <List>
-                    <Item>About Us</Item>
-                    <Item>Careers</Item>
-                    <Item>Press Releases</Item>
-                    <Item>Blog</Item>
-                </List>
-            </Column>
-        </Wrapper>
-    );
-}
-
-export default FooterMenu;

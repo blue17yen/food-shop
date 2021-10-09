@@ -2,12 +2,12 @@ import React from 'react';
 import { NavLink } from "react-router-dom";
 import styled from "styled-components";
 
-import { Container } from '../Container/Container';
-import { Icon } from '../blocks/Icon/Icon';
+import { Container } from 'components/Container/Container';
+import { Search } from "components/Search/Search";
+import { Icon } from 'components/blocks/Icon/Icon';
 
-import UserIco from '../../assets/svg/ic-actions-user.svg';
-import BasketIco from '../../assets/svg/ic-ecommerce-basket.svg';
-import { Search } from './../Search/Search';
+import UserIco from 'assets/svg/ic-actions-user.svg';
+import BasketIco from 'assets/svg/ic-ecommerce-basket.svg';
 
 
 export const Header = () => {

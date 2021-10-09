@@ -1,21 +1,21 @@
 import React, { useState, useEffect, useCallback } from "react";
 import { NavLink, useLocation } from "react-router-dom";
 import styled from "styled-components";
-import { colors } from "../helpers/colors";
-import { setFont } from "./../components/blocks/Text/setFont";
-import { decoder } from './../helpers/decoderHTML';
+// helpers
+import { colors, device, setFontStyle, decoder } from "helpers/";
+// components
+import { Container } from "components/Container/Container";
+import { Button } from "components/blocks/Button/Button";
+import { Loader } from "components/blocks/Loader/Loader";
+import { Numberselector } from 'components/blocks/Selector/NumberSelector';
+import { Plus } from "components/Icons/Plus";
+import { Disableprise } from "components/blocks/NoProducts/DisablePrise";
+// api
+import { getProduct } from "api/spoonacularAPI";
+import { LimitRequestsError } from 'api/LimitReqestsERROR';
+// hooks
+import { useLocationPathName } from 'helpers/hooks/useLocationPathName';
 
-import { Container } from "../components/Container/Container";
-import { Button } from "./../components/blocks/Button/Button";
-import { getProduct } from "../api/spoonacularAPI";
-import { useLocationPathName } from './../helpers/hooks/useLocationPathName';
-import { LimitRequestsError } from './../api/LimitReqestsERROR';
-import { Loader } from "../components/blocks/Loader/Loader";
-import { DATA_APPLE } from "../api/testData";
-import { device } from './../helpers/device';
-import { Numberselector } from '../components/blocks/Selector/NumberSelector';
-import { Plus } from "../components/blocks/SVG_Components/Plus";
-import { Disableprise } from "../components/blocks/NoProducts/DisablePrise";
 
 export const Product = () => {
     const [pageError, setPageError] = useState(null);
@@ -239,7 +239,7 @@ const ProductInfo = styled.div`
     };
 `;
 const Title = styled.h1`
-    ${setFont("h2")};
+    ${setFontStyle("h2")};
 `;
 const Breadcrumbs = styled.div`
     display: flex;
@@ -248,7 +248,7 @@ const Breadcrumbs = styled.div`
     gap: 5px;
 `;
 const Breadcrumb = styled.p`
-    ${setFont("caption", true)};
+    ${setFontStyle("caption", true)};
     color: ${colors.green};
 `;
 const Table = styled.div`
@@ -265,7 +265,7 @@ const TableItem = styled.div`
     display: grid;
     grid-template-columns: 0.8fr 1.2fr;
 
-    ${setFont("body")};
+    ${setFontStyle("body")};
 `;
 const TableItemValue = styled.span``;
 const Sale = styled.div`
@@ -278,7 +278,7 @@ const Sale = styled.div`
 
 `;
 const Price = styled.h2`
-    ${setFont("h3")};
+    ${setFontStyle("h3")};
     color: ${colors.green};
 `;
 const Info = styled.div`
@@ -292,17 +292,17 @@ const Description = styled.div`
     gap: 8px;
 `;
 const DescriptionTitle = styled.h4`
-    ${setFont("h4")};
+    ${setFontStyle("h4")};
 `;
 const DescriptionText = styled.code`
-    ${setFont("body")}
+    ${setFontStyle("body")}
 `;
 const Ingredients = styled(Description)``;
 const IngredientsTitle = styled(DescriptionTitle)``;
 const IngredientsText = styled(DescriptionText)``;
 
 const ErrorInfo = styled.h1`
-    ${setFont("h1")};
+    ${setFontStyle("h1")};
     color: ${colors.light_grey};
     text-align: center;
     margin: 0;
@@ -312,7 +312,7 @@ const ErrorInfo = styled.h1`
     }
 `;
 const ErrorInfoSm = styled.h3`
-    ${setFont("h3")};
+    ${setFontStyle("h3")};
     color: ${colors.light_grey};
     text-align: center;
     margin: 0;

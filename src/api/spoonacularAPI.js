@@ -1,13 +1,12 @@
 import axios from 'axios';
-import { setKey, APIKEY } from './apikey';
-import { LimitRequestsError } from './LimitReqestsERROR';
+import { setKey, APIKEY } from 'api/apikey';
+import { LimitRequestsError } from 'api/LimitReqestsERROR';
 
 const BASEURL = "https://api.spoonacular.com/food/products";
 const SEACH = BASEURL + "/search?query";
 
 function addAPIKEY(url) {
     const regex = /\?/g;
-    console.log(url.match(regex));
     if (url.match(regex)) {
         return url + `&${APIKEY}`;
     }

@@ -1,5 +1,6 @@
 import { css } from 'styled-components';
-import { colors } from "../../../helpers/colors";
+
+import { colors } from "helpers/";
 
 
 export const inputRoot = css`

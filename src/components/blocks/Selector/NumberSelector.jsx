@@ -1,13 +1,13 @@
 import React, { useState, useContext, useCallback } from "react";
 import { PropTypes } from "prop-types";
 import styled from "styled-components";
-import { setFont } from '../Text/setFont';
-import { colors } from "../../../helpers/colors";
-import { range } from "../../../helpers/range";
-import { cssMP_Helper } from "../../../helpers/margin";
-import { Button } from '../Button/Button';
-import { Arrowup, Arrowdown } from "../SVG_Components/Arrow";
-import { ToolsContext } from './../../Tools/Tools';
+
+import { setFontStyle, range } from "helpers/";
+
+import { Arrowup, Arrowdown } from "components/Icons/Arrow";
+
+import { Button } from "components/blocks/Button/Button";
+import { ToolsContext } from 'components/Tools/Tools';
 
 
 export const Numberselector = ({ margin = "0 0 0 0", selected = 1, callback, textButton = 'Nmb'}) => {
@@ -48,10 +48,11 @@ export const Numberselector = ({ margin = "0 0 0 0", selected = 1, callback, tex
 };
 
 Numberselector.propType = {
-    value: PropTypes.string,
+    selected: PropTypes.number,
+    callback: PropTypes.fucn,
+    textButton: PropTypes.string,
     margin: PropTypes.string,
 };
-
 const Wrapper = styled.div`
     min-width: 120px;
     max-width: 140px;
@@ -81,5 +82,5 @@ const Count = styled.div`
     justify-content: center;
     align-items: center;
 
-    ${setFont("body")};
+    ${setFontStyle("body")};
 `;

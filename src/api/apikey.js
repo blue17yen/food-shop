@@ -1,4 +1,4 @@
-import { LimitRequestsError } from './LimitReqestsERROR';
+import { LimitRequestsError } from 'api/LimitReqestsERROR';
 
 
 const apiKeys = [

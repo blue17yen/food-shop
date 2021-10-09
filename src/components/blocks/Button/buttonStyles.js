@@ -1,6 +1,7 @@
 import { css } from "styled-components";
-import { colors } from "../../../helpers/colors";
-import { setFont } from './../Text/setFont';
+import { colors } from "helpers/colors";
+
+import { setFontStyle } from "helpers/";
 
 /* styles common to all buttons */
 export const buttonRoot = css`
@@ -12,7 +13,7 @@ export const buttonRoot = css`
     flex-direction: row;
     align-items: center;
     justify-content: center;
-    ${setFont('button')};
+    ${setFontStyle('button')};
 
     cursor: pointer;
 

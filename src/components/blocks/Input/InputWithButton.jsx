@@ -1,16 +1,18 @@
 import React from 'react';
 import styled from "styled-components";
-import { cssMP_Helper } from './../../../helpers/margin';
-import { Button } from './../Button/Button';
+
+import { css_indent, device } from "helpers/";
+
+import { Button } from "components/blocks/Button/Button";
+
 import * as Style from "./inputStyle";
-import { device } from './../../../helpers/device';
 
 
 
 const Wrapper = styled.div`
     position: relative;
     min-width: 100%;
-    margin: ${(props) => cssMP_Helper(props.margin)};
+    margin: ${(props) => css_indent(props.margin)};
 
     & button {
         position: absolute;

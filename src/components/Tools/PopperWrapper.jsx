@@ -1,15 +1,13 @@
 import React, { useState, useContext, useCallback } from "react";
 import styled from "styled-components";
+import { usePopper } from "react-popper";
 // components
-import { DropdownStings } from "../blocks/DropDown/DropdownStings";
-import { DropdownNumber } from "../blocks/DropDown/DropdownNumber";
-
+import { DropdownStings } from "components/blocks/DropDown/DropdownStings";
+import { DropdownNumber } from "components/blocks/DropDown/DropdownNumber";
 // context
 import { ToolsContext } from "./Tools";
-
 // hooks
-import { usePopper } from "react-popper";
-import { usePopperOnClickOutside } from "../../helpers/hooks/usePopperOnClickOutside";
+import { usePopperOnClickOutside } from "helpers/hooks/usePopperOnClickOutside";
 
 
 export const PopperWrapper = () => {

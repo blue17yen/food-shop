@@ -4,17 +4,13 @@ import React, { createContext } from "react";
 import { PopperWrapper } from "./PopperWrapper";
 
 // hooks
-import { usePopperInterface } from './../../helpers/hooks/usePopperInterface';
+import { usePopperInterface } from 'helpers/hooks/usePopperInterface';
 
-
-
-
+// CONTEXT
 export const ToolsContext = createContext(null)
 
 export const Tools = ({children}) => {
     const popperInterface = usePopperInterface();
-
-
     const toolsContextValue = {
         popperInterface: popperInterface,
     };

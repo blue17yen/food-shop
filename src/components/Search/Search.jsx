@@ -1,16 +1,15 @@
 import React, { useState, useEffect, useRef } from "react";
-import styled from 'styled-components';
 import { useHistory } from 'react-router-dom';
-import { InputSearch } from '../blocks/Input/InputSearch';
-import { Icon } from './../blocks/Icon/Icon';
-import { useDebounce } from './../../helpers/hooks/useDebounse';
-import SearchIco from "../../assets/svg/ic-actions-search.svg";
-import { SearchIcon } from './../blocks/SVG_Components/SearchIcon';
-import { Arrowright } from "../blocks/SVG_Components/Arrow";
-import { colors } from "../../helpers/colors";
-import { RemoveTab } from './../blocks/SVG_Components/RemoveTab';
-import { device } from './../../helpers/device';
+import styled from 'styled-components';
 
+import { device, colors } from "helpers/";
+
+import { InputSearch } from "components/blocks/Input/InputSearch";
+import { SearchIcon } from "components/Icons/SearchIcon";
+import { RemoveTab } from "components/Icons/RemoveTab";
+
+// hooks
+import { useDebounce } from 'helpers/hooks/useDebounse';
 
 export const Search = () => {
     const history = useHistory();

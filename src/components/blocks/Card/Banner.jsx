@@ -1,13 +1,14 @@
 import React from "react";
 import { PropTypes } from 'prop-types';
 import styled from "styled-components";
-import { colors } from "../../../helpers/colors";
-import { Button } from "./../Button/Button";
-import { cssMP_Helper } from './../../../helpers/margin';
-import { device } from "../../../helpers/device";
-import { useValidateImageUrl } from './../../../helpers/useValidateImageUrl';
-import { setFont } from '../Text/setFont';
-import { Arrowright } from "../SVG_Components/Arrow";
+
+import { setFontStyle, css_indent, device, colors } from "helpers/";
+
+import { Button } from "components/blocks/Button/Button";
+import { Arrowright } from "components/Icons/Arrow";
+
+import { useValidateImageUrl } from 'helpers/hooks/useValidateImageUrl';
+
 
 const Wrapper = styled.div`
     width: 100%;
@@ -24,7 +25,7 @@ const Wrapper = styled.div`
             ? `background-image: url(${props.background})`
             : null};
 
-    margin: ${(props) => cssMP_Helper(props.margin)};
+    margin: ${(props) => css_indent(props.margin)};
 
     @media ${device.mobileL} {
         min-height: 280px;
@@ -75,12 +76,12 @@ const TextBlock = styled.div`
 
 const SubTitle = styled.h6`
     min-height: 18px;
-    ${setFont('h6')}
+    ${setFontStyle('h6')}
     color: ${colors.green};
 `;
 
 const Title = styled.h3`
-    ${setFont('h3')}
+    ${setFontStyle('h3')}
     ${(props) =>
         props.isBackground ? `color: #fff` : `color: ${colors.black}`}
 `;

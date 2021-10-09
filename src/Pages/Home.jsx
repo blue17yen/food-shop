@@ -1,33 +1,14 @@
 import React from 'react';
 import styled from 'styled-components';
-import { device } from '../helpers/device';
-import { Container } from '../components/Container/Container';
-import { Banner } from '../components/blocks/Card/Banner';
 
-import BgBannerEgg from '../assets/images/bg-banner-egg.png'
-import BgBannerMeat from '../assets/images/bg-banner-meat.png'
+import { device } from 'helpers/';
 
+import { Container } from 'components/Container/Container';
+import { Banner } from 'components/blocks/Card/Banner';
 
-const Wrapper = styled.main`
-    padding: 30px 0 40px;
-`
-const Inner = styled.div`
-    display: flex;
-    flex-direction: column;
-    row-gap: 20px;
-    align-items: center;
+import BgBannerEgg from 'assets/images/bg-banner-egg.png'
+import BgBannerMeat from 'assets/images/bg-banner-meat.png'
 
-    @media ${device.mobileL} {
-        row-gap: 30px;
-    }
-    @media ${device.laptopS} {
-        flex-direction: row;
-        flex-wrap: wrap;
-        justify-content: center;
-        column-gap: 30px;
-        row-gap: 30px;
-    }
-`;
 
 export const Home = () => {
     return (
@@ -66,3 +47,24 @@ export const Home = () => {
     );
 }
 
+
+const Wrapper = styled.main`
+    padding: 30px 0 40px;
+`;
+const Inner = styled.div`
+    display: flex;
+    flex-direction: column;
+    row-gap: 20px;
+    align-items: center;
+
+    @media ${device.mobileL} {
+        row-gap: 30px;
+    }
+    @media ${device.laptopS} {
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+        column-gap: 30px;
+        row-gap: 30px;
+    }
+`;

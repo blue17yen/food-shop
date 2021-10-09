@@ -2,19 +2,11 @@ import React from 'react';
 import styled from 'styled-components';
 
 import { Container } from '../Container/Container';
-import FooterMenu from './Inner/FooterMenu';
-import ProductTags from './Inner/ProductTags';
+import { FooterMenu } from './Inner/FooterMenu';
+import { ProductTags } from "./Inner/ProductTags";
 
-const FooterWrap = styled.footer`
-    flex: 0 0 auto;
-`
-const FooterInner = styled.div`
-    display: flex;
-    flex-direction: column;
-    padding: 30px 0px;
-`
 
-const Footer = () => {
+export const Footer = () => {
     return (
         <FooterWrap>
             <Container>
@@ -27,4 +19,12 @@ const Footer = () => {
     );
 }
 
-export default Footer;
+const FooterWrap = styled.footer`
+    flex: 0 0 auto;
+`;
+const FooterInner = styled.div`
+    display: flex;
+    flex-direction: column;
+    padding: 30px 0px;
+`;
+

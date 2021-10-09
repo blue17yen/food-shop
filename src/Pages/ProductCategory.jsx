@@ -2,23 +2,21 @@ import React, { useState, useEffect, useCallback } from "react";
 import styled from 'styled-components';
 
 // Help func
-import { device } from './../helpers/device';
-import { colors } from '../helpers/colors';
-import { setFont } from '../components/blocks/Text/setFont';
+import { device, setFontStyle, colors } from "helpers/";
 
 // Compornents
-import { Container } from '../components/Container/Container';
-import { Card } from '../components/blocks/Card/Card';
-import { Pagination } from "../components/blocks/pagination/Pagination";
+import { Container } from 'components/Container/Container';
+import { Card } from 'components/blocks/Card/Card';
+import { Pagination } from "components/blocks/pagination/Pagination";
+import { Loader } from "components/blocks/Loader/Loader";
 
 // Custom hooks
-import { useLocationPathName } from "../helpers/hooks/useLocationPathName";
+import { useLocationPathName } from "helpers/hooks/useLocationPathName";
 
 // Api
-import { searchProductCategory } from "../api/spoonacularAPI";
-import { LimitRequestsError } from './../api/LimitReqestsERROR';
-import { Loader } from "../components/blocks/Loader/Loader";
-import { DATA, DATA_APPLE } from "./../api/testData";
+import { searchProductCategory } from "api/spoonacularAPI";
+import { LimitRequestsError } from 'api/LimitReqestsERROR';
+
 
 export const ProductCategory = () => {
     const categoryName = useLocationPathName();
@@ -131,7 +129,7 @@ const LoadingInner = styled.div`
     justify-content: center;
 `;
 const TitlePage = styled.h1`
-    ${setFont("h1")};
+    ${setFontStyle("h1")};
     text-align: center;
     color: ${colors.green};
     margin: 0 0 40px 0;
@@ -167,7 +165,7 @@ const CardWrapper = styled.div`
     }
 `;
 const ErrorInfo = styled.h1`
-    ${setFont("h1")};
+    ${setFontStyle("h1")};
     color: ${colors.light_grey};
     text-align: center;
     margin: 0;
@@ -177,7 +175,7 @@ const ErrorInfo = styled.h1`
     }
 `;
 const ErrorInfoSm = styled.h3`
-    ${setFont("h3")};
+    ${setFontStyle("h3")};
     color: ${colors.light_grey};
     text-align: center;
     margin: 0;

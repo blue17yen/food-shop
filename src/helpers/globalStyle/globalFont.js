@@ -1,16 +1,16 @@
 import { createGlobalStyle } from "styled-components";
 
-import OpenSans_Regular_Woff from '../../assets/fonts/OpenSans-Regular.woff';
-import OpenSans_Regular_Woff2 from '../../assets/fonts/OpenSans-Regular.woff2';
+import OpenSans_Regular_Woff from 'assets/fonts/OpenSans-Regular.woff';
+import OpenSans_Regular_Woff2 from 'assets/fonts/OpenSans-Regular.woff2';
 
-import Popins_Bold_Woff from '../../assets/fonts/Poppins-Bold.woff';
-import Popins_Bold_Woff2 from '../../assets/fonts/Poppins-Bold.woff2';
+import Popins_Bold_Woff from 'assets/fonts/Poppins-Bold.woff';
+import Popins_Bold_Woff2 from 'assets/fonts/Poppins-Bold.woff2';
 
-import Popins_SemiBold_Woff from '../../assets/fonts/Poppins-SemiBold.woff';
-import Popins_SemiBold_Woff2 from '../../assets/fonts/Poppins-SemiBold.woff2';
+import Popins_SemiBold_Woff from 'assets/fonts/Poppins-SemiBold.woff';
+import Popins_SemiBold_Woff2 from 'assets/fonts/Poppins-SemiBold.woff2';
 
-import Popins_Medium_Woff from "../../assets/fonts/Poppins-Medium.woff2";
-import Popins_Medium_Woff2 from "../../assets/fonts/Poppins-Medium.woff2";
+import Popins_Medium_Woff from "assets/fonts/Poppins-Medium.woff2";
+import Popins_Medium_Woff2 from "assets/fonts/Poppins-Medium.woff2";
 
 
 

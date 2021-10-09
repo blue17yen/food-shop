@@ -1,7 +1,16 @@
 import React from 'react';
-
 import styled from "styled-components";
-import { device } from "../../helpers/device";
+
+import { device } from "helpers/";
+
+
+export const Container = ({children}) => {
+    return (
+        <ContainerWrap>
+            {children}
+        </ContainerWrap>
+    );
+}
 
 const ContainerWrap = styled.div`
     padding: 0 10px;
@@ -16,12 +25,3 @@ const ContainerWrap = styled.div`
         margin: 0 auto;
     }
 `;
-
-export const Container = ({children}) => {
-    return (
-        <ContainerWrap>
-            {children}
-        </ContainerWrap>
-    );
-}
-

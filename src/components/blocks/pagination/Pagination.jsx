@@ -1,12 +1,13 @@
 import React from "react";
 import styled from 'styled-components';
-import { setFont } from '../Text/setFont';
-import { colors } from '../../../helpers/colors';
-import { range } from "../../../helpers/range";
-import {Icon} from './../Icon/Icon';
 
-import leftArrow from '../../../assets/svg/arrows/left-arrow.svg'
-import rightArrow from '../../../assets/svg/arrows/right-arrow.svg'
+import { setFontStyle, colors, range } from "helpers/";
+
+import { Icon } from "components/blocks/Icon/Icon";
+
+import leftArrow from 'assets/svg/arrows/left-arrow.svg'
+import rightArrow from 'assets/svg/arrows/right-arrow.svg'
+
 
 const LEFT_ARROW = 'LEFT_ARROW';
 const RIGHT_ARROW = 'RIGHT_ARROW';
@@ -120,7 +121,7 @@ const Inner = styled.div`
 
     gap: 8px;
 
-    ${setFont("body")};
+    ${setFontStyle("body")};
 `;
 const PageText = styled.p`
     color: ${colors.light_grey};

@@ -1,14 +1,13 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import styled from 'styled-components';
-import { device } from "../../../helpers/device";
-import { colors } from "../../../helpers/colors";
-import { setFont } from '../Text/setFont';
-import { decoder } from '../../../helpers/decoderHTML';
 
-import { Icon } from '../Icon/Icon';
-import closeIco from '../../../assets/svg/ic-actions-close.svg'
-import defItemImage from '../../../assets/images/def-card-img.png';
-import { Numberselector } from '../Selector/NumberSelector';
+import { setFontStyle, colors, device, decoder } from "helpers/";
+
+import { Icon } from 'components/blocks/Icon/Icon';
+import { Numberselector } from "components/blocks/Selector/NumberSelector";
+
+import closeIco from 'assets/svg/ic-actions-close.svg'
+import defItemImage from 'assets/images/def-card-img.png';
 
 
 export const BasketItem = () => {
@@ -91,7 +90,7 @@ const FunctionsItem = styled.li`
     align-items: center;
     column-gap: 6px;
 
-    ${setFont("caption")};
+    ${setFontStyle("caption")};
     color: ${colors.light_grey};
     cursor: pointer;
 `;
@@ -103,10 +102,10 @@ const RightBlock = styled.div`
     gap: 10px
 `;
 const Title = styled.h4`
-    ${setFont("h5")};
+    ${setFontStyle("h5")};
 
     @media ${device.tablet} {
-        ${setFont("h4")};
+        ${setFontStyle("h4")};
     } ;
 `;
 const Total = styled.div`
@@ -125,7 +124,7 @@ const Total = styled.div`
     }
 `;
 const Price = styled.h4`
-    ${setFont("h4")};
+    ${setFontStyle("h4")};
     color: ${colors.green};
 `;
 const Count = styled.div`
@@ -153,7 +152,7 @@ const CountButton = styled.button`
     justify-content: center;
     align-items: center;
     cursor: pointer;
-    ${setFont("button")};
+    ${setFontStyle("button")};
 
     &:disabled {
         background: rgba(0, 0, 0, 0.05);
@@ -168,7 +167,7 @@ const CountValue = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
-    ${setFont("h6")};
+    ${setFontStyle("h6")};
 
     position: relative;
 

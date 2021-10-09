@@ -1,27 +1,15 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Container } from '../components/Container/Container';
-import { BasketItem } from '../components/blocks/Card/BasketItem';
-import { colors } from '../helpers/colors';
-import { setFont } from '../components/blocks/Text/setFont';
-import { Button } from './../components/blocks/Button/Button';
-import { InputWithButton } from '../components/blocks/Input/InputWithButton';
-import { device } from './../helpers/device';
 
-const months = [
-    "January",
-    "February",
-    "March",
-    "April",
-    "May",
-    "June",
-    "July",
-    "August",
-    "September",
-    "October",
-    "November",
-    "December",
-];
+import { device, colors, setFontStyle, months } from "helpers/";
+
+import { Container } from 'components/Container/Container';
+import { BasketItem } from 'components/blocks/Card/BasketItem';
+import { Button } from 'components/blocks/Button/Button';
+import { InputWithButton } from 'components/blocks/Input/InputWithButton';
+
+
+
 
 export const Basket = () => {
 
@@ -113,11 +101,11 @@ const Head = styled.div`
     margin: 0 0 40px;
 `;
 const Title = styled.h3`
-    ${setFont("h3")};
+    ${setFontStyle("h3")};
     margin: 0 0 4px;
 `;
 const SubTitle = styled.p`
-    ${setFont("caption")};
+    ${setFontStyle("caption")};
 `;
 const Cards = styled.div`
     display: flex;
@@ -126,7 +114,7 @@ const Cards = styled.div`
     margin: 0 0 40px;
 `;
 const Continue = styled.h4`
-    ${setFont("h5", true)};
+    ${setFontStyle("h5", true)};
     color: ${colors.red};
     text-align: center;
     margin: 0 auto 40px;
@@ -146,7 +134,7 @@ const SummaryItem = styled.div`
     flex-direction: row;
     justify-content: space-between;
 
-    ${setFont("h6")};
+    ${setFontStyle("h6")};
 `;
 const SummaryName = styled.div`
     justify-self: flex-start;
@@ -173,16 +161,16 @@ const TotalOrder = styled.div`
 `;
 const TotalOrderTitle = styled.h6`
     grid-area: title;
-    ${setFont("h6")};
+    ${setFontStyle("h6")};
 `;
 const DeliveryDate = styled.p`
     grid-area: delivery;
-    ${setFont("caption")};
+    ${setFontStyle("caption")};
     color: ${colors.green};
 `;
 const Total = styled.h2`
     grid-area: total;
     justify-self: end;
-    ${setFont("h2")};
+    ${setFontStyle("h2")};
     color: ${colors.green};
 `;

@@ -1,7 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { colors } from '../../../../helpers/colors';
-import { cssMP_Helper } from "../../../../helpers/margin";
+import { colors, css_indent } from "helpers/";
 
 
 const directions = {
@@ -25,5 +24,5 @@ export const ButtonIco = ({ direction, variant, icon }) => {
 const Wrapper = styled.span`
     display: flex;
     flex-direction: row;
-    ${({ margin }) => margin && "margin:" + cssMP_Helper(margin)};
+    ${({ margin }) => margin && "margin:" + css_indent(margin)};
 `;

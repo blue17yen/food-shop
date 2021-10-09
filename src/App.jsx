@@ -2,31 +2,20 @@ import React from 'react';
 import { Switch, Route, Redirect } from "react-router-dom";
 import styled  from 'styled-components';
 
+//components
+import { Tools } from 'components/Tools/Tools';
+import { Header } from "components/Header/Header";
+import { Footer } from 'components/Footer/Footer';
+import { NavMenu } from 'components/NavMenu/NavMenu';
 
-import { Tools } from './components/Tools/Tools';
-import { Header } from "./components/Header/Header";
-import Footer from './components/Footer/Footer';
-import { NavMenu } from './components/NavMenu/NavMenu';
-import { Home } from './Pages/Home';
-import { ProductCategory } from './Pages/ProductCategory';
-import { Basket } from './Pages/Basket';
-import { Product } from './Pages/Product';
+//pages
+import { Home } from 'pages/Home';
+import { ProductCategory } from 'pages/ProductCategory';
+import { Basket } from 'pages/Basket';
+import { Product } from 'pages/Product';
 
 
-const AppWrap = styled.div`
-    display: flex;
-    flex-direction: column;
-    min-height: 100%;
-`;
-
-const Content = styled.div`
-    flex: 1 1 auto;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-`
-
-function App() {
+export function App() {
   return (
       <AppWrap>
           <Tools>
@@ -57,4 +46,16 @@ function App() {
   );
 }
 
-export default App;
+
+const AppWrap = styled.div`
+    display: flex;
+    flex-direction: column;
+    min-height: 100%;
+`;
+
+const Content = styled.div`
+    flex: 1 1 auto;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+`;

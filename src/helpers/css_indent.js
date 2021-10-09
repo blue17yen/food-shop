@@ -6,6 +6,6 @@
     валидным для css margin параметра
 */
 
-export function cssMP_Helper(string) {
+export function css_indent(string) {
     return string?.split(' ').map(value => Number(value) === 0 ? value : value + 'px').join(' ');
 }

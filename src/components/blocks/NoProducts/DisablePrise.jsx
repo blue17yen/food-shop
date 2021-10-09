@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
-import { colors } from '../../../helpers/colors';
+
+import { colors } from 'helpers/';
 
 export const Disableprise = ({price}) => {
     return (

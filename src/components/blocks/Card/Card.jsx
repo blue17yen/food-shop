@@ -2,14 +2,12 @@ import React from 'react';
 import { useHistory, NavLink } from "react-router-dom";
 import styled from 'styled-components';
 
-import { colors } from './../../../helpers/colors';
-import { setFont } from "../Text/setFont";
-import { decoder } from './../../../helpers/decoderHTML';
+import { setFontStyle, colors, decoder } from "helpers/";
 
-import { Button } from './../Button/Button';
+import { Button } from "components/blocks/Button/Button";
+import { Disableprise } from "components/blocks/NoProducts/DisablePrise";
 
-import defaultImage from '../../../assets/images/def-card-img.png'
-import { Disableprise } from '../NoProducts/DisablePrise';
+import defaultImage from 'assets/images/def-card-img.png'
 
 
 export const Card = ({product}) => {
@@ -99,7 +97,7 @@ const Info = styled.div`
 `;
 
 const Title = styled.h5`
-    ${setFont("h5")};
+    ${setFontStyle("h5")};
     cursor: pointer;
 
     &:hover {
@@ -108,7 +106,7 @@ const Title = styled.h5`
 `;
 
 const Brand = styled.p`
-    ${setFont("caption")};
+    ${setFontStyle("caption")};
     color: #575757;
 `;
 
@@ -119,7 +117,7 @@ const BreadCrumbs = styled.div`
     gap: 5px;
 `;
 const BreadCrumb = styled.p`
-    ${setFont("caption", true)};
+    ${setFontStyle("caption", true)};
     color: ${colors.green};
 `;
 
@@ -131,5 +129,5 @@ const CostBlock = styled.div`
 `;
 
 const Price = styled.h4`
-    ${setFont("h4")};
+    ${setFontStyle("h4")};
 `;

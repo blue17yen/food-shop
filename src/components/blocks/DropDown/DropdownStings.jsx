@@ -1,8 +1,9 @@
 import React from "react";
 import { NavLink, useHistory } from "react-router-dom";
 import styled from "styled-components";
-import { setFont } from "../Text/setFont";
-import { colors } from "../../../helpers/colors";
+
+import { setFontStyle, colors} from "helpers/";
+
 
 export const DropdownStings = ({ closeDropdown, itemsList = ['nothing'] }) => {
     const history = useHistory();
@@ -41,7 +42,7 @@ const Item = styled.li`
     max-width: 140px;
     padding: 10px 0;
 
-    ${setFont("button")};
+    ${setFontStyle("button")};
     display: grid;
     text-align: center;
     text-transform: uppercase;

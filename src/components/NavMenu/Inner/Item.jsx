@@ -1,15 +1,12 @@
 import React, { useState, useContext } from "react";
 import styled from 'styled-components';
-
 // context
-import { ToolsContext } from "../../Tools/Tools";
-
+import { ToolsContext } from "components/Tools/Tools";
 // components
-import {Icon} from './../../blocks/Icon/Icon';
-
+import { Icon } from "components/blocks/Icon/Icon";
 // image
-import downArrowSVG from "../../../assets/svg/arrows/down-arrow.svg";
-import upArrowSVG from "../../../assets/svg/arrows/up-arrow.svg";
+import downArrowSVG from "assets/svg/arrows/down-arrow.svg";
+import upArrowSVG from "assets/svg/arrows/up-arrow.svg";
 
 
 const category = ["apple", "orange", "banana", "pineapple"];

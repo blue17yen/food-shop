@@ -1,13 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
-import { NavLink } from 'react-router-dom';
-
 // helpers
-import { colors } from '../../helpers/colors';
-import { device } from '../../helpers/device';
-import { Container } from './../Container/Container';
-
+import { colors, device } from "helpers/";
 // components
+import { Container } from "components/Container/Container";
 import { Item } from './Inner/Item';
 
 
