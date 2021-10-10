@@ -4,10 +4,8 @@ import styled from 'styled-components';
 
 import { css_indent } from 'helpers/';
 
-import { Icon } from "components/blocks/Icon/Icon";
-
+import { SearchIcon } from 'components/Icons/SearchIcon';
 import * as Style from './inputStyle'
-import searchSvg from 'assets/svg/ic-actions-search.svg'
 
 
 export const InputSearch = ({ margin = "0 0 0 0", value = '', onChange, refImp }) => {
@@ -17,10 +15,12 @@ export const InputSearch = ({ margin = "0 0 0 0", value = '', onChange, refImp }
                 value={value}
                 onChange={onChange}
                 type='search'
-                placeholder='Search Products, categories ...'
+                placeholder='Search products category ...'
                 ref={refImp}
             />
-            <SearchIcon />
+            <SearchIconWrapper>
+                <SearchIcon size={20} />
+            </SearchIconWrapper>
         </Wrapper>
     );
 };
@@ -38,9 +38,11 @@ const Wrapper = styled.div`
     margin: ${(props) => css_indent(props.margin)};
 `;
 
-const Search = styled.div`
+const SearchIconWrapper = styled.div`
+    height: 20px;
     position: absolute;
-    top: 13px;
+    top: 50%;
+    transform: translateY(-50%);
     right: 16px;
 `;
 
@@ -55,11 +57,3 @@ const InputRoot = styled.input`
         display: none;
     }
 `;
-
-const SearchIcon = () => {
-    return (
-        <Search>
-            <Icon icon={searchSvg} iconName={"searchSvg"} />
-        </Search>
-    );
-};

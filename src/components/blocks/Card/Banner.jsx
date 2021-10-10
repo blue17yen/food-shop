@@ -5,7 +5,7 @@ import styled from "styled-components";
 import { setFontStyle, css_indent, device, colors } from "helpers/";
 
 import { Button } from "components/blocks/Button/Button";
-import { Arrowright } from "components/Icons/Arrow";
+import { Arrowright } from "components/Icons/ArrowIcon";
 
 import { useValidateImageUrl } from 'helpers/hooks/useValidateImageUrl';
 

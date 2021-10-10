@@ -79,9 +79,9 @@ export const ProductCategory = () => {
         <Wrapper>
             <Container>
                 <Inner>
-                    <TitlePage>{categoryName} products category</TitlePage>
                     {products.length ? (
                         <>
+                        <TitlePage>{categoryName} products category</TitlePage>
                             <CardWrapper>
                                 {products.map((prod) => (
                                     <Card

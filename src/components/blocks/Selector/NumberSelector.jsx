@@ -4,7 +4,7 @@ import styled from "styled-components";
 
 import { setFontStyle, range } from "helpers/";
 
-import { Arrowup, Arrowdown } from "components/Icons/Arrow";
+import { Arrowup, Arrowdown } from "components/Icons/ArrowIcon";
 
 import { Button } from "components/blocks/Button/Button";
 import { ToolsContext } from 'components/Tools/Tools';

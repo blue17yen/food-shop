@@ -3,10 +3,9 @@ import styled from 'styled-components';
 
 import { setFontStyle, colors, device, decoder } from "helpers/";
 
-import { Icon } from 'components/blocks/Icon/Icon';
 import { Numberselector } from "components/blocks/Selector/NumberSelector";
+import { CloseIcon } from 'components/Icons/CloseIcon';
 
-import closeIco from 'assets/svg/ic-actions-close.svg'
 import defItemImage from 'assets/images/def-card-img.png';
 
 
@@ -25,18 +24,14 @@ export const BasketItem = () => {
                     <Image src={defItemImage} />
                     <Functions>
                         <FunctionsItem>
-                            <Icon
-                                icon={closeIco}
-                                size={12}
-                                iconName={"closeIco"}
-                            />
+                            <CloseIcon size={14} />
                             Remove
                         </FunctionsItem>
                     </Functions>
                 </LeftBlock>
                 <RightBlock>
                     <Title>
-                        {decoder(`                        Apple &amp; Eve On The Go, Cranberry Juice Cocktail, 8oz
+                        {decoder(`Apple &amp; Eve On The Go, Cranberry Juice Cocktail, 8oz
                         (Pack of 24)`)}
                     </Title>
                     <Total>

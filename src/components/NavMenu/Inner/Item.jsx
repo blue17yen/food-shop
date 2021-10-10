@@ -1,12 +1,11 @@
 import React, { useState, useContext } from "react";
 import styled from 'styled-components';
+// helpers
+import { colors } from "helpers/";
 // context
 import { ToolsContext } from "components/Tools/Tools";
 // components
-import { Icon } from "components/blocks/Icon/Icon";
-// image
-import downArrowSVG from "assets/svg/arrows/down-arrow.svg";
-import upArrowSVG from "assets/svg/arrows/up-arrow.svg";
+import { Arrowup, Arrowdown } from "components/Icons/ArrowIcon";
 
 
 const category = ["apple", "orange", "banana", "pineapple"];
@@ -31,19 +30,9 @@ export const Item = ({ children }) => {
                 {children}
                 {popperContext.isOpen &&
                 popperContext.reference === reference ? (
-                    <Icon
-                        icon={upArrowSVG}
-                        iconName={"upArrowSVG"}
-                        size={18}
-                        margin={"0 0 0 5"}
-                    />
+                    <Arrowup color={colors.green} />
                 ) : (
-                    <Icon
-                        icon={downArrowSVG}
-                        iconName={"downArrowSVG"}
-                        size={18}
-                        margin={"0 0 0 5"}
-                    />
+                    <Arrowdown color={colors.green} />
                 )}
             </Wrapper>
         </>

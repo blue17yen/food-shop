@@ -1,6 +1,6 @@
 import React from "react";
 
-export const SearchIcon = ({ color = "#151515", size = "24" }) => {
+export const UserIcon = ({ color = "#151515", size = "24" }) => {
     return (
         <svg
             width={size}
@@ -10,14 +10,14 @@ export const SearchIcon = ({ color = "#151515", size = "24" }) => {
             xmlns='http://www.w3.org/2000/svg'
         >
             <path
-                d='M22.9833 28.5833C29.4266 28.5833 34.65 23.36 34.65 16.9167C34.65 10.4733 29.4266 5.25 22.9833 5.25C16.54 5.25 11.3167 10.4733 11.3167 16.9167C11.3167 23.36 16.54 28.5833 22.9833 28.5833Z'
+                d='M5 36.6667L6.31667 31.8667C10.6667 16.0334 29.3333 16.0334 33.6833 31.8667L35 36.6667'
                 stroke={color}
                 stroke-width='3.5'
                 stroke-linecap='round'
-                stroke-linejoin='bevel'
+                stroke-linejoin='round'
             />
             <path
-                d='M14.5335 25.5999L6.7168 33.4165'
+                d='M20.0001 19.9667C24.6025 19.9667 28.3334 16.2358 28.3334 11.6334C28.3334 7.03101 24.6025 3.30005 20.0001 3.30005C15.3977 3.30005 11.6667 7.03101 11.6667 11.6334C11.6667 16.2358 15.3977 19.9667 20.0001 19.9667Z'
                 stroke={color}
                 stroke-width='3.5'
                 stroke-linecap='round'

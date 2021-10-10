@@ -6,7 +6,7 @@ import { device, colors } from "helpers/";
 
 import { InputSearch } from "components/blocks/Input/InputSearch";
 import { SearchIcon } from "components/Icons/SearchIcon";
-import { RemoveTab } from "components/Icons/RemoveTab";
+import { RemoveTab } from "components/Icons/RemoveTabIcon";
 
 // hooks
 import { useDebounce } from 'helpers/hooks/useDebounse';
@@ -66,9 +66,9 @@ export const Search = () => {
 
 const WrapperIcon = styled.div`
     position: absolute;
-    right: 88px;
+    right: 78px;
+    justify-self: flex-end;
     cursor: pointer;
-    display: flex;
 
     ${({ isOpen }) => isOpen && `display: none`};
 
@@ -79,7 +79,7 @@ const WrapperIcon = styled.div`
 const WrapperInput = styled.div`
     position: absolute;
     width: 100%;
-    padding: 0 84px 0 0;
+    padding: 0 78px 0 0;
     display: flex;
     align-items: center;
     gap: 6px;

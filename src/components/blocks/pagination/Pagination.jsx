@@ -3,10 +3,7 @@ import styled from 'styled-components';
 
 import { setFontStyle, colors, range } from "helpers/";
 
-import { Icon } from "components/blocks/Icon/Icon";
-
-import leftArrow from 'assets/svg/arrows/left-arrow.svg'
-import rightArrow from 'assets/svg/arrows/right-arrow.svg'
+import { Arrowleft, Arrowright } from "components/Icons/ArrowIcon";
 
 
 const LEFT_ARROW = 'LEFT_ARROW';
@@ -83,11 +80,7 @@ export const Pagination = ({
                                     key={LEFT_ARROW}
                                     onClick={handlePrevPage}
                                 >
-                                    <Icon
-                                        icon={leftArrow}
-                                        size={18}
-                                        iconName={"leftArrow"}
-                                    />
+                                    <Arrowleft color={colors.green} />
                                 </Arrow>
                             );
                         }
@@ -97,11 +90,7 @@ export const Pagination = ({
                                     key={RIGHT_ARROW}
                                     onClick={handleNextPage}
                                 >
-                                    <Icon
-                                        icon={rightArrow}
-                                        size={18}
-                                        iconName={"rightArrow"}
-                                    />
+                                    <Arrowright color={colors.green} />
                                 </Arrow>
                             );
                         }

@@ -8,7 +8,7 @@ import { Container } from "components/Container/Container";
 import { Button } from "components/blocks/Button/Button";
 import { Loader } from "components/blocks/Loader/Loader";
 import { Numberselector } from 'components/blocks/Selector/NumberSelector';
-import { Plus } from "components/Icons/Plus";
+import { Plus } from "components/Icons/PlusIcon";
 import { Disableprise } from "components/blocks/NoProducts/DisablePrise";
 // api
 import { getProduct } from "api/spoonacularAPI";
@@ -148,7 +148,11 @@ export const Product = () => {
                                     <Price>
                                         <Disableprise price={product.price} />
                                     </Price>
-                                    <Numberselector callback={handleNumSelector} selected={numSelected} textButton={"Pcs"} />
+                                    <Numberselector
+                                        callback={handleNumSelector}
+                                        selected={numSelected}
+                                        textButton={"Pcs"}
+                                    />
                                     <Button
                                         variant='filled'
                                         size='md'
@@ -160,17 +164,24 @@ export const Product = () => {
                                 </Sale>
 
                                 <Info>
-                                    <Description>
-                                        <DescriptionTitle>
-                                            Description
-                                        </DescriptionTitle>
-                                        <DescriptionText>
-                                            {product.generatedText
-                                                ? decoder(product.generatedText)
-                                                : decoder(product.description)}
-                                        </DescriptionText>
-                                    </Description>
-                                    {product.ingredientCount && (
+                                    {(product.generatedText ||
+                                        product.description) && (
+                                        <Description>
+                                            <DescriptionTitle>
+                                                Description
+                                            </DescriptionTitle>
+                                            <DescriptionText>
+                                                {product.generatedText
+                                                    ? decoder(
+                                                          product.generatedText
+                                                      )
+                                                    : decoder(
+                                                          product.description
+                                                      )}
+                                            </DescriptionText>
+                                        </Description>
+                                    )}
+                                    {product.ingredientCount.length && (
                                         <Ingredients>
                                             <IngredientsTitle>
                                                 Ingredients (

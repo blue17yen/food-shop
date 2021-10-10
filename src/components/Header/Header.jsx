@@ -4,10 +4,9 @@ import styled from "styled-components";
 
 import { Container } from 'components/Container/Container';
 import { Search } from "components/Search/Search";
-import { Icon } from 'components/blocks/Icon/Icon';
 
-import UserIco from 'assets/svg/ic-actions-user.svg';
-import BasketIco from 'assets/svg/ic-ecommerce-basket.svg';
+import { UserIcon } from 'components/Icons/UserIcon';
+import { BasketIcon } from 'components/Icons/BasketIcon';
 
 
 export const Header = () => {
@@ -21,20 +20,10 @@ export const Header = () => {
                     <Search />
                     <UserNav>
                         <NavLink to='/basket'>
-                            <Icon
-                                icon={UserIco}
-                                iconName='UserIco'
-                                size={24}
-                                margin={"0 8 0"}
-                            />
+                            <UserIcon />
                         </NavLink>
                         <NavLink to='/basket'>
-                            <Icon
-                                icon={BasketIco}
-                                iconName='BasketIco'
-                                size={24}
-                                margin={"0 8 0 8"}
-                            />
+                            <BasketIcon />
                         </NavLink>
                     </UserNav>
                 </HeaderInner>
@@ -67,4 +56,5 @@ const UserNav = styled.div`
     flex-direction: row;
     align-items: center;
     justify-content: center;
+    gap: 14px;
 `;
