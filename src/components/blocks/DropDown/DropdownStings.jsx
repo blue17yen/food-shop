@@ -1,5 +1,5 @@
 import React from "react";
-import { NavLink, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import styled from "styled-components";
 
 import { setFontStyle, colors} from "helpers/";
@@ -10,14 +10,14 @@ export const DropdownStings = ({ closeDropdown, itemsList = ['nothing'] }) => {
 
     const handleClick = (path) => {
         closeDropdown();
-        history.push('/products/' + path);
+        history.push(path);
     };
 
     return (
         <Wrapper>
             <List>
                 {itemsList.map((el) => (
-                    <Item key={el} onClick={() => handleClick(el)}>{el}</Item>
+                    <Item key={el.path} onClick={() => handleClick(el.path)}>{el.title}</Item>
                 ))}
             </List>
         </Wrapper>
@@ -45,7 +45,6 @@ const Item = styled.li`
     ${setFontStyle("button")};
     display: grid;
     text-align: center;
-    text-transform: uppercase;
 
     &:hover {
         background-color: ${colors.green};

@@ -10,16 +10,6 @@ import { ButtonIco } from "./Inner/ButtonIco";
 
 
 
-const ButtonRoot = styled.button.attrs((props) => ({
-    className: "__button",
-    disabled: props.$disabled,
-}))`
-    ${Style.buttonRoot};
-    ${(props) => Style[props.size] ?? Style.md};
-    ${(props) => Style[props.variant] ?? Style.normal};
-    ${(props) => props.margin && "margin:" + css_indent(props.margin)};
-    ${(props) => props.padding && "padding:" + css_indent(props.padding)};
-`;
 
 export const Button = ({
     children,
@@ -30,6 +20,7 @@ export const Button = ({
     padding = null,
     startIcon = null,
     endIcon = null,
+    onClick,
 }) => {
     return (
         <ButtonRoot
@@ -38,6 +29,7 @@ export const Button = ({
             margin={margin}
             padding={padding}
             $disabled={disabled}
+            onClick={onClick}
         >
             {startIcon && (
                 <ButtonIco
@@ -60,4 +52,17 @@ Button.propTypes = {
     variant: PropTypes.oneOf(["normal", "filled", "bright"]),
     startArrow: PropTypes.bool,
     endArrow: PropTypes.bool,
+    onClick: PropTypes.func,
 };
+
+
+const ButtonRoot = styled.button.attrs((props) => ({
+    className: "__button",
+    disabled: props.$disabled,
+}))`
+    ${Style.buttonRoot};
+    ${(props) => Style[props.size] ?? Style.md};
+    ${(props) => Style[props.variant] ?? Style.normal};
+    ${(props) => props.margin && "margin:" + css_indent(props.margin)};
+    ${(props) => props.padding && "padding:" + css_indent(props.padding)};
+`;

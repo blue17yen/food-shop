@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useCallback } from 'react';
 import styled from 'styled-components';
 
 import { setFontStyle, colors, device, decoder } from "helpers/";
@@ -121,66 +121,4 @@ const Total = styled.div`
 const Price = styled.h4`
     ${setFontStyle("h4")};
     color: ${colors.green};
-`;
-const Count = styled.div`
-    min-height: 30px;
-    overflow: hidden;
-    background-color: #fff;
-    border: 1px solid #d1d1d1;
-    border-radius: 12px;
-    display: flex;
-    flex-direction: row;
-    flex-wrap: nowrap;
-    align-self: flex-end;
-
-    @media ${device.mobileL} {
-        align-self: unset;
-    } ;
-`;
-const CountButton = styled.button`
-    flex: 1;
-    min-width: 25px;
-    max-width: 25px;
-    background-color: transparent;
-    border: none;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    cursor: pointer;
-    ${setFontStyle("button")};
-
-    &:disabled {
-        background: rgba(0, 0, 0, 0.05);
-    }
-`;
-const CountValue = styled.div`
-    flex: 1;
-    min-width: 30px;
-    max-width: 60px;
-    overflow: hidden;
-    padding: 5px 5px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    ${setFontStyle("h6")};
-
-    position: relative;
-
-    &::before,
-    &::after {
-        content: "";
-        z-index: 2;
-        position: absolute;
-        left: -2px;
-        top: 0;
-        bottom: 0;
-        height: 80%;
-        width: 2px;
-        background: rgba(0, 0, 0, 0.1);
-        margin: auto 0;
-    }
-    &::after {
-        left: unset;
-        right: -2px;
-    }
 `;

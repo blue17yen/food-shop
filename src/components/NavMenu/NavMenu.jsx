@@ -4,28 +4,19 @@ import styled from 'styled-components';
 import { colors, device } from "helpers/";
 // components
 import { Container } from "components/Container/Container";
-import { Item } from './Inner/Item';
+import { NavMenuItem } from "./Inner/NavMenuItem";
 
 
 
 
-export const NavMenu = () => {
+export const NavMenu = ({ content }) => {
     return (
         <Wrapper>
             <Container>
                 <Inner>
-                    <Item>
-                        <ItemText>Bakery</ItemText>
-                    </Item>
-                    <Item>
-                        <ItemText>Fruit and vegetables</ItemText>
-                    </Item>
-                    <Item>
-                        <ItemText>Meat and fish</ItemText>
-                    </Item>
-                    <Item>
-                        <ItemText>Drinks</ItemText>
-                    </Item>
+                    {content.map((el) => (
+                        <NavMenuItem key={el.path} {...el} />
+                    ))}
                 </Inner>
             </Container>
         </Wrapper>
@@ -51,18 +42,5 @@ const Inner = styled.div`
     @media ${device.mobileL} {
         min-height: 55px;
         padding: 16px 16px 16px 0;
-    }
-`;
-const ItemText = styled.h5`
-    font-family: "Poppins-Medium";
-    flex-wrap: 500;
-    font-size: 12px;
-    line-height: 18px;
-    color: ${colors.black};
-    word-wrap: normal;
-
-    @media ${device.mobileL} {
-        font-size: 15px;
-        line-height: 22.5px;
     }
 `;

@@ -8,7 +8,7 @@ import { SearchIcon } from 'components/Icons/SearchIcon';
 import * as Style from './inputStyle'
 
 
-export const InputSearch = ({ margin = "0 0 0 0", value = '', onChange, refImp }) => {
+export const InputSearch = ({ margin = "0 0 0 0", value = '', onChange, refInp }) => {
     return (
         <Wrapper margin={margin}>
             <InputRoot
@@ -16,7 +16,7 @@ export const InputSearch = ({ margin = "0 0 0 0", value = '', onChange, refImp }
                 onChange={onChange}
                 type='search'
                 placeholder='Search products category ...'
-                ref={refImp}
+                ref={refInp}
             />
             <SearchIconWrapper>
                 <SearchIcon size={20} />

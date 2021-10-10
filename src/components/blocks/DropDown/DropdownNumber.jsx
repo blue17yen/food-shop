@@ -3,11 +3,6 @@ import styled from "styled-components";
 
 import { setFontStyle, colors, range } from "helpers/";
 
-const calculateScrollTo = (heightCont, to) => {
-
-}
-
-
 export const DropdownNumber = ({ closeDropdown, itemsList = range(1, 20), value = 1, callback }) => {
     const wrapperRef = useRef(null);
 
@@ -16,7 +11,7 @@ export const DropdownNumber = ({ closeDropdown, itemsList = range(1, 20), value 
         const selectedItem = list.children[value - 1];
         const upByOne = selectedItem.offsetTop - selectedItem.offsetHeight - 10;
         wrapperRef.current.scrollTo(0, upByOne);
-    } , []);
+    }, [value]);
 
     const handleClick = (num) => {
         callback(num);

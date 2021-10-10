@@ -14,6 +14,10 @@ import { ProductCategory } from 'pages/ProductCategory';
 import { Basket } from 'pages/Basket';
 import { Product } from 'pages/Product';
 
+// content
+import { appContent } from "helpers/content";
+
+
 
 export function App() {
   return (
@@ -21,10 +25,10 @@ export function App() {
           <Tools>
               <Content>
                   <Header />
-                  <NavMenu />
+                  <NavMenu content={appContent} />
                   <Switch>
                       <Route path='/home' exact>
-                          <Home />
+                          <Home content={appContent} />
                       </Route>
                       <Route path='/basket'>
                           <Basket />

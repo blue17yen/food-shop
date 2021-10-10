@@ -13,9 +13,12 @@ import { ToolsContext } from 'components/Tools/Tools';
 export const Numberselector = ({ margin = "0 0 0 0", selected = 1, callback, textButton = 'Nmb'}) => {
     const [reference, setReference] = useState(null);
     const popperContext = useContext(ToolsContext).popperInterface;
-    const changingCallback = useCallback((el) => {
-        callback(el);
-    },[]); 
+    const changingCallback = useCallback(
+        (el) => {
+            callback(el);
+        },
+        [callback]
+    ); 
     const handleClick = () => {
         popperContext.openPopper({
             newReference: reference,

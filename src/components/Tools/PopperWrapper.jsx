@@ -37,7 +37,7 @@ export const PopperWrapper = () => {
 
     const closeAfterSelect = useCallback(() => {
         popperContext.closePopper();
-    },[])
+    }, [popperContext]);
 
     return (
         <>

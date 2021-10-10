@@ -40,7 +40,7 @@ export const Product = () => {
                 getData(productId);
             }
         }
-    }, [productId]);
+    }, [productId, location.state]);
 
     async function getData(productId) {
         setIsLoading(true);

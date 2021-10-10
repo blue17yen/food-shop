@@ -23,7 +23,7 @@ export const ProductCategory = () => {
 
     const [pageError, setPageError] = useState(null);
     const [isLoading, setIsLoading] = useState(false);
-    const [productsOnPage, setProductsPage] = useState(10);
+    const [productsOnPage, ] = useState(10);
     const [totalProductsCount, setTotalProductsCount] = useState(
         10
     );

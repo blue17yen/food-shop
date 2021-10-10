@@ -22,7 +22,7 @@ export const Search = () => {
         if (debousedValue.length) {
             history.push(`/products/${debousedValue}`);
         }
-    }, [debousedValue]);
+    }, [debousedValue, history]);
 
     const [isOpen, setIsOpen] = useState(false);
     const inputRef = useRef(null)
@@ -31,6 +31,7 @@ export const Search = () => {
     }
     const handleIconClose = () => {
         setIsOpen(false);
+        setInputVal('');
     };
 
     useEffect(() => {
@@ -51,7 +52,7 @@ export const Search = () => {
 
             <WrapperInput isOpen={isOpen}>
                 <InputSearch
-                    refImp={inputRef}
+                    refInp={inputRef}
                     value={inputVal}
                     onChange={handleChange}
                 />

@@ -1,5 +1,6 @@
 import React from "react";
 import { PropTypes } from 'prop-types';
+import { useHistory } from 'react-router-dom';
 import styled from "styled-components";
 
 import { setFontStyle, css_indent, device, colors } from "helpers/";
@@ -8,6 +9,64 @@ import { Button } from "components/blocks/Button/Button";
 import { Arrowright } from "components/Icons/ArrowIcon";
 
 import { useValidateImageUrl } from 'helpers/hooks/useValidateImageUrl';
+
+import BgBannerMeat from "assets/images/bg-banner-meat.png";
+
+
+export const Banner = ({
+    title = "Title",
+    subTitle = null,
+    buttonText = "To category",
+    background = BgBannerMeat,
+    path=null,
+    margin = "0 0 0 0",
+}) => {
+    const isImage = useValidateImageUrl(background);
+
+    const history = useHistory();
+
+    const handleClick = () => {
+        history.push(path);
+    }
+
+    return (
+        <Wrapper background={background} margin={margin}>
+            <Bg isBackground={isImage}>
+                <Inner>
+                    <TextBlock>
+                        <SubTitle>{subTitle}</SubTitle>
+                        <Title isBackground={isImage}>{title}</Title>
+                    </TextBlock>
+                    <Button
+                        onClick={handleClick}
+                        variant='filled'
+                        size='md'
+                        endIcon={<Arrowright />}
+                    >
+                        {buttonText}
+                    </Button>
+                </Inner>
+            </Bg>
+        </Wrapper>
+    );
+};
+
+Banner.propTypes = {
+    title: PropTypes.string,
+    subTitle: PropTypes.oneOfType([
+        PropTypes.string,
+        PropTypes.oneOf([null]).isRequired,
+    ]),
+    buttonText: PropTypes.string,
+    background: PropTypes.oneOfType([
+        PropTypes.string,
+        PropTypes.oneOf([null]).isRequired,
+    ]),
+    margin: PropTypes.oneOfType([
+        PropTypes.string,
+        PropTypes.oneOf([null]).isRequired,
+    ]),
+};
 
 
 const Wrapper = styled.div`
@@ -21,9 +80,7 @@ const Wrapper = styled.div`
     background-size: cover;
     background-repeat: no-repeat;
     ${(props) =>
-        props.background
-            ? `background-image: url(${props.background})`
-            : null};
+        props.background ? `background-image: url(${props.background})` : null};
 
     margin: ${(props) => css_indent(props.margin)};
 
@@ -42,11 +99,9 @@ const Bg = styled.div`
             transition: background 0.5s;
             &:hover {
                 background: rgba(21, 21, 21, 0.6);
-            }`
+            }`;
         }
     }};
-
-
 `;
 
 const Inner = styled.div`
@@ -76,56 +131,12 @@ const TextBlock = styled.div`
 
 const SubTitle = styled.h6`
     min-height: 18px;
-    ${setFontStyle('h6')}
+    ${setFontStyle("h6")}
     color: ${colors.green};
 `;
 
 const Title = styled.h3`
-    ${setFontStyle('h3')}
+    ${setFontStyle("h3")}
     ${(props) =>
         props.isBackground ? `color: #fff` : `color: ${colors.black}`}
 `;
-
-export const Banner = ({
-    title = "Title",
-    subTitle = "SubTitle",
-    buttonText = "Button",
-    background = null,
-    margin = '0 0 0 0'
-}) => {
-
-    const isImage = useValidateImageUrl(background)
-
-    return (
-        <Wrapper background={background} margin={margin}>
-            <Bg isBackground={isImage}>
-                <Inner>
-                    <TextBlock>
-                        <SubTitle>{subTitle}</SubTitle>
-                        <Title isBackground={isImage}>{title}</Title>
-                    </TextBlock>
-                    <Button variant='filled' size='md' endIcon={<Arrowright />} >
-                        {buttonText}
-                    </Button>
-                </Inner>
-            </Bg>
-        </Wrapper>
-    );
-};
-
-Banner.propTypes = {
-    title: PropTypes.string,
-    subTitle: PropTypes.oneOfType([
-        PropTypes.string,
-        PropTypes.oneOf([null]).isRequired,
-    ]),
-    buttonText: PropTypes.string,
-    background: PropTypes.oneOfType([
-        PropTypes.string,
-        PropTypes.oneOf([null]).isRequired,
-    ]),
-    margin: PropTypes.oneOfType([
-        PropTypes.string,
-        PropTypes.oneOf([null]).isRequired,
-    ]),
-};

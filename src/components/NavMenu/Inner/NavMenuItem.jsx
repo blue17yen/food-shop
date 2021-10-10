@@ -1,17 +1,15 @@
 import React, { useState, useContext } from "react";
 import styled from 'styled-components';
 // helpers
-import { colors } from "helpers/";
+import { colors, device } from "helpers/";
 // context
 import { ToolsContext } from "components/Tools/Tools";
 // components
 import { Arrowup, Arrowdown } from "components/Icons/ArrowIcon";
 
 
-const category = ["apple", "orange", "banana", "pineapple"];
-
-export const Item = ({ children }) => {
-    const [reference, setReference] = useState(null)
+export const NavMenuItem = ({ title, categories }) => {
+    const [reference, setReference] = useState(null);
     const popperContext = useContext(ToolsContext).popperInterface;
 
     const handleOpenPopper = () => {
@@ -19,15 +17,15 @@ export const Item = ({ children }) => {
             popperContext.openPopper({
                 newReference: reference,
                 variant: "str",
-                content: category,
+                content: categories,
             });
         }
-    }
+    };
 
     return (
         <>
             <Wrapper ref={setReference} onClick={handleOpenPopper}>
-                {children}
+                <ItemText>{title}</ItemText>
                 {popperContext.isOpen &&
                 popperContext.reference === reference ? (
                     <Arrowup color={colors.green} />
@@ -45,4 +43,18 @@ const Wrapper = styled.div`
     flex-direction: row;
     align-items: center;
     cursor: pointer;
+`;
+
+const ItemText = styled.h5`
+    font-family: "Poppins-Medium";
+    flex-wrap: 500;
+    font-size: 12px;
+    line-height: 18px;
+    color: ${colors.black};
+    word-wrap: normal;
+
+    @media ${device.mobileL} {
+        font-size: 15px;
+        line-height: 22.5px;
+    }
 `;

@@ -6,41 +6,15 @@ import { device } from 'helpers/';
 import { Container } from 'components/Container/Container';
 import { Banner } from 'components/blocks/Card/Banner';
 
-import BgBannerEgg from 'assets/images/bg-banner-egg.png'
-import BgBannerMeat from 'assets/images/bg-banner-meat.png'
 
-
-export const Home = () => {
+export const Home = ({ content }) => {
     return (
         <Wrapper>
             <Container>
                 <Inner>
-                    <Banner
-                        title={"Fresh vegetables and fruits"}
-                        subTitle='Vegetables and fruits'
-                        background={BgBannerEgg}
-                    />
-                    <Banner
-                        title={"Fresh vegetables and fruits"}
-                        background={BgBannerEgg}
-                        subTitle={null}
-                    />
-                    <Banner title={"Fresh meat"} background={BgBannerMeat} />
-                    <Banner
-                        title={"Fresh vegetables and fruits"}
-                        background={BgBannerEgg}
-                    />
-                    <Banner title={"Fresh meat"} background={BgBannerMeat} />
-                    <Banner
-                        title={"Fresh vegetables and fruits"}
-                        background={BgBannerEgg}
-                    />
-                    <Banner title={"Fresh meat"} background={BgBannerMeat} />
-                    <Banner
-                        title={"Fresh vegetables and fruits"}
-                        background={BgBannerEgg}
-                    />
-                    <Banner title={"Fresh meat"} background={BgBannerMeat} />
+                    {content.map((el) => (
+                        <Banner key={el.path} title={el.title} background={el.background} path={el.path}/>
+                    ))}
                 </Inner>
             </Container>
         </Wrapper>
