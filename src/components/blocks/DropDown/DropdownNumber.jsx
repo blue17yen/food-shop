@@ -1,10 +1,22 @@
-import React from "react";
+import React, { useRef, useEffect } from "react";
 import styled from "styled-components";
 
 import { setFontStyle, colors, range } from "helpers/";
 
+const calculateScrollTo = (heightCont, to) => {
+
+}
+
 
 export const DropdownNumber = ({ closeDropdown, itemsList = range(1, 20), value = 1, callback }) => {
+    const wrapperRef = useRef(null);
+
+    useEffect(() => {
+        const list = wrapperRef.current.children[0];
+        const selectedItem = list.children[value - 1];
+        const upByOne = selectedItem.offsetTop - selectedItem.offsetHeight - 10;
+        wrapperRef.current.scrollTo(0, upByOne);
+    } , []);
 
     const handleClick = (num) => {
         callback(num);
@@ -12,7 +24,7 @@ export const DropdownNumber = ({ closeDropdown, itemsList = range(1, 20), value 
     };
 
     return (
-        <Wrapper>
+        <Wrapper ref={wrapperRef}>
             <List>
                 {itemsList.map((el) => (
                     <Item
@@ -46,16 +58,21 @@ const List = styled.ul`
 const Item = styled.li`
     width: 100%;
     max-width: 140px;
-    padding: 10px 0;
+    padding: 10px 5px;
 
     ${setFontStyle("button")};
     display: grid;
     text-align: center;
     text-transform: uppercase;
+    cursor: pointer;
+
+    &:hover {
+        background-color: ${colors.green};
+        color: #fff;
+    }
 
     ${({ selected }) =>
         selected &&
-        `        background-color: ${colors.green};
-        color: #fff;
-        cursor: pointer`};
+        `background-color: ${colors.green};
+        color: #fff`};
 `;
