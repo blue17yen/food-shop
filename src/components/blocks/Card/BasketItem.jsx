@@ -1,4 +1,5 @@
 import React, { useState, useCallback } from 'react';
+import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
 
 import { setFontStyle, colors, device, decoder } from "helpers/";
@@ -8,22 +9,26 @@ import { CloseIcon } from 'components/Icons/CloseIcon';
 
 import defItemImage from 'assets/images/def-card-img.png';
 
+import { removeProduct, updateProduct } from 'redux/basketSlice';
 
-export const BasketItem = () => {
-    const price = 36.99;
-    const [numSelected, setNumSelected] = useState(1);
 
-    const handleNumSelector = useCallback((num) => {
-        setNumSelected(num);
-    }, [])
+export const BasketItem = ({ id, image = defItemImage, title, count, price }) => {
+    const dispatch = useDispatch();
+    const handleNumSelector = (num) => {
+        dispatch(updateProduct({ id, newCount: num }));
+    };
+
+    const handleDeleteItem = () => {
+        dispatch(removeProduct({ id }));
+    }
 
     return (
         <Wrapper>
             <Inner>
                 <LeftBlock>
-                    <Image src={defItemImage} />
+                    <Image src={image} />
                     <Functions>
-                        <FunctionsItem>
+                        <FunctionsItem onClick={handleDeleteItem}>
                             <CloseIcon size={14} />
                             Remove
                         </FunctionsItem>
@@ -31,21 +36,20 @@ export const BasketItem = () => {
                 </LeftBlock>
                 <RightBlock>
                     <Title>
-                        {decoder(`Apple &amp; Eve On The Go, Cranberry Juice Cocktail, 8oz
-                        (Pack of 24)`)}
+                        {decoder(title)}
                     </Title>
                     <Total>
                         <Price>{price} USD</Price>
                         <Numberselector
                             callback={handleNumSelector}
-                            selected={numSelected}
+                            selected={count}
                         />
                     </Total>
                 </RightBlock>
             </Inner>
         </Wrapper>
     );
-}
+};
 
 
 const Wrapper = styled.div``;
@@ -71,6 +75,7 @@ const Image = styled.img`
     width: 100px;
     height: 67px;
     border-radius: 12px;
+    object-fit: contain;
 `;
 const Functions = styled.ul`
     display: flex;

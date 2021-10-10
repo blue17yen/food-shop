@@ -1,4 +1,5 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 import styled from 'styled-components';
 
 import { device, colors, setFontStyle, months } from "helpers/";
@@ -9,21 +10,24 @@ import { Button } from 'components/blocks/Button/Button';
 import { InputWithButton } from 'components/blocks/Input/InputWithButton';
 
 
+const date = new Date();
+const day = date.getDate() + 1;
+const month = months[date.getMonth()];
+const year = date.getFullYear();
+const dateStr = `${month} ${day}, ${year}`;    
 
 
 export const Basket = () => {
-
-    const date = new Date(); 
-    const day = date.getDate() + 1;
-    const month = months[date.getMonth()];
-    const year = date.getFullYear();
-    const dateStr = `${month} ${day}, ${year}`;    
+    const { basketProducts, totalPrice, totalProductsCount } = useSelector((state) => state.basket);
 
     return (
         <Wrapper>
             <Container>
                 <Inner>
                     <Head>
+                        <TotalProductsCount>
+                            Total: {totalProductsCount}
+                        </TotalProductsCount>
                         <Title>Order Summary</Title>
                         <SubTitle>
                             Price can change depending on shipping method and
@@ -31,10 +35,16 @@ export const Basket = () => {
                         </SubTitle>
                     </Head>
                     <Cards>
-                        <BasketItem />
-                        <BasketItem />
-                        <BasketItem />
-                        <BasketItem />
+                        {basketProducts.map((el) => (
+                            <BasketItem
+                                key={el.id}
+                                id={el.id}
+                                image={el.images[1]}
+                                title={el.title}
+                                count={el.count}
+                                price={el.totalPrice}
+                            />
+                        ))}
                     </Cards>
                     <Continue>Continue shopping</Continue>
                     <Summary>
@@ -51,6 +61,7 @@ export const Basket = () => {
                             <SummaryCalue>0 USD</SummaryCalue>
                         </SummaryItem>
                     </Summary>
+
                     <PromoCode>
                         <InputWithButton buttonText={"Apply now"} />
                     </PromoCode>
@@ -59,7 +70,7 @@ export const Basket = () => {
                         <DeliveryDate>
                             Guaranteed delivery day: {dateStr}
                         </DeliveryDate>
-                        <Total>89.84 USD</Total>
+                        <Total>{totalPrice} USD</Total>
                         <Button
                             variant='filled'
                             size='md'
@@ -94,11 +105,12 @@ const Inner = styled.div`
     };
 `;
 const Head = styled.div`
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    text-align: start;
     margin: 0 0 40px;
+    position: relative;
+`;
+const TotalProductsCount = styled.h4`
+    float: right;
+    ${setFontStyle("h4")};
 `;
 const Title = styled.h3`
     ${setFontStyle("h3")};

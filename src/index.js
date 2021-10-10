@@ -3,6 +3,9 @@ import ReactDOM from 'react-dom';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { App } from "App.jsx";
+// store
+import { store } from 'redux/store';
+import { Provider } from 'react-redux';
 
 // Global style
 import GlobalStyle from 'helpers/globalStyle/';
@@ -11,9 +14,11 @@ import GlobalStyle from 'helpers/globalStyle/';
 ReactDOM.render(
     <React.StrictMode>
         <GlobalStyle />
-        <Router>
-            <App/>
-        </Router>
+        <Provider store={store}>
+            <Router>
+                <App />
+            </Router>
+        </Provider>
     </React.StrictMode>,
     document.getElementById("root")
 );
