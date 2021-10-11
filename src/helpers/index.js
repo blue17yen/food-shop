@@ -4,8 +4,9 @@ import { device } from "./device";
 import { css_indent } from "./css_indent";
 import { months } from "./months";
 import { range } from "./range";
-import { setFontStyle } from "./setFontStyle";
+import { setFontStyle } from "./text/setFontStyle";
 import { appContent } from "./content";
+import { priceFormat } from "./priceFormat";
 
 export {
     colors,
@@ -16,4 +17,5 @@ export {
     range,
     setFontStyle,
     appContent,
+    priceFormat,
 };

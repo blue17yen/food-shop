@@ -84,11 +84,11 @@ export const appContent = [
         categories: [
             {
                 title: "Meat",
-                path: "/product/meat",
+                path: "/products/meat",
             },
             {
                 title: "Chicken",
-                path: "/product/chicken",
+                path: "/products/chicken",
             },
         ],
     },
