@@ -1,15 +1,19 @@
 import React from 'react';
 import { NavLink } from "react-router-dom";
+import { useSelector } from "react-redux";
 import styled from "styled-components";
 
 import { Container } from 'components/Container/Container';
 import { Search } from "components/Search/Search";
+import { BasketRedDot } from 'components/blocks/BasketRedDot/BasketRedDot';
 
 import { UserIcon } from 'components/Icons/UserIcon';
 import { BasketIcon } from 'components/Icons/BasketIcon';
 
 
 export const Header = () => {
+    const count = useSelector((state) => state.basket.totalProductsCount);
+
     return (
         <HeaderWrap>
             <Container>
@@ -23,7 +27,9 @@ export const Header = () => {
                             <UserIcon />
                         </NavLink>
                         <NavLink to='/basket'>
-                            <BasketIcon />
+                            <BasketRedDot count={count}>
+                                <BasketIcon />
+                            </BasketRedDot>
                         </NavLink>
                     </UserNav>
                 </HeaderInner>
