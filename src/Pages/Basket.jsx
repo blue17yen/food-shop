@@ -18,7 +18,9 @@ const dateStr = `${month} ${day}, ${year}`;
 
 
 export const Basket = () => {
-    const { basketProducts, totalPrice, totalProductsCount } = useSelector((state) => state.basket);
+    const { basketProducts, totalProductsCount, totalPrice, tax, totalPriceWithTax  } = useSelector((state) => state.basket);
+    const products = Object.values(basketProducts);
+
 
     return (
         <Wrapper>
@@ -34,31 +36,32 @@ export const Basket = () => {
                             taxes of your state.
                         </SubTitle>
                     </Head>
-                    <Cards>
-                        {basketProducts.map((el) => (
-                            <BasketItem
-                                key={el.id}
-                                id={el.id}
-                                image={el.images[1]}
-                                title={el.title}
-                                count={el.count}
-                                price={el.totalPrice}
-                            />
-                        ))}
-                    </Cards>
+                    {products.length ? (
+                        <Cards>
+                            {Object.values(basketProducts).map((el) => (
+                                <BasketItem
+                                    key={el.id}
+                                    id={el.id}
+                                    image={el.images[1]}
+                                    title={el.title}
+                                    count={el.count}
+                                    price={el.totalPrice}
+                                />
+                            ))}
+                        </Cards>
+                    ) : (
+                        <NoProducts>Your shopping basket is empty</NoProducts>
+                    )}
+
                     <Continue>Continue shopping</Continue>
                     <Summary>
                         <SummaryItem>
                             <SummaryName>Subtotal</SummaryName>
-                            <SummaryCalue>73.98 USD</SummaryCalue>
+                            <SummaryCalue>{totalPrice} USD</SummaryCalue>
                         </SummaryItem>
                         <SummaryItem>
                             <SummaryName>Tax</SummaryName>
-                            <SummaryCalue>17% 16.53 USD</SummaryCalue>
-                        </SummaryItem>
-                        <SummaryItem>
-                            <SummaryName>Shipping</SummaryName>
-                            <SummaryCalue>0 USD</SummaryCalue>
+                            <SummaryCalue>17% {tax} USD</SummaryCalue>
                         </SummaryItem>
                     </Summary>
 
@@ -70,7 +73,7 @@ export const Basket = () => {
                         <DeliveryDate>
                             Guaranteed delivery day: {dateStr}
                         </DeliveryDate>
-                        <Total>{totalPrice} USD</Total>
+                        <Total>{totalPriceWithTax} USD</Total>
                         <Button
                             variant='filled'
                             size='md'
@@ -125,7 +128,15 @@ const Cards = styled.div`
     gap: 30px;
     margin: 0 0 40px;
 `;
-const Continue = styled.h4`
+const NoProducts = styled.span`
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    ${setFontStyle("h2")};
+    color: ${colors.light_grey};
+    margin: 40px 0 80px;
+`;
+const Continue = styled.h4` 
     ${setFontStyle("h5", true)};
     color: ${colors.red};
     text-align: center;

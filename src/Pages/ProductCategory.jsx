@@ -78,34 +78,32 @@ export const ProductCategory = () => {
     return (
         <Wrapper>
             <Container>
-                <Inner>
-                    {products.length ? (
-                        <>
-                        <TitlePage>{categoryName} products category</TitlePage>
-                            <CardWrapper>
-                                {products.map((prod) => (
-                                    <Card
-                                        key={prod.id}
-                                        product={prod}
-                                    />
-                                ))}
-                            </CardWrapper>
-                            <Pagination
-                                totalCount={totalProductsCount}
-                                countOnPage={productsOnPage}
-                                currentPage={numberCurrentPage}
-                                callback={handlePagination}
-                            />
-                        </>
-                    ) : (
-                        <>
-                            <ErrorInfo>No such item</ErrorInfo>
-                            {pageError?.length && (
-                                <ErrorInfoSm>{pageError}</ErrorInfoSm>
-                            )}
-                        </>
-                    )}
-                </Inner>
+                {products.length ? (
+                    <Inner>
+                    <TitlePage>{categoryName} products category</TitlePage>
+                        <CardWrapper>
+                            {products.map((prod) => (
+                                <Card
+                                    key={prod.id}
+                                    product={prod}
+                                />
+                            ))}
+                        </CardWrapper>
+                        <Pagination
+                            totalCount={totalProductsCount}
+                            countOnPage={productsOnPage}
+                            currentPage={numberCurrentPage}
+                            callback={handlePagination}
+                        />
+                    </Inner>
+                ) : (
+                    <Inner>
+                        <ErrorInfo>No such item</ErrorInfo>
+                        {pageError?.length && (
+                            <ErrorInfoSm>{pageError}</ErrorInfoSm>
+                        )}
+                    </Inner>
+                )}
             </Container>
         </Wrapper>
     );

@@ -1,35 +1,60 @@
 import React, { useState, useEffect, useCallback } from "react";
 import { NavLink, useLocation } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 // helpers
 import { colors, device, setFontStyle, decoder } from "helpers/";
 // components
 import { Container } from "components/Container/Container";
-import { Button } from "components/blocks/Button/Button";
-import { Loader } from "components/blocks/Loader/Loader";
 import { Numberselector } from 'components/blocks/Selector/NumberSelector';
-import { Plus } from "components/Icons/PlusIcon";
+import { Button } from "components/blocks/Button/Button";
 import { Disableprise } from "components/blocks/NoProducts/DisablePrise";
+import { Loader } from "components/blocks/Loader/Loader";
+import { Plus } from "components/Icons/PlusIcon";
+import { CheckIcon } from "components/Icons/CheckIcon";
 // api
 import { getProduct } from "api/spoonacularAPI";
 import { LimitRequestsError } from 'api/LimitReqestsERROR';
 // hooks
 import { useLocationPathName } from 'helpers/hooks/useLocationPathName';
+// store
+import { addProduct, updateProduct } from "redux/basketSlice";
 
 
 export const Product = () => {
+    const dispatch = useDispatch();
+    const location = useLocation();
+    const productId = useLocationPathName();
+
+
     const [pageError, setPageError] = useState(null);
     const [isLoading, setIsLoading] = useState(true);
     const [product, setProduct] = useState(null)
-    const location = useLocation();
-    const productId = useLocationPathName();
     const [numSelected, setNumSelected] = useState(1);
+ 
+    const productInBasket = useSelector((state) =>
+        state.basket.basketProducts[productId]
+    );
+    const isAddedToBasket = Boolean(productInBasket?.id);
+
+    useEffect(() => {
+        console.log(isAddedToBasket);
+        if (isAddedToBasket) {
+            setNumSelected(productInBasket.count);
+        }    
+    }, [productInBasket]);
+
+    useEffect(() => {
+        if (isAddedToBasket) {
+            handleUpdateProductInBasket();
+        }
+    }, [numSelected]);
 
     const handleNumSelector = useCallback((num) => {
+        
         setNumSelected(num);
     }, []);
-
-
+ 
     useEffect(() => {
         const locationState = location.state;
         if (productId?.length) {
@@ -54,7 +79,21 @@ export const Product = () => {
         }
         setIsLoading(false);
     }
-    
+
+    const handleAddToBasket = () => {
+        if (!isAddedToBasket) {
+            dispatch(addProduct({ product, newCount: numSelected }));
+        }
+    }
+    const handleUpdateProductInBasket = () => {
+
+        if (isAddedToBasket) {
+            dispatch(
+                updateProduct({ id: productInBasket.id, newCount: numSelected })
+            );
+        }
+    }
+
     if (isLoading) {
         return (
             <Wrapper>
@@ -64,148 +103,146 @@ export const Product = () => {
             </Wrapper>
         );
     }
-    
+
     return (
         <Wrapper>
             <Container>
-                <Inner>
-                    {!pageError ? (
-                        <>
-                            <Image src={product.images[2]} />
-                            <ProductInfo>
-                                <Title>{decoder(product.title)}</Title>
-                                <Table>
-                                    <TableBlock>
-                                        <TableItem>
-                                            ProductID:
-                                            <TableItemValue>
-                                                {product.id}
-                                            </TableItemValue>
-                                        </TableItem>
-                                        <TableItem>
-                                            Category:
-                                            <TableItemValue>
-                                                <Breadcrumbs>
-                                                    {product.breadcrumbs.map(
-                                                        (bc) => (
-                                                            <NavLink
-                                                                to={
-                                                                    "/products/" +
-                                                                    bc
-                                                                }
-                                                                key={bc}
-                                                            >
-                                                                <Breadcrumb>
-                                                                    {bc}
-                                                                </Breadcrumb>
-                                                            </NavLink>
-                                                        )
-                                                    )}
-                                                </Breadcrumbs>
-                                            </TableItemValue>
-                                        </TableItem>
-                                        <TableItem>
-                                            Stock:
-                                            <TableItemValue>
-                                                In Stock
-                                            </TableItemValue>
-                                        </TableItem>
-                                        <TableItem>
-                                            Brand:
-                                            <TableItemValue>
-                                                {product.brand}
-                                            </TableItemValue>
-                                        </TableItem>
-                                    </TableBlock>
-                                    <TableBlock>
-                                        <TableItem>
-                                            Freshness:
-                                            <TableItemValue>
-                                                1 days old
-                                            </TableItemValue>
-                                        </TableItem>
-                                        <TableItem>
-                                            Buy by:
-                                            <TableItemValue>
-                                                pcs, kgs, box, pack
-                                            </TableItemValue>
-                                        </TableItem>
-                                        <TableItem>
-                                            Delivery:
-                                            <TableItemValue>
-                                                in 2 days
-                                            </TableItemValue>
-                                        </TableItem>
-                                        <TableItem>
-                                            Delivery area:
-                                            <TableItemValue>
-                                                Earth
-                                            </TableItemValue>
-                                        </TableItem>
-                                    </TableBlock>
-                                </Table>
-                                <Sale>
-                                    <Price>
-                                        <Disableprise price={product.price} />
-                                    </Price>
-                                    <Numberselector
-                                        callback={handleNumSelector}
-                                        selected={numSelected}
-                                        textButton={"Pcs"}
-                                    />
+                {!pageError ? (
+                    <Inner>
+                        <Image src={product.images[2]} />
+                        <ProductInfo>
+                            <Title>{decoder(product.title)}</Title>
+                            <ContentProduct
+                                id={product.id}
+                                breadcrumbs={product.breadcrumbs}
+                                brand={product.brand}
+                            />
+                            <Sale>
+                                <Price>
+                                    <Disableprise price={product.price} />
+                                    {isAddedToBasket && (
+                                        <TotalPrice>
+                                            Total: {productInBasket.totalPrice} USD
+                                        </TotalPrice>
+                                    )}
+                                </Price>
+                                <Numberselector
+                                    callback={handleNumSelector}
+                                    selected={numSelected}
+                                    textButton={"Pcs"}
+                                />
+                                {!isAddedToBasket ? (
                                     <Button
                                         variant='filled'
                                         size='md'
                                         startIcon={<Plus />}
                                         disabled={!Boolean(product.price)}
+                                        onClick={handleAddToBasket}
                                     >
-                                        Add to cart
+                                        Add to basket
                                     </Button>
-                                </Sale>
+                                ) : (
+                                    <Button
+                                        variant='bright'
+                                        size='md'
+                                        startIcon={<CheckIcon size={18} />}
+                                        disabled={!Boolean(product.price)}
+                                    >
+                                        In basket
+                                    </Button>
+                                )}
+                            </Sale>
 
-                                <Info>
-                                    {(product.generatedText ||
-                                        product.description) && (
-                                        <Description>
-                                            <DescriptionTitle>
-                                                Description
-                                            </DescriptionTitle>
-                                            <DescriptionText>
-                                                {product.generatedText
-                                                    ? decoder(
-                                                          product.generatedText
-                                                      )
-                                                    : decoder(
-                                                          product.description
-                                                      )}
-                                            </DescriptionText>
-                                        </Description>
-                                    )}
-                                    {product.ingredientCount.length && (
-                                        <Ingredients>
-                                            <IngredientsTitle>
-                                                Ingredients (
-                                                {product.ingredientCount})
-                                            </IngredientsTitle>
-                                            <IngredientsText>
-                                                {product.ingredientList}
-                                            </IngredientsText>
-                                        </Ingredients>
-                                    )}
-                                </Info>
-                            </ProductInfo>
-                        </>
-                    ) : (
-                        <>
-                            <ErrorInfo>No such item</ErrorInfo>
-                            {pageError?.length && (
-                                <ErrorInfoSm>{pageError}</ErrorInfoSm>
-                            )}
-                        </>
-                    )}
-                </Inner>
+                            <Info>
+                                {(product.generatedText ||
+                                    product.description) && (
+                                    <Description>
+                                        <DescriptionTitle>
+                                            Description
+                                        </DescriptionTitle>
+                                        <DescriptionText>
+                                            {product.generatedText
+                                                ? decoder(product.generatedText)
+                                                : decoder(product.description)}
+                                        </DescriptionText>
+                                    </Description>
+                                )}
+                                {product.ingredientCount.length && (
+                                    <Ingredients>
+                                        <IngredientsTitle>
+                                            Ingredients (
+                                            {product.ingredientCount})
+                                        </IngredientsTitle>
+                                        <IngredientsText>
+                                            {product.ingredientList}
+                                        </IngredientsText>
+                                    </Ingredients>
+                                )}
+                            </Info>
+                        </ProductInfo>
+                    </Inner>
+                ) : (
+                    <ErrorInner>
+                        <ErrorInfo>No such item</ErrorInfo>
+                        {pageError?.length && (
+                            <ErrorInfoSm>{pageError}</ErrorInfoSm>
+                        )}
+                    </ErrorInner>
+                )}
             </Container>
         </Wrapper>
+    );
+};
+
+
+const ContentProduct = ({ id, breadcrumbs, brand }) => {
+    return (
+        <Table>
+            <TableBlock>
+                <TableItem>
+                    ProductID:
+                    <TableItemValue>{id}</TableItemValue>
+                </TableItem>
+                <TableItem>
+                    Category:
+                    <TableItemValue>
+                        <Breadcrumbs>
+                            {breadcrumbs.map((bc) => (
+                                <NavLink to={"/products/" + bc} key={bc}>
+                                    <Breadcrumb>{bc}</Breadcrumb>
+                                </NavLink>
+                            ))}
+                        </Breadcrumbs>
+                    </TableItemValue>
+                </TableItem>
+                <TableItem>
+                    Stock:
+                    <TableItemValue>In Stock</TableItemValue>
+                </TableItem>
+                <TableItem>
+                    Brand:
+                    <TableItemValue>{brand}</TableItemValue>
+                </TableItem>
+            </TableBlock>
+            <TableBlock>
+                <TableItem>
+                    Freshness:
+                    <TableItemValue>1 days old</TableItemValue>
+                </TableItem>
+                <TableItem>
+                    Buy by:
+                    <TableItemValue>pcs, kgs, box, pack</TableItemValue>
+                </TableItem>
+                <TableItem>
+                    Delivery:
+                    <TableItemValue>in 2 days</TableItemValue>
+                </TableItem>
+                <TableItem>
+                    Delivery area:
+                    <TableItemValue>Earth</TableItemValue>
+                </TableItem>
+            </TableBlock>
+        </Table>
     );
 };
 
@@ -226,6 +263,11 @@ const Inner = styled.div`
     @media ${device.tablet} {
         flex-direction: row;
     } ;
+`;
+const ErrorInner = styled.div`
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
 `;
 const Image = styled.img`
     width: 100%;
@@ -288,10 +330,16 @@ const Sale = styled.div`
     gap: 10px 30px;
 
 `;
-const Price = styled.h2`
+const Price = styled.div`
+    display: flex;
+    flex-direction: column;
     ${setFontStyle("h3")};
     color: ${colors.green};
 `;
+const TotalPrice = styled.h5`
+    ${setFontStyle("h5")};
+    color: ${colors.green};
+`
 const Info = styled.div`
     display: flex;
     flex-direction: column;
