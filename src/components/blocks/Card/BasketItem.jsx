@@ -10,6 +10,7 @@ import { CloseIcon } from 'components/Icons/CloseIcon';
 import defItemImage from 'assets/images/def-card-img.png';
 
 import { removeProduct, updateProduct } from 'redux/basketSlice';
+import { NavLink } from 'react-router-dom';
 
 
 export const BasketItem = ({ id, image = defItemImage, title, count, price }) => {
@@ -26,7 +27,9 @@ export const BasketItem = ({ id, image = defItemImage, title, count, price }) =>
         <Wrapper>
             <Inner>
                 <LeftBlock>
-                    <Image src={image} />
+                    <NavLink to={`/product/${id}`}>
+                        <Image src={image} />   
+                    </NavLink>
                     <Functions>
                         <FunctionsItem onClick={handleDeleteItem}>
                             <CloseIcon size={14} />
@@ -36,7 +39,9 @@ export const BasketItem = ({ id, image = defItemImage, title, count, price }) =>
                 </LeftBlock>
                 <RightBlock>
                     <Title>
-                        {decoder(title)}
+                        <NavLink to={`/product/${id}`}>
+                            {decoder(title)}
+                        </NavLink>
                     </Title>
                     <Total>
                         <Price>{price} USD</Price>
@@ -103,6 +108,10 @@ const RightBlock = styled.div`
 `;
 const Title = styled.h4`
     ${setFontStyle("h5")};
+
+    &:hover {
+        text-decoration: underline;
+    }
 
     @media ${device.tablet} {
         ${setFontStyle("h4")};
