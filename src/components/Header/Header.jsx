@@ -23,7 +23,7 @@ export const Header = () => {
                     </Logo>
                     <Search />
                     <UserNav>
-                        <NavLink to='/basket'>
+                        <NavLink to='/user'>
                             <UserIcon />
                         </NavLink>
                         <NavLink to='/basket'>
