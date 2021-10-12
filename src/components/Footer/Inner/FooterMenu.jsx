@@ -8,21 +8,29 @@ export const FooterMenu = () => {
     return (
         <Wrapper>
             <Column>
-                <Head>Get in touch</Head>
+                <Head>Author</Head>
                 <List>
-                    <Item>About Us</Item>
-                    <Item>Careers</Item>
-                    <Item>Press Releases</Item>
-                    <Item>Blog</Item>
+                    <Item>
+                        <a
+                            href={"https://github.com/blue17yen"}
+                            target='_blank'
+                        >
+                            GitHub
+                        </a>
+                    </Item>
                 </List>
             </Column>
             <Column>
-                <Head>Get in touch</Head>
+                <Head>Food API</Head>
                 <List>
-                    <Item>About Us</Item>
-                    <Item>Careers</Item>
-                    <Item>Press Releases</Item>
-                    <Item>Blog</Item>
+                    <Item>
+                        <a
+                            href={"https://spoonacular.com/food-api"}
+                            target='_blank'
+                        >
+                            Spoonacular
+                        </a>
+                    </Item>
                 </List>
             </Column>
         </Wrapper>
