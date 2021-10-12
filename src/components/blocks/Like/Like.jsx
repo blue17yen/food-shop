@@ -16,7 +16,6 @@ export const Like = ({product}) => {
     const isLiked = useSelector((state) =>
         state.liked.orderLikeds.includes(product.id)
     );
-    console.log(isLiked);
 
     const handleLike = () => {
         dispatch(addLiked({ product }));

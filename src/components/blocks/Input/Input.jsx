@@ -8,7 +8,6 @@ import * as Style from './inputStyle';
 
 
 export const Input = ({margin = '0 0 0 0',value, label = null,}) => {
-    console.log(label)
     return (
         <Wrapper margin={margin}>
             {String(label).length && <Label>{label}</Label>}

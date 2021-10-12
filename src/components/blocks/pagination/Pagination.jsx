@@ -20,7 +20,6 @@ export const Pagination = ({
     function handlePage(page) {
 
         if (page !== currentPage) {
-            console.log("page: ", page + 1);
             callback(page)
         }
     }

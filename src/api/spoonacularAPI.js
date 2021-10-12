@@ -22,21 +22,19 @@ async function ERRORWrapper(callback) {
             return await ERRORWrapper(callback);
         } catch (error) {
             if (error instanceof LimitRequestsError) {
-                console.log(error);  
                 return error;
             } 
         }
     }
 }
 
-export async function getProduct(productId) {
+export async function getProduct(productID) {
     const request = async () => {
-        const product = `/${productId}`;
+        const product = `/${productID}`;
         const url = addAPIKEY(BASEURL + product);
 
         const response = await axios.get(url);
         const data = response.data;
-        console.log(data);
         return data;
     };
     return await ERRORWrapper(request);
@@ -58,7 +56,6 @@ export async function searchProductCategory(nameCategory, count = 10, page = 0) 
 
         const response = await axios.get(url);
         const data = response.data;
-        console.log(data);
         return data;
     };
 
