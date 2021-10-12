@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useCallback } from "react";
+import { useParams } from "react-router";
 import styled from 'styled-components';
 
 // Help func
@@ -7,11 +8,8 @@ import { device, setFontStyle, colors } from "helpers/";
 // Compornents
 import { Container } from 'components/Container/Container';
 import { Card } from 'components/blocks/Card/Card';
-import { Pagination } from "components/blocks/pagination/Pagination";
+import { Pagination } from "components/blocks/Pagination/Pagination";
 import { Loader } from "components/blocks/Loader/Loader";
-
-// Custom hooks
-import { useLocationPathName } from "helpers/hooks/useLocationPathName";
 
 // Api
 import { searchProductCategory } from "api/spoonacularAPI";
@@ -19,7 +17,7 @@ import { LimitRequestsError } from 'api/LimitReqestsERROR';
 
 
 export const ProductCategory = () => {
-    const categoryName = useLocationPathName();
+    const categoryName = useParams().category;
 
     const [pageError, setPageError] = useState(null);
     const [isLoading, setIsLoading] = useState(false);
@@ -58,7 +56,7 @@ export const ProductCategory = () => {
     useEffect(() => {
         if (categoryName) {
             searchProd(categoryName, productsOnPage, numberCurrentPage);
-            window.scrollTo(0, 0);
+            
         }
 
     }, [categoryName, productsOnPage, numberCurrentPage]);

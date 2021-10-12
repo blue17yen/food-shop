@@ -1,4 +1,5 @@
 import React from 'react';
+import { NavLink } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import styled from 'styled-components';
 
@@ -7,7 +8,6 @@ import { device, colors, setFontStyle, months } from "helpers/";
 import { Container } from 'components/Container/Container';
 import { BasketItem } from 'components/blocks/Card/BasketItem';
 import { Button } from 'components/blocks/Button/Button';
-import { InputWithButton } from 'components/blocks/Input/InputWithButton';
 
 
 const date = new Date();
@@ -18,9 +18,7 @@ const dateStr = `${month} ${day}, ${year}`;
 
 
 export const Basket = () => {
-    const { basketProducts, totalProductsCount, totalPrice, tax, totalPriceWithTax  } = useSelector((state) => state.basket);
-    const products = Object.values(basketProducts);
-
+    const { basketProducts, order, totalProductsCount, totalPrice, tax, totalPriceWithTax  } = useSelector((state) => state.basket);
 
     return (
         <Wrapper>
@@ -36,16 +34,12 @@ export const Basket = () => {
                             taxes of your state.
                         </SubTitle>
                     </Head>
-                    {products.length ? (
+                    {order.length ? (
                         <Cards>
-                            {Object.values(basketProducts).map((el) => (
+                            {order.map((el) => (
                                 <BasketItem
-                                    key={el.id}
-                                    id={el.id}
-                                    image={el.images[1]}
-                                    title={el.title}
-                                    count={el.count}
-                                    price={el.totalPrice}
+                                    key={basketProducts[el]?.id}
+                                    product={basketProducts[el]}
                                 />
                             ))}
                         </Cards>
@@ -53,7 +47,9 @@ export const Basket = () => {
                         <NoProducts>Your shopping basket is empty</NoProducts>
                     )}
 
-                    <Continue>Continue shopping</Continue>
+                    <Continue>
+                        <NavLink to='/home'>Continue shopping</NavLink>
+                    </Continue>
                     <Summary>
                         <SummaryItem>
                             <SummaryName>Subtotal</SummaryName>
@@ -64,10 +60,6 @@ export const Basket = () => {
                             <SummaryCalue>17% {tax} USD</SummaryCalue>
                         </SummaryItem>
                     </Summary>
-
-                    <PromoCode>
-                        <InputWithButton buttonText={"Apply now"} />
-                    </PromoCode>
                     <TotalOrder>
                         <TotalOrderTitle>Total Order</TotalOrderTitle>
                         <DeliveryDate>
@@ -164,10 +156,6 @@ const SummaryName = styled.div`
 `;
 const SummaryCalue = styled.div`
     justify-self: flex-end;
-`;
-
-const PromoCode = styled.div`
-    margin: 0 0 40px;
 `;
 const TotalOrder = styled.div`
     display: grid;

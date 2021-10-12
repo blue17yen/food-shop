@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback } from "react";
-import { NavLink, useLocation } from "react-router-dom";
+import { NavLink, useLocation, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 // helpers
@@ -9,67 +9,78 @@ import { Container } from "components/Container/Container";
 import { Numberselector } from 'components/blocks/Selector/NumberSelector';
 import { Button } from "components/blocks/Button/Button";
 import { Disableprise } from "components/blocks/NoProducts/DisablePrise";
+import { Like } from "components/blocks/Like/Like";
 import { Loader } from "components/blocks/Loader/Loader";
 import { Plus } from "components/Icons/PlusIcon";
 import { CheckIcon } from "components/Icons/CheckIcon";
 // api
 import { getProduct } from "api/spoonacularAPI";
 import { LimitRequestsError } from 'api/LimitReqestsERROR';
-// hooks
-import { useLocationPathName } from 'helpers/hooks/useLocationPathName';
 // store
 import { addProduct, updateProduct } from "redux/basketSlice";
+import { addViewed } from "redux/viewedSlice";
 
 
 export const Product = () => {
     const dispatch = useDispatch();
-    const location = useLocation();
-    const productId = useLocationPathName();
+    const productID = useParams().id;
+    const locationState = useLocation()?.state;
 
-
+    const [productInBasket, wasAddToBasket] = useSelector((state) => {
+        const p = state.basket.basketProducts[productID];
+        return [p, Boolean(p)];
+    });
     const [pageError, setPageError] = useState(null);
     const [isLoading, setIsLoading] = useState(true);
-    const [product, setProduct] = useState(null)
+    const [product, setProduct] = useState(null);
     const [numSelected, setNumSelected] = useState(1);
- 
-    const productInBasket = useSelector((state) =>
-        state.basket.basketProducts[productId]
-    );
-    const isAddedToBasket = Boolean(productInBasket?.id);
 
+    /*
+        If there is such a product in the basket
+        then use its data from the store
+        or set data from locationState
+        or fetch data
+    */
     useEffect(() => {
-        console.log(isAddedToBasket);
-        if (isAddedToBasket) {
+        if (wasAddToBasket) {
+            setProduct(productInBasket);
             setNumSelected(productInBasket.count);
-        }    
-    }, [productInBasket]);
-
-    useEffect(() => {
-        if (isAddedToBasket) {
-            handleUpdateProductInBasket();
-        }
-    }, [numSelected]);
-
-    const handleNumSelector = useCallback((num) => {
-        
-        setNumSelected(num);
-    }, []);
- 
-    useEffect(() => {
-        const locationState = location.state;
-        if (productId?.length) {
+            setIsLoading(false);
+        } else {
             if (locationState) {
                 setProduct(locationState);
                 setIsLoading(false);
             } else {
-                getData(productId);
+                getData(productID);
             }
         }
-    }, [productId, location.state]);
+    }, [productInBasket, wasAddToBasket, locationState, productID]);
 
-    async function getData(productId) {
+    /* 
+        Update product count in basket
+        when a new product quantity is selected
+        and if there is such a product in the basket
+        or set in state
+    */
+    const handleNumSelector = useCallback(
+        (num) => {
+            if (wasAddToBasket) {
+                dispatch(
+                    updateProduct({
+                        id: productInBasket.id,
+                        newCount: num,
+                    })
+                );
+            } else {
+                setNumSelected(num);
+            }
+        },
+        [wasAddToBasket, productInBasket, dispatch]
+    );
+
+    async function getData(productID) {
         setIsLoading(true);
-        const fetchData = await getProduct(productId);
+        const fetchData = await getProduct(productID);
         if (fetchData instanceof LimitRequestsError) {
             setPageError(fetchData.toString().split(": ")[1]);
         } else if (!Object.keys(fetchData).length) {
@@ -79,20 +90,23 @@ export const Product = () => {
         }
         setIsLoading(false);
     }
-
     const handleAddToBasket = () => {
-        if (!isAddedToBasket) {
+        if (!wasAddToBasket) {
             dispatch(addProduct({ product, newCount: numSelected }));
         }
-    }
-    const handleUpdateProductInBasket = () => {
+    };
 
-        if (isAddedToBasket) {
-            dispatch(
-                updateProduct({ id: productInBasket.id, newCount: numSelected })
-            );
+
+
+    /*
+        When product loaded on page
+        set to viewed section on store
+    */
+    useEffect(() => {
+        if (product) {
+            dispatch(addViewed({ product }));
         }
-    }
+    }, [product, dispatch]);
 
     if (isLoading) {
         return (
@@ -103,7 +117,6 @@ export const Product = () => {
             </Wrapper>
         );
     }
-
     return (
         <Wrapper>
             <Container>
@@ -112,6 +125,7 @@ export const Product = () => {
                         <Image src={product.images[2]} />
                         <ProductInfo>
                             <Title>{decoder(product.title)}</Title>
+                            <Like product={product} />
                             <ContentProduct
                                 id={product.id}
                                 breadcrumbs={product.breadcrumbs}
@@ -120,9 +134,10 @@ export const Product = () => {
                             <Sale>
                                 <Price>
                                     <Disableprise price={product.price} />
-                                    {isAddedToBasket && (
+                                    {wasAddToBasket && (
                                         <TotalPrice>
-                                            Total: {productInBasket.totalPrice} USD
+                                            Total: {productInBasket.totalPrice}{" "}
+                                            USD
                                         </TotalPrice>
                                     )}
                                 </Price>
@@ -131,7 +146,7 @@ export const Product = () => {
                                     selected={numSelected}
                                     textButton={"Pcs"}
                                 />
-                                {!isAddedToBasket ? (
+                                {!wasAddToBasket ? (
                                     <Button
                                         variant='filled'
                                         size='md'
