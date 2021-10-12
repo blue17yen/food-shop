@@ -781,18 +781,16 @@ const initialState = {
         //         "Organic Apples, Organic Apple Fiber, Contains 1% or less of the following: Ascorbic Acid (Vitamin C), Water",
         // },
     },
+    order: [],
     totalProductsCount: 0,
     totalPrice: 0,
     tax: 0,
     totalPriceWithTax: 0,
 };
 
-
-
-
 const addProductFunc = (state, action) => {
     const { product, newCount } = action.payload;
-    const productId = product.id;
+    const productID = product.id;
     const productPrice = product.price;
     const productTotalPrice = priceFormat(newCount * productPrice);
     const newProduct = {
@@ -803,8 +801,9 @@ const addProductFunc = (state, action) => {
     
     const newTotalPrice = priceFormat(state.totalPrice + productTotalPrice);
 
-    state.basketProducts[productId] = newProduct;
+    state.basketProducts[productID] = newProduct;
     state.totalProductsCount = state.totalProductsCount + 1;
+    state.order.push(productID);
     setTaxedPrice(state, newTotalPrice);
 };
 const updateProductFunc = (state, action) => {
@@ -831,6 +830,7 @@ const removeProductFunc = (state, action) => {
 
 
     delete state.basketProducts[id];
+    state.order = state.order.filter((el) => el !== id);
     state.totalProductsCount = state.totalProductsCount - 1;
     setTaxedPrice(state, newTotalPrice);
 };

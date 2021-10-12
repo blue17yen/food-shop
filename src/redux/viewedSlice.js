@@ -2,7 +2,10 @@ import { createSlice } from "@reduxjs/toolkit";
 
 
 const addViewedFunc = (state, action) => {
-    state.slice(0, 1).concat(action.payload);
+    const { product } = action.payload;
+    if (product.id !== state[0]?.id) {
+        state.unshift(product);
+    } 
 };
 
 export const viewedSlice = createSlice({
