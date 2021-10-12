@@ -1,40 +1,44 @@
-import React, { useState, useCallback } from 'react';
+import React from 'react';
+import { NavLink } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import styled from 'styled-components';
 
 import { setFontStyle, colors, device, decoder } from "helpers/";
 
 import { Numberselector } from "components/blocks/Selector/NumberSelector";
+import { Like } from "components/blocks/Like/Like";
 import { CloseIcon } from 'components/Icons/CloseIcon';
 
 import defItemImage from 'assets/images/def-card-img.png';
 
 import { removeProduct, updateProduct } from 'redux/basketSlice';
-import { NavLink } from 'react-router-dom';
 
 
-export const BasketItem = ({ id, image = defItemImage, title, count, price }) => {
+export const BasketItem = ({ product }) => {
+    const { id, image = defItemImage, title, count, price } = product;
+
     const dispatch = useDispatch();
     const handleNumSelector = (num) => {
         dispatch(updateProduct({ id, newCount: num }));
     };
 
-    const handleDeleteItem = () => {
+    const handleDelete = () => {
         dispatch(removeProduct({ id }));
-    }
+    };
 
     return (
         <Wrapper>
             <Inner>
                 <LeftBlock>
                     <NavLink to={`/product/${id}`}>
-                        <Image src={image} />   
+                        <Image src={image} />
                     </NavLink>
                     <Functions>
-                        <FunctionsItem onClick={handleDeleteItem}>
+                        <FunctionsItem onClick={handleDelete}>
                             <CloseIcon size={14} />
                             Remove
                         </FunctionsItem>
+                        <Like product={product} />
                     </Functions>
                 </LeftBlock>
                 <RightBlock>

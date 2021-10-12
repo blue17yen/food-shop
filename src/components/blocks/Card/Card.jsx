@@ -7,6 +7,7 @@ import { setFontStyle, colors, decoder } from "helpers/";
 
 import { Button } from "components/blocks/Button/Button";
 import { Disableprise } from "components/blocks/NoProducts/DisablePrise";
+import { Like } from 'components/blocks/Like/Like';
 import { BasketIcon } from "components/Icons/BasketIcon";
 
 import defaultImage from "assets/images/def-card-img.png";
@@ -30,8 +31,7 @@ export const Card = ({product}) => {
     );
 
     const handleOpenProduct = () => {
-        console.log(product);
-        window.scrollTo(0, 0);
+        
         history.push(`/product/${id}`, { ...product });
     };
     const handleAddToBasket = () => {
@@ -54,6 +54,7 @@ export const Card = ({product}) => {
                             </NavLink>
                         ))}
                     </BreadCrumbs>
+                    <Like product={product} />
                 </Info>
                 <CostBlock>
                     <Price>
@@ -75,7 +76,7 @@ export const Card = ({product}) => {
                             size='sm'
                             padding='6.5 12'
                             disabled={true}
-                            endIcon={<BasketIcon size={16}/>}
+                            endIcon={<BasketIcon size={16} />}
                         >
                             In basket
                         </Button>
@@ -95,14 +96,12 @@ const Wrapper = styled.div`
     border-radius: 12px;
     padding: 16px 16px;
 `;
-
 const Inner = styled.div`
     height: 100%;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
 `;
-
 const Image = styled.img`
     width: 237px;
     height: 180px;
@@ -110,14 +109,13 @@ const Image = styled.img`
     object-fit: contain;
     cursor: pointer;
 `;
-
 const Info = styled.div`
     display: flex;
     flex-direction: column;
     text-align: start;
+    gap: 8px;
     margin: 0 0 16px;
 `;
-
 const Title = styled.h5`
     ${setFontStyle("h5")};
     cursor: pointer;
@@ -126,12 +124,10 @@ const Title = styled.h5`
         text-decoration: underline;
     }
 `;
-
 const Brand = styled.p`
     ${setFontStyle("caption")};
     color: #575757;
 `;
-
 const BreadCrumbs = styled.div`
     display: flex;
     flex-direction: row;
@@ -142,14 +138,12 @@ const BreadCrumb = styled.p`
     ${setFontStyle("caption", true)};
     color: ${colors.green};
 `;
-
 const CostBlock = styled.div`
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
 `;
-
 const Price = styled.h4`
     ${setFontStyle("h4")};
 `;
